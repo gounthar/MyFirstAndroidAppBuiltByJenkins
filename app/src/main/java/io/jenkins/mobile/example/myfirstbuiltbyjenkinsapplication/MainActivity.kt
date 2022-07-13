@@ -1,4 +1,4 @@
-package com.example.myfirstbuiltbyjenkinsapplications
+package io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication
 
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myfirstbuiltbyjenkinsapplications.databinding.ActivityMainBinding
+import io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

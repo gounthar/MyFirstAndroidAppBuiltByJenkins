@@ -1,4 +1,4 @@
-package com.example.myfirstbuiltbyjenkinsapplications.ui.gallery
+package io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

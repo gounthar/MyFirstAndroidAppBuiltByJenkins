@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.myfirstbuiltbyjenkinsapplications">
+          package="io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication">
 
     <application
             android:allowBackup="true"
@@ -12,7 +12,6 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
-                android:label="@string/app_name"
                 android:theme="@style/Theme.MyFirstBuiltByJenkinsApplications.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

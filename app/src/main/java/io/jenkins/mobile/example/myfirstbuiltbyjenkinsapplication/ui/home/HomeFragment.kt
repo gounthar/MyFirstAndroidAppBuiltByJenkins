@@ -1,4 +1,4 @@
-package com.example.myfirstbuiltbyjenkinsapplications.ui.slideshow
+package io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myfirstbuiltbyjenkinsapplications.R
-import com.example.myfirstbuiltbyjenkinsapplications.databinding.FragmentSlideshowBinding
+import io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.databinding.FragmentHomeBinding
 
-class SlideshowFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
-    private var _binding: FragmentSlideshowBinding? = null
+    private lateinit var homeViewModel: HomeViewModel
+    private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +24,14 @@ class SlideshowFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-                ViewModelProvider(this).get(SlideshowViewModel::class.java)
+        homeViewModel =
+                ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textHome
+        homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
