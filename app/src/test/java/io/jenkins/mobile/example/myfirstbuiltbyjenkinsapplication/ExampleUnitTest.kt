@@ -1,4 +1,4 @@
-package com.example.myfirstbuiltbyjenkinsapplications
+package io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication
 
 import org.junit.Test
 

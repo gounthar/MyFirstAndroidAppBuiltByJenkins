@@ -1,4 +1,4 @@
-package com.example.myfirstbuiltbyjenkinsapplications.ui.gallery
+package io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myfirstbuiltbyjenkinsapplications.R
-import com.example.myfirstbuiltbyjenkinsapplications.databinding.FragmentGalleryBinding
+import io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
 
