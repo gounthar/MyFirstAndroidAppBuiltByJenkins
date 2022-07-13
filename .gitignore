@@ -20,8 +20,8 @@ output.json
 .idea/
 
 # Keystore files
-*.jks
-*.keystore
+#*.jks
+#*.keystore
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
