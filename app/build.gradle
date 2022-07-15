@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("com.github.triplet.play") version "3.7.0"
 }
 
 android {
