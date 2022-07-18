@@ -9,7 +9,7 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    echo 'Compile the source code' 
+                    echo 'Compile the source code'
                     chmod +x ./gradlew
                     ./gradlew build
                     cd app/build/outputs/apk/release && rm app-release-unsigned-aligned.apk 2> /dev/null || true
