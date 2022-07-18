@@ -8,13 +8,15 @@ pipeline {
         }
         stage('Compile') {
             steps {
-                echo 'Compile the source code' 
-                chmod +x ./gradlew
-                bash './gradlew build'
-                bash 'cd app/build/outputs/apk/release && rm app-release-unsigned-aligned.apk 2> /dev/null || true'
-                bash 'apksigner verify app-release.apk'
-                bash 'cd - && ./gradlew :app:bundleDebug :app:bundleRelease'
-                bash './gradlew tasks --group publishing'
+                script {
+                    echo 'Compile the source code' 
+                    chmod +x ./gradlew
+                    ./gradlew build
+                    cd app/build/outputs/apk/release && rm app-release-unsigned-aligned.apk 2> /dev/null || true
+                    apksigner verify app-release.apk
+                    cd - && ./gradlew :app:bundleDebug :app:bundleRelease
+                    ./gradlew tasks --group publishing
+                }
             }
         }
         stage('Security Check') {
