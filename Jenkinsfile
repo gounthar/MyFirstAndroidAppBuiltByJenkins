@@ -11,6 +11,7 @@ pipeline {
                 script {
                     echo 'Compile the source code' 
                     chmod +x ./gradlew
+                    echo "Test to see if the gradlew is the main cause of the failure"
                     echo "./gradlew build"
                     cd app/build/outputs/apk/release && rm app-release-unsigned-aligned.apk 2> /dev/null || true
                     apksigner verify app-release.apk
