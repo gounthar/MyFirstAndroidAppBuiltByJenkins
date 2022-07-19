@@ -52,6 +52,7 @@ pipeline {
                         returnStdout: true
                     )
                     echo "Release version: ${versionName}"
+                    sh "export versionName=$versionName"
                     versionCode = sh (
                         script: 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\'',
                         returnStdout: true
@@ -59,7 +60,7 @@ pipeline {
                     echo "Release version code: ${versionCode}"
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'gh release list'
-                    sh 'gh release list | grep $versionName'
+                    sh 'gh release list | grep ${versionName}'
                     sh 'gh release list | grep ${versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
                     env.existingRelease = sh 'gh release list | grep ${versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
                     echo "Existing release is ${existingRelease}"
