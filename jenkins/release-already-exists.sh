@@ -1,4 +1,4 @@
- #!/bin/sh
+ #!/bin/sh -fvx
 
 versionName=$(grep versionName app/build.gradle | cut -d '"' -f 2)
 # echo "Release version: ${versionName}"
