@@ -51,7 +51,7 @@ pipeline {
                 sh 'echo "$(gh release list)"'
                 sh 'echo "$(gh release list | grep $versionName)"'
                 sh 'echo "$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)"'
-                sh 'existingRelease=$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)'
+                sh 'export existingRelease=$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)'
                 echo "Existing release is $existingRelease"
             }
         }
