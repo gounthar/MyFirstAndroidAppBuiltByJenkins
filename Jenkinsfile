@@ -44,16 +44,18 @@ pipeline {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
                 def versionName = '0.0.0'
+                def versionCode = 0
+                def existingRelease = '0.0.0'
             }
             steps {
                 script {
                     versionName = sh 'grep versionName app/build.gradle | cut -d \'"\' -f 2'
-                    sh 'export versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
+                    versionCode = sh 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\''
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'echo "$(gh release list)"'
                     sh 'echo "$(gh release list | grep $versionName)"'
                     sh 'echo "$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)"'
-                    sh 'export existingRelease=$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)'
+                    existingRelease = sh 'gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-'
                     echo "Existing release is $existingRelease"
                 }
             }
