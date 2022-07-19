@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     releaseAlreadyExists = sh (
-                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
+                        script: 'chmod +x ./jenkins/release-already-exists.sh && sh -x ./jenkins/release-already-exists.sh',
                         returnStdout: true
                     )
                     echo "Existing release? ${releaseAlreadyExists}"
