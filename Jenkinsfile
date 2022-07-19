@@ -48,7 +48,7 @@ pipeline {
                 script {
                     env.existingRelease = '0.0.0'
                     env.versionName = sh 'grep versionName app/build.gradle | cut -d \'"\' -f 2'
-                    echo "Release version: ${env.versionName}"
+                    echo "Release version: ${versionName}"
                     env.versionCode = sh 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\''
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'gh release list'
