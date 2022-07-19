@@ -17,8 +17,6 @@ pipeline {
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                     sh './gradlew tasks --group publishing'
-                    sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
-                    sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
                 }
             }
         }
@@ -40,6 +38,13 @@ pipeline {
         stage('Publish Artifacts') {
             steps {
                 echo 'Save the assemblies generated from the compilation'
+            }
+        }
+        stage('Release on GitHub') {
+            steps {
+                sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
+                sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
+                sh 'echo $GITHUB_ACCESS_TOKEN | gh auth login --with-token'
             }
         }
     }
