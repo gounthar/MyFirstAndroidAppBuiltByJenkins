@@ -51,10 +51,10 @@ pipeline {
                     env.versionCode = sh 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\''
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'gh release list'
-                    sh 'gh release list | grep ${versionName}'
-                    sh 'gh release list | grep ${versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
-                    env.existingRelease = sh 'gh release list | grep ${versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
-                    echo "Existing release is ${existingRelease}"
+                    sh 'gh release list | grep ${env.versionName}'
+                    sh 'gh release list | grep ${env.versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
+                    env.existingRelease = sh 'gh release list | grep ${env.versionName} | cut -d$\'\t\' -f 1 | cut -c 2-'
+                    echo "Existing release is ${env.existingRelease}"
                 }
             }
         }
