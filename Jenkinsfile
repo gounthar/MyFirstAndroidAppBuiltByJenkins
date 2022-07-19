@@ -46,25 +46,11 @@ pipeline {
             }
             steps {
                 script {
-                    versionName = sh (
-                        script: 'grep versionName app/build.gradle | cut -d \'"\' -f 2',
+                    releaseAlreadyExists = sh (
+                        script: './jenkins/release-already-exists.sh',
                         returnStdout: true
                     )
-                    echo "Release version: ${versionName}"
-                    sh "export versionName=$versionName"
-                    versionCode = sh (
-                        script: 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\'',
-                        returnStdout: true
-                    )
-                    echo "Release version code: ${versionCode}"
-                    sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
-                    sh 'gh release list'
-                    sh "gh release list | grep ${versionName}"
-                    existingRelease = sh (
-                        script: "gh release list | grep ${versionName} | cut -d\$\'\\t\' -f 1 | cut -c 2-",
-                        returnStdout: true
-                    )
-                    echo "Existing release is ${existingRelease}"
+                    echo "Existing release? ${releaseAlreadyExists}"
                 }
             }
         }
