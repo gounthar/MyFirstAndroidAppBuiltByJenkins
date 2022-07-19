@@ -54,7 +54,7 @@ pipeline {
                     if (releaseAlreadyExists == 'false') {
                         echo "Found false. Existing release? ${releaseAlreadyExists}"
                     } else {
-                        echo "Found something else. Existing release? ${releaseAlreadyExists}"
+                        echo "Found something else. Existing release? (${releaseAlreadyExists})"
                     }
                 }
             }
