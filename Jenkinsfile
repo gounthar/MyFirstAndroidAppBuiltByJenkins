@@ -46,10 +46,10 @@ pipeline {
             }
             steps {
                 script {
-                   def versionName = '0.0.0'
+                    def versionName = '0.0.0'
                     def versionCode = 0
                     def existingRelease = '0.0.0'
-                    versionName = sh 'grep versionName app/build.gradle | cut -d \'"\' -f 2'
+                    versionName = sh 'echo $(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
                     versionCode = sh 'grep versionCode app/build.gradle | grep -o \'[^ ]*$\''
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'echo "$(gh release list)"'
