@@ -51,7 +51,7 @@ pipeline {
                         returnStdout: true
                     )
                     echo "Release already exists: $releaseAlreadyExists ."
-                    if (releaseAlreadyExists == 'false') {
+                    if (releaseAlreadyExists.trim() == 'false') {
                         echo "Found false. Existing release? ${releaseAlreadyExists}"
                     } else {
                         echo "Found something else. Existing release? (${releaseAlreadyExists})"
