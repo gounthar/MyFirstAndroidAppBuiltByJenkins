@@ -61,7 +61,7 @@ pipeline {
                     sh 'gh release list'
                     sh "gh release list | grep ${versionName}"
                     existingRelease = sh (
-                        script: 'gh release list | grep ${versionName} | cut -d\$\'\\t\' -f 1 | cut -c 2-',
+                        script: "gh release list | grep ${versionName} | cut -d\$\'\\t\' -f 1 | cut -c 2-",
                         returnStdout: true
                     )
                     echo "Existing release is ${existingRelease}"
