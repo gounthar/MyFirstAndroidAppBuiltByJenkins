@@ -46,7 +46,6 @@ pipeline {
             }
             steps {
                 script {
-                    existingRelease = '0.0.0'
                     versionName = sh (
                         script: 'grep versionName app/build.gradle | cut -d \'"\' -f 2',
                         returnStdout: true
@@ -61,8 +60,10 @@ pipeline {
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'gh release list'
                     sh "gh release list | grep ${versionName}"
-                    sh "gh release list | grep ${versionName} | cut -d\$\'\t\' -f 1 | cut -c 2-"
-                    env.existingRelease = sh "gh release list | grep ${versionName} | cut -d\$\'\\t\' -f 1 | cut -c 2-"
+                    existingRelease = sh (
+                        script: 'gh release list | grep ${versionName} | cut -d\$\'\\t\' -f 1 | cut -c 2-',
+                        returnStdout: true
+                    )
                     echo "Existing release is ${existingRelease}"
                 }
             }
