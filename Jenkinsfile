@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        timestamps()
+    }
     stages {
         stage('Static Analysis') {
             steps {
@@ -14,6 +17,8 @@ pipeline {
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                     sh './gradlew tasks --group publishing'
+                    sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
+                    sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
                 }
             }
         }
