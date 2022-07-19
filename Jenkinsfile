@@ -41,10 +41,14 @@ pipeline {
             }
         }
         stage('Release on GitHub') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+            }
             steps {
                 sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
                 sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
-                sh 'echo $GITHUB_ACCESS_TOKEN | gh auth login --with-token'
+                echo "$GITHUB_CREDENTIALS_PSW"
+                sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
             }
         }
     }
