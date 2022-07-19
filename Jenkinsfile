@@ -47,7 +47,6 @@ pipeline {
             steps {
                 sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
                 sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
-                echo "$GITHUB_CREDENTIALS_PSW"
                 sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
             }
         }
