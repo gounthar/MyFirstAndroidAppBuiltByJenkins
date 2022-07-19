@@ -45,14 +45,16 @@ pipeline {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
             }
             steps {
-                sh 'export versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
-                sh 'export versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
-                sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
-                sh 'echo "$(gh release list)"'
-                sh 'echo "$(gh release list | grep $versionName)"'
-                sh 'echo "$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)"'
-                sh 'export existingRelease=$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)'
-                echo "Existing release is $existingRelease"
+                script {
+                    sh 'export versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
+                    sh 'export versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
+                    sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
+                    sh 'echo "$(gh release list)"'
+                    sh 'echo "$(gh release list | grep $versionName)"'
+                    sh 'echo "$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)"'
+                    sh 'export existingRelease=$(gh release list | grep $versionName | cut -d$\'\t\' -f 1 | cut -c 2-)'
+                    echo "Existing release is $existingRelease"
+                }
             }
         }
     }
