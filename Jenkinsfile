@@ -50,10 +50,12 @@ pipeline {
                         script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
                         returnStdout: true
                     )
-                    echo "Release already exists: $releaseAlreadyExists"
-                    if (releaseAlreadyExists.equals("false")) {
-                            echo "Existing release? ${releaseAlreadyExists}"
-                     }
+                    echo "Release already exists: $releaseAlreadyExists ."
+                    if (releaseAlreadyExists == 'false') {
+                        echo "Found false. Existing release? ${releaseAlreadyExists}"
+                    } else {
+                        echo "Found something else. Existing release? ${releaseAlreadyExists}"
+                    }
                 }
             }
         }
