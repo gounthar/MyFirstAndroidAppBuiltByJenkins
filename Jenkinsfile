@@ -43,10 +43,11 @@ pipeline {
         stage('Release on GitHub') {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
+                def versionName = '0.0.0'
             }
             steps {
                 script {
-                    sh 'export versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
+                    versionName = sh '$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
                     sh 'export versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
                     sh 'echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token'
                     sh 'echo "$(gh release list)"'
