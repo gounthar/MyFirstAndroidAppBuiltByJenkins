@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     releaseAlreadyExists = sh (
-                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
+                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh | sed -e \'s/^[[:space:]]*//\'',
                         returnStdout: true
                     )
                     echo "Release already exists: $releaseAlreadyExists ."
