@@ -1,9 +1,9 @@
  #!/bin/sh
 
-versionName=$(grep versionName ../app/build.gradle | cut -d '"' -f 2)
+versionName=$(grep versionName app/build.gradle | cut -d '"' -f 2)
 # echo "Release version: ${versionName}"
 
-versionCode=$(grep versionCode ../app/build.gradle | grep -o '[^ ]*$')
+versionCode=$(grep versionCode app/build.gradle | grep -o '[^ ]*$')
 # echo "Release version code: ${versionCode}"
 
 echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
