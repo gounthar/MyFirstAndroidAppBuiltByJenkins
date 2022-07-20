@@ -51,7 +51,7 @@ pipeline {
 }
 
 void releaseAlreadyExist(config) {
-    GITHUB_CREDENTIALS_PSW = credentials('github-app-android').password
+    GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
     releaseAlreadyExists = sh (
         script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
         returnStdout: true
