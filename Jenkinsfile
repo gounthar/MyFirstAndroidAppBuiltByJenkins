@@ -46,7 +46,7 @@ pipeline {
             }
             steps {
                 script {
-                env.GITHUB_CREDENTIALS_PSW = env.GITHUB_CREDENTIALS.getPassword()
+                env.GITHUB_CREDENTIALS_PSW = GITHUB_CREDENTIALS.getPassword()
                     releaseAlreadyExist(this)
                 }
             }
