@@ -10,4 +10,4 @@ echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
 lookAlikeExistingRelease=$(gh release list | grep $versionName)
 result=$([ -z "$lookAlikeExistingRelease" ] && echo "" || echo "$lookAlikeExistingRelease" | cut -d$'\t' -f 1 | cut -c 2-)
 
-[ -z "$result" ] && echo "false" || echo "true"
+[ -z "$result" ] && echo -n "false" || echo -n "true"
