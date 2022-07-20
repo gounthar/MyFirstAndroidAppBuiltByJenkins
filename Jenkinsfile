@@ -54,7 +54,7 @@ pipeline {
 }
 
 void releaseAlreadyExist(config) {
-    echo $GITHUB_CREDENTIALS_PSW
+    GITHUB_CREDENTIALS_PSW=GITHUB_CREDENTIALS.getPassword()
     releaseAlreadyExists = sh (
         script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
         returnStdout: true
