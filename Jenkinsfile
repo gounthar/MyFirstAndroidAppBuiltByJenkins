@@ -52,12 +52,17 @@ pipeline {
                     )
                     echo "Release already exists: $releaseAlreadyExists."
                     if (releaseAlreadyExists == 'false') {
-                        echo "Found false. Existing release? ${releaseAlreadyExists}"
+                        echo "The release does not exist yet, so we can create it."
+                        whateverFunction()
                     } else {
-                        echo "Found something else. Existing release? (${releaseAlreadyExists})"
+                        echo "The release already exists, so we won't create it."
                     }
                 }
             }
         }
     }
+}
+
+void whateverFunction() {
+    sh 'ls /'
 }
