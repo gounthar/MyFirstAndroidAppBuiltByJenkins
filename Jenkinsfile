@@ -14,11 +14,9 @@ pipeline {
                 script {
                     sh 'echo "Compile the source code"'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew build'
+                    /*sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
-                    sh './gradlew tasks --group publishing'
-                    sh 'versionName=$(grep versionName app/build.gradle | cut -d \'"\' -f 2)'
-                    sh 'versionCode=$(grep versionCode app/build.gradle | grep -o \'[^ ]*$\')'
+                    sh './gradlew tasks --group publishing' */
                 }
             }
         }
@@ -42,5 +40,35 @@ pipeline {
                 echo 'Save the assemblies generated from the compilation'
             }
         }
+        stage('Release on GitHub') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+            }
+            steps {
+                script {
+                // Later on, move everything into functions and call them here.
+                     releaseAlreadyExists = sh (
+                            script: 'chmod +x ./jenkins/release-already-exists.sh && sh -x ./jenkins/release-already-exists.sh',
+                            returnStdout: true
+                        )
+                        echo "Release already exists: $releaseAlreadyExists."
+                        if (releaseAlreadyExists == 'false') {
+                            echo "The release does not exist yet, so we can create it."
+                            whateverFunction()
+                        } else {
+                            echo "The release already exists, so we won't create it."
+                        }
+                }
+            }
+        }
     }
+}
+
+void releaseAlreadyExist(config) {
+    GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
+    echo $GITHUB_CREDENTIALS_PSW
+}
+
+void whateverFunction() {
+    sh 'ls /'
 }

@@ -15,8 +15,9 @@ buildscript {
 }
 
 apply plugin: "com.dipien.android.semantic-version"
-version = "1.0.3"
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+version = "1.0.2"
