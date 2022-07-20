@@ -12,11 +12,11 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    sh 'echo "Compile the source code"'
+                    /* sh 'echo "Compile the source code"'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
-                    sh './gradlew tasks --group publishing'
+                    sh './gradlew tasks --group publishing' */
                 }
             }
         }
@@ -41,6 +41,9 @@ pipeline {
             }
         }
         stage('Release on GitHub') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+            }
             steps {
                 script {
                 // Later on, move everything into functions and call them here.
