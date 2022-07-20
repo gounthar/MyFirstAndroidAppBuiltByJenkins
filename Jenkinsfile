@@ -46,20 +46,24 @@ pipeline {
             }
             steps {
                 script {
-                    releaseAlreadyExists = sh (
-                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
-                        returnStdout: true
-                    )
-                    echo "Release already exists: $releaseAlreadyExists."
-                    if (releaseAlreadyExists == 'false') {
-                        echo "The release does not exist yet, so we can create it."
-                        whateverFunction()
-                    } else {
-                        echo "The release already exists, so we won't create it."
-                    }
+                    releaseAlreadyExist()
                 }
             }
         }
+    }
+}
+
+void releaseAlreadyExist() {
+    releaseAlreadyExists = sh (
+        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
+        returnStdout: true
+    )
+    echo "Release already exists: $releaseAlreadyExists."
+    if (releaseAlreadyExists == 'false') {
+        echo "The release does not exist yet, so we can create it."
+        whateverFunction()
+    } else {
+        echo "The release already exists, so we won't create it."
     }
 }
 
