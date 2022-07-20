@@ -47,10 +47,10 @@ pipeline {
             steps {
                 script {
                     releaseAlreadyExists = sh (
-                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh | sed -e \'s/^[[:space:]]*//\'',
+                        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
                         returnStdout: true
                     )
-                    echo "Release already exists: $releaseAlreadyExists ."
+                    echo "Release already exists: $releaseAlreadyExists."
                     if (releaseAlreadyExists == 'false') {
                         echo "Found false. Existing release? ${releaseAlreadyExists}"
                     } else {
