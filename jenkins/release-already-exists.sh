@@ -10,9 +10,7 @@ echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
 existingRelease=$(gh release list | grep -F $versionName)
 lookAlikeExistingRelease=
 
-[ -z "$existingRelease" ] && {
-# echo "No release with version ${versionName} found"
-} || {
+[ -z "$existingRelease" ] || {
 # echo "Release $versionName already exists"
   lookAlikeExistingRelease=$(echo $existingRelease | cut -d$'\t' -f 1 | cut -c 2-)
 }
