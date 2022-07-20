@@ -43,7 +43,18 @@ pipeline {
         stage('Release on GitHub') {
             steps {
                 script {
-                    releaseAlreadyExist(this)
+                // Later on, move everything into functions and call them here.
+                     releaseAlreadyExists = sh (
+                            script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
+                            returnStdout: true
+                        )
+                        echo "Release already exists: $releaseAlreadyExists."
+                        if (releaseAlreadyExists == 'false') {
+                            echo "The release does not exist yet, so we can create it."
+                            whateverFunction()
+                        } else {
+                            echo "The release already exists, so we won't create it."
+                        }
                 }
             }
         }
@@ -53,17 +64,6 @@ pipeline {
 void releaseAlreadyExist(config) {
     GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
     echo $GITHUB_CREDENTIALS_PSW
-    releaseAlreadyExists = sh (
-        script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
-        returnStdout: true
-    )
-    echo "Release already exists: $releaseAlreadyExists."
-    if (releaseAlreadyExists == 'false') {
-        echo "The release does not exist yet, so we can create it."
-        whateverFunction()
-    } else {
-        echo "The release already exists, so we won't create it."
-    }
 }
 
 void whateverFunction() {
