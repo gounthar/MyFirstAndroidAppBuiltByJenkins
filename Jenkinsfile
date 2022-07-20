@@ -41,12 +41,8 @@ pipeline {
             }
         }
         stage('Release on GitHub') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-            }
             steps {
                 script {
-                env.GITHUB_CREDENTIALS_PSW = GITHUB_CREDENTIALS.getPassword()
                     releaseAlreadyExist(this)
                 }
             }
@@ -55,7 +51,7 @@ pipeline {
 }
 
 void releaseAlreadyExist(config) {
-    GITHUB_CREDENTIALS_PSW=env.GITHUB_CREDENTIALS_PSW
+    GITHUB_CREDENTIALS = credentials('github-app-android')
     releaseAlreadyExists = sh (
         script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
         returnStdout: true
