@@ -13,8 +13,8 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Compile the source code"'
-                    /*sh 'chmod +x ./gradlew'
-                    sh './gradlew build'
+                    sh 'chmod +x ./gradlew'
+                    /*sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                     sh './gradlew tasks --group publishing' */
                 }
