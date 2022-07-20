@@ -7,7 +7,15 @@ versionCode=$(./gradlew printVersion | grep "Version code:" | grep -o '[^ ]*$' |
 # echo "Release version code: ${versionCode}"
 
 echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
-lookAlikeExistingRelease=$(gh release list | grep $versionName | cut -d$'\t' -f 1 | cut -c 2-)
+existingRelease=$(gh release list | grep -F $versionName)
+lookAlikeExistingRelease=
+
+[ -z "$existingRelease" ] && {
+# echo "No release with version ${versionName} found"
+} || {
+# echo "Release $versionName already exists"
+  lookAlikeExistingRelease=$(echo $existingRelease | cut -d$'\t' -f 1 | cut -c 2-)
+}
 # echo "Existing release for $versionName : $lookAlikeExistingRelease"
 
 result=$([ -z "$lookAlikeExistingRelease" ] && echo "" || echo "$lookAlikeExistingRelease")
