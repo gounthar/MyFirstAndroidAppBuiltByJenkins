@@ -20,4 +20,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-version = "1.0.2-ALPHA"
+version = "1.0.3-ALPHA"
