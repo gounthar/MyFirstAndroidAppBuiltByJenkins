@@ -1,3 +1,6 @@
+
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -61,4 +64,12 @@ dependencies {
 
 repositories {
 //    mavenCentral()
+}
+
+play {
+    // Overrides defaults
+    track.set("internal")
+    updatePriority.set(2)
+    releaseStatus.set(ReleaseStatus.DRAFT)
+    // ...
 }
