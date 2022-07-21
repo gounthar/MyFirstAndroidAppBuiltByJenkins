@@ -25,4 +25,4 @@ case $suffix in
         GH_OPTS="$GH_OPTS-d"
         ;;
 esac
-echo "gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk"
+gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
