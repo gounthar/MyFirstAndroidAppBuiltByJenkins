@@ -25,4 +25,6 @@ case $suffix in
         GH_OPTS="$GH_OPTS-d"
         ;;
 esac
+
+echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
 gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
