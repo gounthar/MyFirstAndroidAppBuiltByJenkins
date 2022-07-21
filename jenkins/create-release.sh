@@ -13,7 +13,13 @@ GH_OPTS=" "
 # Functions
 publishOnPlayStore(){
     echo "Publishing on Google Play Store"
-    echo "Found credentials: $ANDROID_PUBLISHER_CREDENTIALS"
+    # Because the tool expects to see the release notes in that kind of directory
+    # This should definitely be coined via reading/understanding build.gradle, and not hardcoded
+    # cf https://github.com/Triple-T/gradle-play-publisher#uploading-release-notes
+    releaseNotesDir=app/src/main/play/release-notes/en-US
+    mkdir -p $releaseNotesDir
+    # Same in here of course, internal can be found in the `play` section of build.gradle
+    script -q -c "gh release view ${versionName}" $releaseNotesDir/internal.txt >/dev/null
     ./gradlew publishBundle
 }
 
