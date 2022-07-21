@@ -10,6 +10,13 @@ echo "Release version: ${versionName}"
 # We should detect if the version contains "SNAPSHOT" to not make a release at all
 GH_OPTS=" "
 
+# Functions
+publishOnPlayStore(){
+    echo "Publishing on Google Play Store"
+    echo "Found credentials: $ANDROID_PUBLISHER_CREDENTIALS"
+    ./gradlew publishBundle
+}
+
 suffix=$(echo $versionName | sed 's/.*-//')
 case $suffix in
     ALPHA|BETA)
@@ -34,6 +41,7 @@ if [[ "$GH_OPTS" == *"DO_NOT_RELEASE"* ]]; then
     echo "It's a release, so we'll publish it."
     echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
     gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
+    # Now let's tackle with the Google Play Store
+    publishOnPlayStore
 } fi
 
-echo "Found credentials: $ANDROID_PUBLISHER_CREDENTIALS"
