@@ -54,7 +54,7 @@ pipeline {
                         echo "Release already exists: $releaseAlreadyExists."
                         if (releaseAlreadyExists == 'false') {
                             echo "The release does not exist yet, so we can create it."
-                            whateverFunction()
+                            createRelease()
                         } else {
                             echo "The release already exists, so we won't create it."
                         }
@@ -69,6 +69,9 @@ void releaseAlreadyExist(config) {
     echo $GITHUB_CREDENTIALS_PSW
 }
 
-void whateverFunction() {
-    sh 'ls /'
+void createRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-release.sh && sh -x ./jenkins/create-release.sh',
+        returnStdout: true
+    )
 }
