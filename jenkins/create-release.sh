@@ -17,7 +17,9 @@ case $suffix in
         GH_OPTS="$GH_OPTS-p"
         ;;
     SNAPSHOT)
-        echo "This is a snapshot, we won't release anything";;
+        echo "This is a snapshot, we won't release anything"
+        GH_OPTS="$GH_OPTSDO_NOT_RELEASE"
+        ;;
     RELEASE)
         echo "This a real release, so no need to use -d or -p";;
     *)
@@ -26,7 +28,12 @@ case $suffix in
         ;;
 esac
 
-echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
-gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
+if [[ "$GH_OPTS" == *"DO_NOT_RELEASE"* ]]; then
+  echo "It's not considered as a release, do nothing."
+  else {
+    echo "It's a release, so we'll publish it."
+    echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
+    gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
+} fi
 
 echo "Found credentials: $ANDROID_PUBLISHER_CREDENTIALS"
