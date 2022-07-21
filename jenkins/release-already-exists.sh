@@ -1,4 +1,4 @@
- #!/bin/sh
+#!/bin/sh
 
 versionName=$(./gradlew printVersion | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 # echo "Release version: ${versionName}"
