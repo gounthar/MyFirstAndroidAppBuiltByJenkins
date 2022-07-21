@@ -28,3 +28,5 @@ esac
 
 echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
 gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
+
+echo "Found credentials: $ANDROID_PUBLISHER_CREDENTIALS"

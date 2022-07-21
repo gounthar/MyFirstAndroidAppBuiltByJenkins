@@ -43,6 +43,7 @@ pipeline {
         stage('Release on GitHub') {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials’)
             }
             steps {
                 script {
