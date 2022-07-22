@@ -72,7 +72,7 @@ void releaseAlreadyExist(config) {
 
 void createRelease() {
     sh (
-        script: 'chmod +x ./jenkins/create-release.sh && sh -x ./jenkins/create-release.sh',
+        script: 'chmod +x ./jenkins/create-release.sh && ./jenkins/create-release.sh',
         returnStdout: true
     )
 }
