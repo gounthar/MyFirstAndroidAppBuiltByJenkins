@@ -50,4 +50,3 @@ if [[ "$GH_OPTS" == *"DO_NOT_RELEASE"* ]]; then
     # Now let's tackle with the Google Play Store
     publishOnPlayStore
 } fi
-
