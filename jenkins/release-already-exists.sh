@@ -1,9 +1,9 @@
 #!/bin/sh
 
-versionName=$(./gradlew printVersion | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 # echo "Release version: ${versionName}"
 
-versionCode=$(./gradlew printVersion | grep "Version code:" | grep -o '[^ ]*$' | sed -e 's/^[[:space:]]*//')
+versionCode=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version code:" | grep -o '[^ ]*$' | sed -e 's/^[[:space:]]*//')
 # echo "Release version code: ${versionCode}"
 
 echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
