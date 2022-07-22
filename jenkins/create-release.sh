@@ -1,6 +1,6 @@
 #!/bin/sh
 
-versionName=$(./gradlew printVersion | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 echo "Release version: ${versionName}"
 # -d Save the release as a draft instead of publishing it...
 # -p Mark the release as a prerelease
