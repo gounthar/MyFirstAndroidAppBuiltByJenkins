@@ -31,7 +31,7 @@ case $suffix in
         ;;
     SNAPSHOT)
         echo "This is a snapshot, we won't release anything"
-        GH_OPTS="$GH_OPTSDO_NOT_RELEASE"
+        GH_OPTS="$GH_OPTS DO_NOT_RELEASE"
         ;;
     RELEASE)
         echo "This a real release, so no need to use -d or -p";;
