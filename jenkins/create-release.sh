@@ -41,7 +41,7 @@ case $suffix in
         ;;
 esac
 
-if [[ "$GH_OPTS" == *"DO_NOT_RELEASE"* ]]; then
+if [[ $GH_OPTS == *"DO_NOT_RELEASE"* ]]; then
   echo "It's not considered as a release, do nothing."
   else {
     echo "It's a release, so we'll publish it."
