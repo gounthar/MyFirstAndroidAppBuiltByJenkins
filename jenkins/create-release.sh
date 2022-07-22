@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -x
 
 versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 echo "Release version: ${versionName}"
@@ -40,8 +40,8 @@ case $suffix in
         GH_OPTS="$GH_OPTS-d"
         ;;
 esac
-
-if [[ $GH_OPTS == *"DO_NOT_RELEASE"* ]]; then
+echo "GH_OPTS is $GH_OPTS"
+if [[ "$GH_OPTS" =~ .*"DO_NOT_RELEASE".* ]]; then
   echo "It's not considered as a release, do nothing."
   else {
     echo "It's a release, so we'll publish it."
