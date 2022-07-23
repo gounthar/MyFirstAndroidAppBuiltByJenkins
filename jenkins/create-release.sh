@@ -20,7 +20,7 @@ publishOnPlayStore(){
     mkdir -p $releaseNotesDir
     # Same in here of course, internal can be found in the `play` section of build.gradle
     script -q -c "gh release view v${versionName}" $releaseNotesDir/internal.txt >/dev/null
-    cat $releaseNotesDir/internal.txt | aha > ls-output.htm && mv ls-output.htm $releaseNotesDir/internal.txt
+    cat $releaseNotesDir/internal.txt | aha > $releaseNotesDir/internal.html
     ./gradlew publishBundle
 }
 
