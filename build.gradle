@@ -21,4 +21,3 @@ apply plugin: "com.dipien.android.semantic-version"
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
