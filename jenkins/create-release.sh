@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash -x
 
-versionName=$(./gradlew printVersion | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 echo "Release version: ${versionName}"
 # -d Save the release as a draft instead of publishing it...
 # -p Mark the release as a prerelease
@@ -19,7 +19,22 @@ publishOnPlayStore(){
     releaseNotesDir=app/src/main/play/release-notes/en-US
     mkdir -p $releaseNotesDir
     # Same in here of course, internal can be found in the `play` section of build.gradle
-    script -q -c "gh release view ${versionName}" $releaseNotesDir/internal.txt >/dev/null
+    # We have to get the release notes as small as possible, as Google wants at max 500 characters...
+    # So we strip everything before "--"
+    # title:  v1.0.7-ALPHA
+    # tag:    v1.0.7-ALPHA
+    # draft:  false
+    # prerelease:     true
+    # author: myjenkinsinstancev[bot]
+    # created:        2022-07-21T15:35:12Z
+    # published:      2022-07-23T17:45:05Z
+    # url:    https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins/releases/tag/v1.0.7-ALPHA
+    # asset:  app-debug.apk
+    # asset:  app-release.apk
+    # --
+    gh release view v${versionName} | grep -A 500 "\-\-" | grep -v "\-\-" | sed 's/http.*[/]/#/' > $releaseNotesDir/internal.txt
+    # Strangely, the published version is still attached to the 1.0.3 "release". We have to find out why, and what kind
+    # of parameter to pass so that the tool can find the right release.
     ./gradlew publishBundle
 }
 
@@ -31,7 +46,7 @@ case $suffix in
         ;;
     SNAPSHOT)
         echo "This is a snapshot, we won't release anything"
-        GH_OPTS="$GH_OPTSDO_NOT_RELEASE"
+        GH_OPTS="$GH_OPTS DO_NOT_RELEASE"
         ;;
     RELEASE)
         echo "This a real release, so no need to use -d or -p";;
@@ -41,7 +56,8 @@ case $suffix in
         ;;
 esac
 
-if [[ "$GH_OPTS" == *"DO_NOT_RELEASE"* ]]; then
+echo "GH_OPTS is $GH_OPTS"
+if [[ "$GH_OPTS" =~ .*"DO_NOT_RELEASE".* ]]; then
   echo "It's not considered as a release, do nothing."
   else {
     echo "It's a release, so we'll publish it."
