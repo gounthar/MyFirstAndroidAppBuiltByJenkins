@@ -19,7 +19,22 @@ publishOnPlayStore(){
     releaseNotesDir=app/src/main/play/release-notes/en-US
     mkdir -p $releaseNotesDir
     # Same in here of course, internal can be found in the `play` section of build.gradle
-    gh release view v${versionName} > $releaseNotesDir/internal.txt
+    # We have to get the release notes as small as possible, as Google wants at max 500 characters...
+    # So we strip everything before "--"
+    # title:  v1.0.7-ALPHA
+    # tag:    v1.0.7-ALPHA
+    # draft:  false
+    # prerelease:     true
+    # author: myjenkinsinstancev[bot]
+    # created:        2022-07-21T15:35:12Z
+    # published:      2022-07-23T17:45:05Z
+    # url:    https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins/releases/tag/v1.0.7-ALPHA
+    # asset:  app-debug.apk
+    # asset:  app-release.apk
+    # --
+    gh release view v${versionName} | grep -A 500 "\-\-" | grep -v "\-\-" > $releaseNotesDir/internal.txt
+    # Strangely, the published version is still attached to the 1.0.3 "release". We have to find out why, and what kind
+    # of parameter to pass so that the tool can find the right release.
     ./gradlew publishBundle
 }
 
