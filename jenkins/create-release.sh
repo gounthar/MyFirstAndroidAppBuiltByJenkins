@@ -1,6 +1,10 @@
 #!/bin/bash -x
 
 versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
+    # We're in a feature branch or whatever, so we'll use the branch name as a prefix
+    versionName="$GIT_BRANCH-$versionName"
+} fi
 echo "Release version: ${versionName}"
 # -d Save the release as a draft instead of publishing it...
 # -p Mark the release as a prerelease
