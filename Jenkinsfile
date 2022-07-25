@@ -68,10 +68,7 @@ pipeline {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
             steps {
-                script {
-                // Later on, move everything into functions and call them here.
-                    createGooglePlayStoreRelease()
-                }
+                createGooglePlayStoreRelease()
             }
         }
     }
