@@ -61,7 +61,7 @@ pipeline {
                         }
                 }
             }
-        }
+     }
         stage('Release on Google Play Store') {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
