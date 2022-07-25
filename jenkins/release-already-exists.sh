@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash -x
 
 versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
+    # We're in a feature branch or whatever, so we'll use the branch name as a prefix
+    versionName="$GIT_BRANCH-$versionName"
+} fi
 # echo "Release version: ${versionName}"
 
 versionCode=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version code:" | grep -o '[^ ]*$' | sed -e 's/^[[:space:]]*//')
