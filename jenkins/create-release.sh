@@ -1,6 +1,10 @@
 #!/bin/bash -x
-
-versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+printVersionOptions="-Palpha=true -Pbeta=true"
+if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
+  # We're in the main branch, so no more alpha, beta or snapshot versions.
+  printVersionOptions="-Palpha=false -Pbeta=false -Psnapshot=false"
+} fi
+versionName=$(./gradlew printVersion $printVersionOptions | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 # because of origin/master, we need to remove the first part of the branch name
 GIT_BRANCH=$(echo "/$GIT_BRANCH" | sed 's/.*[/]//')
 if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
