@@ -55,6 +55,7 @@ case $suffix in
         GH_OPTS="$GH_OPTS-d"
         ;;
 esac
+
 echo "GH_OPTS is $GH_OPTS"
 if [[ "$GH_OPTS" =~ .*"DO_NOT_RELEASE".* ]]; then
   echo "It's not considered as a release, do nothing."
