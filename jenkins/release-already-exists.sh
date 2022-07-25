@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # because of origin/master, we need to remove the first part of the branch name
 GIT_BRANCH=$(echo "/$GIT_BRANCH" | sed 's/.*[/]//')
 printVersionOptions=" "
