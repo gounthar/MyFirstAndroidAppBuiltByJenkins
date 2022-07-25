@@ -1,4 +1,6 @@
 #!/bin/bash -x
+# because of origin/master, we need to remove the first part of the branch name
+GIT_BRANCH=$(echo "/$GIT_BRANCH" | sed 's/.*[/]//')
 printVersionOptions=" "
 if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
   # We're not in the main branch, so alpha, beta or snapshot versions.
