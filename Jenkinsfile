@@ -62,6 +62,15 @@ pipeline {
                 }
             }
         }
+        stage('Release on Google Play Store') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            steps {
+                echo 'Publishes the bundle on the Google Play Store'
+            }
+        }
     }
 }
 
@@ -73,6 +82,13 @@ void releaseAlreadyExist(config) {
 void createRelease() {
     sh (
         script: 'chmod +x ./jenkins/create-release.sh && ./jenkins/create-release.sh',
+        returnStdout: true
+    )
+}
+
+void createGooglePlayStoreRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-gps-release.sh && ./jenkins/create-gps-release.sh',
         returnStdout: true
     )
 }
