@@ -33,7 +33,8 @@ publishOnPlayStore(){
     # This should definitely be coined via reading/understanding build.gradle, and not hardcoded
     # cf https://github.com/Triple-T/gradle-play-publisher#uploading-release-notes
     releaseNotesDir=app/src/main/play/release-notes/en-US
-    mkdir -p $releaseNotesDir
+    releaseNamesDir=app/src/main/play/release-names
+    mkdir -p $releaseNotesDir && mkdir -p $releaseNamesDir
     # Same in here of course, internal can be found in the `play` section of build.gradle
     # We have to get the release notes as small as possible, as Google wants at max 500 characters...
     # So we strip everything before "--"
@@ -52,6 +53,10 @@ publishOnPlayStore(){
     content=$(cat < "$releaseNotesDir/internal.txt" && echo .) && content=${content%.} && printf %s "${content:0:500}" > "$releaseNotesDir/internal.txt"
     # Strangely, the published version is still attached to the 1.0.3 "release". We have to find out why, and what kind
     # of parameter to pass so that the tool can find the right release.
+    # That could be linked to the release names. Let's try out
+    # https://github.com/Triple-T/gradle-play-publisher#uploading-developer-facing-release-names
+    # Note: the Play Store limits your release names to a maximum of 50 characters.
+    printf %s "${versionName:0:500}" > $releaseNamesDir/internal.txt
     ./gradlew publishBundle
 }
 
