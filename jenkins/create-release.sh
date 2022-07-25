@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
 versionName=$(./gradlew printVersion -Palpha=true -Pbeta=true | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+# because of origin/master, we need to remove the first part of the branch name
+GIT_BRANCH=$(echo "/$GIT_BRANCH" | sed 's/.*[/]//')
 if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
     # We're in a feature branch or whatever, so we'll use the branch name as a prefix
     versionName="$GIT_BRANCH-$versionName"

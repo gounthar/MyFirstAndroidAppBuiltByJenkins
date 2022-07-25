@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-version = "1.0.9-ALPHA"
+version = "1.0.11"
 
 apply plugin: "com.dipien.android.semantic-version"
 
