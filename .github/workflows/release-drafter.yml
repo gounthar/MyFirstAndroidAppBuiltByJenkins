@@ -1,36 +1,38 @@
-- name: Release Drafter
-  # You may pin to the exact commit or the version.
-  # uses: release-drafter/release-drafter@e9ee02fbac03d922bac6212003695e8358dd88b0
-  uses: release-drafter/release-drafter@v5.19.0
-  with:
-    # If your workflow requires multiple release-drafter configs it be helpful to override the config-name.
-    # The config should still be located inside `.github` as that's where we are looking for config files.
+name: Release Drafter
 
-    config-name: # optional, default is release-drafter.yml
-    # The name that will be used in the GitHub release that's created or updated.
-    # This will override any `name-template` specified in your `release-drafter.yml` if defined.
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+  # pull_request event is required only for autolabeler
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
+  # pull_request_target event is required for autolabeler to support PRs from forks
+  # pull_request_target:
+  #   types: [opened, reopened, synchronize]
 
-    name: # optional
-    # The tag name to be associated with the GitHub release that's created or updated.
-    # This will override any `tag-template` specified in your `release-drafter.yml` if defined.
+permissions:
+  contents: read
 
-    tag: # optional
-    # The version to be associated with the GitHub release that's created or updated.
-    # This will override any version calculated by the release-drafter.
+jobs:
+  update_release_draft:
+    permissions:
+      contents: write  # for release-drafter/release-drafter to create a github release
+      pull-requests: write  # for release-drafter/release-drafter to add label to PR
+    runs-on: ubuntu-latest
+    steps:
+      # (Optional) GitHub Enterprise requires GHE_HOST variable set
+      #- name: Set GHE_HOST
+      #  run: |
+      #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 
-    version: # optional
-    # A boolean indicating whether the release being created or updated should be immediately published.
-
-    publish: # optional, default is 
-    # A boolean indicating whether the release being created or updated is a prerelease.
-
-    prerelease: # optional, default is 
-    # The object that the release should be created to point to.
-
-    commitish: # optional, default is 
-    # A boolean indicating whether the releaser mode is disabled.
-
-    disable-releaser: # optional, default is 
-    # A boolean indicating whether the autolabeler mode is disabled.
-
-    disable-autolabeler: # optional, default is 
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # with:
+        #   config-name: my-config.yml
+        #   disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
