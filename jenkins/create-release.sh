@@ -33,6 +33,7 @@ publishOnPlayStore(){
     # asset:  app-release.apk
     # --
     gh release view v${versionName} | grep -A 500 "\-\-" | grep -v "\-\-" | sed 's/http.*[/]/#/' > $releaseNotesDir/internal.txt
+    content=$(cat < "$releaseNotesDir/internal.txt" && echo .) && content=${content%.} && printf %s "${content:0:500}" > "$releaseNotesDir/internal.txt"
     # Strangely, the published version is still attached to the 1.0.3 "release". We have to find out why, and what kind
     # of parameter to pass so that the tool can find the right release.
     ./gradlew publishBundle
