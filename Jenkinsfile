@@ -49,7 +49,7 @@ pipeline {
                 script {
                 // Later on, move everything into functions and call them here.
                      releaseAlreadyExists = sh (
-                            script: 'chmod +x ./jenkins/release-already-exists.sh && ./jenkins/release-already-exists.sh',
+                            script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
                             returnStdout: true
                         )
                         echo "Release already exists: $releaseAlreadyExists."
