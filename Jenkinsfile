@@ -69,7 +69,6 @@ pipeline {
             }
             steps {
                 echo 'Publishes the bundle on the Google Play Store'
-                createGooglePlayStoreRelease()
             }
         }
     }
