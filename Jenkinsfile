@@ -21,7 +21,6 @@ pipeline {
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
-                    sh './gradlew tasks --group publishing'
                 }
             }
         }
