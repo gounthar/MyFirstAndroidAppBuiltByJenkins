@@ -68,7 +68,7 @@ pipeline {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
             steps {
-                echo 'Publishes on the Google Play Store'
+                echo 'Publishes the bundle on the Google Play Store'
                 createGooglePlayStoreRelease()
             }
         }
