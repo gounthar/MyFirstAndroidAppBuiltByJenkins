@@ -1,6 +1,10 @@
 #!/bin/bash -x
-printVersionOptions="-Palpha=true -Pbeta=true"
+
+printVersionOptions=" "
 if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
+  # We're not in the main branch, so alpha, beta or snapshot versions.
+  printVersionOptions="-Palpha=true -Pbeta=true -Psnapshot=false"
+} else {
   # We're in the main branch, so no more alpha, beta or snapshot versions.
   printVersionOptions="-Palpha=false -Pbeta=false -Psnapshot=false"
 } fi
