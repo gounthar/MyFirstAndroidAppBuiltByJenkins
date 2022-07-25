@@ -4,6 +4,11 @@ node {
         timestamps()
     }
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Static Analysis') {
             steps {
                 echo 'Run the static analysis to the code'
