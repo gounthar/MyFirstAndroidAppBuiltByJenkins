@@ -42,7 +42,8 @@ RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/
                                                       "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
                                                       "add-ons;addon-google_apis-google-24" \
                                                       "add-ons;addon-google_apis-google-23" 2>&1 >/dev/null && \
- chown -R jenkins:jenkins $ANDROID_HOME && ls -artl /usr/local/android-sdk-linux
+ groupadd -r developer && useradd -m -d /home/jenkins/ -s /bin/bash --no-log-init -r -g developer jenkins && \
+ chown -R jenkins:developers $ANDROID_HOME && ls -artl /usr/local/android-sdk-linux
 ENV PATH /usr/local/android-sdk-linux/build-tools/$ANDROID_BUILD_TOOLS_VERSION/:$PATH
 
 # Install GitHub command line tool
