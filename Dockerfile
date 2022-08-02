@@ -54,4 +54,4 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     apt update && apt install gh -y
 
 # Install docker \
-RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh && docker --version
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
