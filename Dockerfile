@@ -24,7 +24,7 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 ENV CMDLINE_TOOLS_HOME $ANDROID_HOME/cmdline-tools
 ENV PATH /usr/local/bin:$PATH:CMDLINE_TOOLS_HOME/tools/bin
-ARG ANDROID_BUILD_TOOLS_VERSION=30.0.2
+ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
 
 RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/android-sdk-linux && \
  curl -L -O  https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip && \
