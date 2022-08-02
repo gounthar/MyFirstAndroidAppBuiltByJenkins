@@ -1,6 +1,6 @@
 FROM debian:latest as ssh-agent
 
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y build-essential curl file git unzip openjdk-11-jdk-headless
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-11-jdk-headless
 
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 
@@ -51,7 +51,7 @@ ENV PATH /usr/local/android-sdk-linux/build-tools/$ANDROID_BUILD_TOOLS_VERSION/:
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
     chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt update && apt install gh -y
+    apt update && apt install -y --no-install-recommends gh
 
 # Install docker \
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
