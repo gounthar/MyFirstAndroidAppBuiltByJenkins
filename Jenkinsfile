@@ -17,6 +17,9 @@ pipeline {
             }
         }
         stage('Compile') {
+            environment {
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
             steps {
                 script {
                     sh 'echo "Compile the source code"'
