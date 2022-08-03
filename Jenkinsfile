@@ -7,6 +7,9 @@ pipeline {
     }
     stages {
         stage('Checkout') {
+            steps {
+                echo 'Checkout if needed'
+            }
         }
         stage('Static Analysis') {
             steps {
