@@ -4,6 +4,11 @@ pipeline {
         timestamps()
     }
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Static Analysis') {
             steps {
                 echo 'Run the static analysis to the code'
@@ -16,7 +21,6 @@ pipeline {
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
-                    sh './gradlew tasks --group publishing'
                 }
             }
         }
@@ -62,6 +66,16 @@ pipeline {
                 }
             }
         }
+        stage('Release on Google Play Store') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            steps {
+                echo 'Publishes the bundle on the Google Play Store'
+                createGooglePlayStoreRelease()
+            }
+        }
     }
 }
 
@@ -73,6 +87,13 @@ void releaseAlreadyExist(config) {
 void createRelease() {
     sh (
         script: 'chmod +x ./jenkins/create-release.sh && ./jenkins/create-release.sh',
+        returnStdout: true
+    )
+}
+
+void createGooglePlayStoreRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-gps-release.sh && ./jenkins/create-gps-release.sh',
         returnStdout: true
     )
 }
