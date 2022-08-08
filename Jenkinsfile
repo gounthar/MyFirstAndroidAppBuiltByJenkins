@@ -1,11 +1,14 @@
+def getBranchName() {
+   return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+}
 pipeline {
     environment {
-        BRANCH_NAME = "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+        BRANCH_NAME = getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent {
         docker {
-            image "${env.DOCKER_IMAGE_NAME}"
+            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
             label 'ubuntu'
         }
     }
