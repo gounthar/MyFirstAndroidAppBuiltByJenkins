@@ -4,7 +4,10 @@ pipeline {
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent {
-        docker { image "${env.DOCKER_IMAGE_NAME}" }
+        docker {
+            image "${env.DOCKER_IMAGE_NAME}"
+            label 'linux ubuntu docker'
+        }
     }
     options {
         timestamps()
