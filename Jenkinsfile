@@ -1,9 +1,10 @@
 pipeline {
     environment {
         BRANCH_NAME = "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent {
-        docker { image 'gounthar/jenkinsci-docker-android-base:$BRANCH_NAME' }
+        docker { image $DOCKER_IMAGE_NAME}
     }
     options {
         timestamps()
