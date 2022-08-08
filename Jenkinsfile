@@ -6,7 +6,7 @@ pipeline {
     agent {
         docker {
             image "${env.DOCKER_IMAGE_NAME}"
-            label 'linux ubuntu docker'
+            label 'ubuntu'
         }
     }
     options {
