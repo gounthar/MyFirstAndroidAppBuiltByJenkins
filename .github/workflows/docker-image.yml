@@ -1,0 +1,44 @@
+name: docker image building and pushing
+
+on:
+  push:
+    branches:
+      - 'dockerfile-true'
+  pull_request:
+    branches: [ dockerfile-true ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Will build everyday at 4:30 and 16:30
+    - cron:  '30 4,16 * * *'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:  
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      -
+        name: Build and push latest
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
