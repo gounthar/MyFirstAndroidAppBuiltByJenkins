@@ -12,8 +12,28 @@ on:
     - cron:  '30 4,16 * * *'
 
 jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            docker:
+              - 'Dockerfile'
+      # run only if 'Dockerfile' was changed
+      - name: Dockerfile tests
+        if: steps.filter.outputs.docker == 'true'
+        run: echo "Dockerfile"
+
   docker:
     runs-on: ubuntu-latest
+    # Wait from the paths-filter to be completed before starting next-job
+    needs: paths-filter
+    if: needs.paths-filter.outputs.output1 == 'true'
     steps:  
       -
         name: Checkout
