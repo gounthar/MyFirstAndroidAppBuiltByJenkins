@@ -25,6 +25,8 @@ pipeline {
         stage('Static Analysis') {
             steps {
                 echo 'Run the static analysis to the code'
+                sh 'chmod +x ./gradlew'
+                sh './gradlew check'
             }
         }
         stage('Compile') {
