@@ -29,6 +29,19 @@ pipeline {
                 sh './gradlew check'
             }
         }
+       stage('Qodana') {
+            agent {
+               docker {
+                  image 'jetbrains/qodana-android'
+                  args '-v .:/data/project/'
+                  args '-v ./app/build/reports/qodana:/data/results/'
+                  args '--entrypoint=""'
+               }
+            }
+            steps {
+               sh "qodana --save-report"
+            }
+        }
         stage('Compile') {
             environment {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
