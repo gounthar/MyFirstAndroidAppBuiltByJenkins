@@ -1,5 +1,16 @@
 FROM debian:latest as ssh-agent
 
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+RUN groupadd -g ${gid} ${group}
+RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
+
+ARG AGENT_WORKDIR=/home/${user}/agent
+
+
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-11-jdk-headless
 
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
@@ -42,8 +53,8 @@ RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/
                                                       "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
                                                       "add-ons;addon-google_apis-google-24" \
                                                       "add-ons;addon-google_apis-google-23" 2>&1 >/dev/null && \
- groupadd -r developer && useradd -m -d /home/jenkins/ -s /bin/bash --no-log-init -r -g developer jenkins && \
- chown -R jenkins:developer $ANDROID_HOME && ls -artl /usr/local/android-sdk-linux
+# groupadd -r jenkins && useradd -m -d /home/jenkins/ -s /bin/bash --no-log-init -r -g jenkins jenkins && \
+ chown -R jenkins:jenkins $ANDROID_HOME && ls -artl /usr/local/android-sdk-linux
 ENV PATH /usr/local/android-sdk-linux/build-tools/$ANDROID_BUILD_TOOLS_VERSION/:$PATH
 ENV HOME /home/jenkins
 
@@ -56,3 +67,11 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
 
 # Install docker \
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+
+USER ${user}
+ENV AGENT_WORKDIR=${AGENT_WORKDIR}
+RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
+
+VOLUME /home/${user}/.jenkins
+VOLUME ${AGENT_WORKDIR}
+WORKDIR /home/${user}
