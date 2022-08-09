@@ -5,6 +5,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id("com.github.triplet.play") version "3.7.0"
+    id("com.gradleup.static-analysis") version "1.4"
+    id("com.github.spotbugs") version "4.7.1"
+    id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
 android {
@@ -35,15 +38,41 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
+    }
+
+    staticAnalysis {
+        penalty {
+            maxErrors = 0
+            maxWarnings = 0
+        }
+        checkstyle { }
+        pmd { }
+        spotbugs {
+            // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
+            // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
+            htmlReportEnabled true // Control whether html report generation should be enabled. `true` by default.
+            includeVariants { variant -> release } // A closure to determine which variants (only for Android) to include
+        }
+        detekt {
+            buildUponDefaultConfig = true // preconfigure defaults
+            allRules = false // activate all available (even unstable) rules.
+            config = files("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+            baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
+        }
+
+        lintOptions { }
     }
 }
 
