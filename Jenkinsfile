@@ -8,6 +8,7 @@ pipeline {
     }
     agent {
         docker {
+            alwaysPull true
             image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
             label 'ubuntu'
         }
