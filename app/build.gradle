@@ -7,7 +7,7 @@ plugins {
     id("com.github.triplet.play") version "3.7.0"
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "4.7.1"
-    id("io.gitlab.arturbosch.detekt").version("1.21.0")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -57,23 +57,24 @@ android {
             maxErrors = 0
             maxWarnings = 0
         }
-        checkstyle { }
-        pmd { }
+        // Kotlin project, so no checkstyle { }
+        pmd {}
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
             htmlReportEnabled true // Control whether html report generation should be enabled. `true` by default.
-            includeVariants { variant -> release } // A closure to determine which variants (only for Android) to include
-        }
-        detekt {
-            buildUponDefaultConfig = true // preconfigure defaults
-            allRules = false // activate all available (even unstable) rules.
-            config = files("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
-            baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
+            includeVariants { variant -> release }
+            // A closure to determine which variants (only for Android) to include
         }
 
-        lintOptions { }
+        //detekt {
+            /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
+            input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
+            // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
+            /*baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
+        //}
     }
+
 }
 
 dependencies {
@@ -102,3 +103,4 @@ play {
     releaseStatus.set(ReleaseStatus.DRAFT)
     // ...
 }
+
