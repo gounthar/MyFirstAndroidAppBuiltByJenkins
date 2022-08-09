@@ -3,9 +3,9 @@ name: docker image building and pushing
 on:
   push:
     branches:
-      - 'conditional-docker-building'
+      - 'dynamic-docker'
   pull_request:
-    branches: [ conditional-docker-building ]
+    branches: [ dynamic-docker ]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
