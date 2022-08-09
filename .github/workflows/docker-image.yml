@@ -28,8 +28,16 @@ jobs:
       - name: Dockerfile tests
         if: steps.filter.outputs.docker == 'true'
         run: echo "Dockerfile"
-
-  docker:
+  check-docker-image:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+    steps:
+    run: |
+    manifest=$(curl -X GET https://docker.pkg.github.com/v2/{org}/{repo}/{image name}/manifests/$GITHUB_SHA -u $GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }} | jq '.')
+    echo $manifest
+ 
+ docker:
     runs-on: ubuntu-latest
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
