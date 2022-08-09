@@ -34,6 +34,7 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Compile the source code"'
+                    sh 'echo $HOME'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
