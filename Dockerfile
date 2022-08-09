@@ -45,6 +45,7 @@ RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/
  groupadd -r developer && useradd -m -d /home/jenkins/ -s /bin/bash --no-log-init -r -g developer jenkins && \
  chown -R jenkins:developer $ANDROID_HOME && ls -artl /usr/local/android-sdk-linux
 ENV PATH /usr/local/android-sdk-linux/build-tools/$ANDROID_BUILD_TOOLS_VERSION/:$PATH
+ENV HOME /home/jenkins
 
 # Install GitHub command line tool
 # ENV GITHUB_TOKEN $GITHUB_TOKEN
