@@ -3,7 +3,7 @@ name: docker image building and pushing
 on:
   push:
     branches:
-      - 'dynamic-docker'
+      - 'conditional-docker-building'
   pull_request:
     branches: [ conditional-docker-building ]
   schedule:
