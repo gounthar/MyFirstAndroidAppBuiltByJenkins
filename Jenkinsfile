@@ -39,6 +39,7 @@ pipeline {
                     sh 'echo "Compile the source code"'
                     sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
+                    sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                 }
