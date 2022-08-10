@@ -3,9 +3,9 @@ name: docker image building and pushing
 on:
   push:
     branches:
-      - 'main'
+      - 'add-gradle-wrapper-binary'
   pull_request:
-    branches: [ main ]
+    branches: [ add-gradle-wrapper-binary ]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
