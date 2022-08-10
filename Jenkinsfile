@@ -21,6 +21,7 @@ pipeline {
             steps {
                 echo 'Checkout if needed'
                 sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
+                sh 'find /home/jenkins/ -name "*.zip" -exec ls {} \;'
             }
         }
         stage('Static Analysis') {
