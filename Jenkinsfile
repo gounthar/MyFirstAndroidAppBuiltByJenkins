@@ -20,7 +20,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkout if needed'
-                sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
+                sh 'ls -artl /home/jenkins/.gradle/wrapper/dists/gradle-7.3.3-bin'
             }
         }
         stage('Static Analysis') {
