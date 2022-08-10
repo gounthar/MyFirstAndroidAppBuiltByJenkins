@@ -5,6 +5,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id("com.github.triplet.play") version "3.7.0"
+    id("com.gradleup.static-analysis") version "1.4"
+    id("com.github.spotbugs") version "4.7.1"
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -35,16 +38,43 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
     }
+
+    staticAnalysis {
+        penalty {
+            maxErrors = 0
+            maxWarnings = 0
+        }
+        // Kotlin project, so no checkstyle { }
+        pmd {}
+        spotbugs {
+            // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
+            // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
+            htmlReportEnabled true // Control whether html report generation should be enabled. `true` by default.
+            includeVariants { variant -> release }
+            // A closure to determine which variants (only for Android) to include
+        }
+
+        //detekt {
+            /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
+            input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
+            // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
+            /*baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
+        //}
+    }
+
 }
 
 dependencies {
@@ -53,10 +83,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -73,3 +103,4 @@ play {
     releaseStatus.set(ReleaseStatus.DRAFT)
     // ...
 }
+

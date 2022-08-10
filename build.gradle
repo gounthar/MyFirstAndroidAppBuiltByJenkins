@@ -8,13 +8,18 @@ buildscript {
         classpath "com.android.tools.build:gradle:7.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
         classpath("com.dipien:semantic-version-android-gradle-plugin:1.2.0")
+        // spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
-version = "1.0.17"
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.21.0")
+}
+
+version = "1.1.2"
 
 apply plugin: "com.dipien.android.semantic-version"
 

@@ -1,23 +1,42 @@
+def getBranchName() {
+   return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+}
 pipeline {
-    agent any
+    environment {
+        BRANCH_NAME = getBranchName()
+        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
+    }
+    agent {
+        docker {
+            alwaysPull true
+            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+            label 'ubuntu'
+        }
+    }
     options {
         timestamps()
     }
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                echo 'Checkout if needed'
             }
         }
         stage('Static Analysis') {
             steps {
                 echo 'Run the static analysis to the code'
+                sh 'chmod +x ./gradlew'
+                sh './gradlew check'
             }
         }
         stage('Compile') {
+            environment {
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
             steps {
                 script {
                     sh 'echo "Compile the source code"'
+                    sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
