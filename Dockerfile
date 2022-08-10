@@ -68,15 +68,17 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
 # Install docker \
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 
-RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && mkdir -p /home/${user}/gradle/wrapper
+RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && mkdir -p /home/${user}/gradle/wrapper && \
+    mkdir -p /home/${user}/.gradle/wrapper/dists
 
 # Let's try to download the gradle wrapper binary
 WORKDIR /home/${user}
 COPY . .
 COPY gradlew /home/${user}/
 
+ENV GRADLE_HOME=/home/${user}/.gradle
 RUN chown -R ${user}:${group} /home/${user} && chmod +x /home/${user}/gradlew && \
-    cd /home/${user} && ./gradlew --version
+    cd /home/${user} && ./gradlew -d --version && ls -artl /home/${user}/.gradle
 
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
