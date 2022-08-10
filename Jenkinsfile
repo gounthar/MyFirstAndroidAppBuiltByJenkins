@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Checkout if needed'
                 sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
-                sh 'find /home/jenkins/ -name "*.zip" -exec ls {} \\;'
+                sh 'find / -name "*.zip" -exec ls {} \\;'
             }
         }
         stage('Static Analysis') {
@@ -41,6 +41,7 @@ pipeline {
                     sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
                     sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
+                    sh 'find /home/jenkins/ -name "*.zip" -exec ls {} \\;'
                     sh './gradlew build'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                 }
