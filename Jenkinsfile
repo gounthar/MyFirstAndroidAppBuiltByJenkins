@@ -34,7 +34,7 @@ pipeline {
        stage('Qodana') {
             agent {
                docker {
-                  image 'jetbrains/qodana-android'
+                  image 'jetbrains/qodana-jvm-android'
                   args '-v .:/data/project/'
                   args '-v ./app/build/reports/qodana:/data/results/'
                   args '--entrypoint=""'
