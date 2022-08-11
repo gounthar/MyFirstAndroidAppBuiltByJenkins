@@ -11,7 +11,7 @@ pipeline {
         BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
-    agent none
+    agent any
     options {
         timestamps()
     }
