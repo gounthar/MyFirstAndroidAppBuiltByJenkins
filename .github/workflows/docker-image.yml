@@ -5,7 +5,7 @@ on:
     branches:
       - '*'
   pull_request:
-    branches: [ * ]
+    branches: [ '*' ]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
