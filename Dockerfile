@@ -79,7 +79,7 @@ COPY gradlew /home/${user}/
 
 ENV GRADLE_HOME=/home/${user}/.gradle
 RUN chown -R ${user}:${group} /home/${user} && chmod +x /home/${user}/gradlew && \
-    cd /home/${user} && ./gradlew -d --version && ls -artl /home/${user}/.gradle
+    cd /home/${user} && ./gradlew -d --version && ls -artl /home/${user}/.gradle/wrapper/dists
 
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
