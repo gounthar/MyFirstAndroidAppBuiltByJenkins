@@ -31,7 +31,7 @@ jobs:
       # run only if 'Dockerfile' was changed
       - name: Dockerfile tests
         if: steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true' || steps.filter.outputs.grqdle-zrqpper == 'true'
-        run: echo "Dockerfile"
+        run: echo "true"
 
   docker:
     runs-on: ubuntu-latest
