@@ -21,7 +21,7 @@ pipeline {
 //            steps {
 //                echo 'Checkout if needed'
 //            }
-        }
+//        }
         parallel {
             stage('Static Analysis') {
                 agent {
