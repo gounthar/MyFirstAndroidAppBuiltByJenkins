@@ -29,11 +29,11 @@ pipeline {
         }
         stage('Static Analysis') {
             steps {
-                echo 'Run the static analysis to the code'
-                sh 'chmod +x ./gradlew'
-                sh './gradlew detekt --auto-correct'
-                sh 'git diff'
-                sh './gradlew check'
+//                 echo 'Run the static analysis to the code'
+//                 sh 'chmod +x ./gradlew'
+//                 sh './gradlew detekt --auto-correct'
+//                 sh 'git diff'
+//                 sh './gradlew check'
             }
         }
        stage('Qodana') {
