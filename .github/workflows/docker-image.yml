@@ -34,7 +34,7 @@ jobs:
   docker:
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
-    if: ${{ needs.paths-filter.changes.outputs.docker == 'true' || needs.paths-filter.changes.outputs.docker-ignore == 'true' || needs.paths-filter.changes.outputs.gradle-wrapper == 'true' }}
+    if: ${{ needs.paths-filter.changes.outputs != [] }}
     runs-on: ubuntu-latest
     steps:  
       -
