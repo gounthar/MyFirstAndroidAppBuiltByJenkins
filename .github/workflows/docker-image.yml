@@ -3,9 +3,9 @@ name: docker image building and pushing
 on:
   push:
     branches:
-      - 'main'
+      - '*'
   pull_request:
-    branches: [ main ]
+    branches: [ '*' ]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
@@ -15,7 +15,9 @@ jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+      docker: ${{ steps.filter.outputs.docker }}
+      docker-ignore: ${{ steps.filter.outputs.docker-ignore }}
+      gradle-wrapper: ${{ steps.filter.outputs.gradle-wrapper }}
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
@@ -24,16 +26,17 @@ jobs:
           filters: |
             docker:
               - 'Dockerfile'
-      # run only if 'Dockerfile' was changed
-      - name: Dockerfile tests
-        if: steps.filter.outputs.docker == 'true'
-        run: echo "Dockerfile"
+            docker-ignore:
+              - '.dockerignore'
+            gradle-wrapper:
+              - 'gradle/wrapper/gradle-wrapper.properties'
 
   docker:
-    runs-on: ubuntu-latest
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
-    if: needs.paths-filter.outputs.output1 == 'true'
+    if: "!contains(needs.paths-filter.changes.outputs, '[]')"
+    # “!contains(toJson(github.event.pull_request.labels), ‘[]’)”
+    runs-on: ubuntu-latest
     steps:  
       -
         name: Checkout
