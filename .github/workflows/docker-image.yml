@@ -15,7 +15,9 @@ jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+      docker: ${{ steps.filter.outputs.docker }}
+      docker-ignore: ${{ steps.filter.outputs.docker-ignore }}
+      gradle-wrapper: ${{ steps.filter.outputs.gradle-wrapper }}
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
@@ -30,10 +32,10 @@ jobs:
               - 'gradle/wrapper/gradle-wrapper.properties'
 
   docker:
-    runs-on: ubuntu-latest
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
-    if: ${{ steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true' || steps.filter.outputs.gradle-wrapper == 'true' }}
+    if: ${{ paths-filter.changes.outputs.docker == 'true' || paths-filter.changes.outputs.docker-ignore == 'true' || paths-filter.changes.outputs.gradle-wrapper == 'true' }}
+    runs-on: ubuntu-latest
     steps:  
       -
         name: Checkout
