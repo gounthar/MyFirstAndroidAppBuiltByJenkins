@@ -28,16 +28,12 @@ jobs:
               - '.dockerignore'
             gradle-wrapper:
               - 'gradle/wrapper/gradle-wrapper.properties'
-      # run only if 'Dockerfile' was changed
-      - name: Dockerfile tests
-        if: steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true' || steps.filter.outputs.grqdle-zrqpper == 'true'
-        run: echo "true"
 
   docker:
     runs-on: ubuntu-latest
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
-    if: needs.paths-filter.outputs.output1 == 'true'
+    if: ${{ steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true' || steps.filter.outputs.gradle-wrapper == 'true' }}
     steps:  
       -
         name: Checkout
