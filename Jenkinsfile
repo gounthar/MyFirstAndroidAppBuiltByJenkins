@@ -1,6 +1,7 @@
 def getBranchName() {
    return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
 }
+
 def getSimplifiedBranchName() {
    return "${getBranchName().replace('/', '-')}"
 }
@@ -33,6 +34,19 @@ pipeline {
                 sh './gradlew detekt --auto-correct'
                 sh 'git diff'
                 sh './gradlew check'
+            }
+        }
+       stage('Qodana') {
+            agent {
+               docker {
+                  image 'jetbrains/qodana-android'
+                  args '-v .:/data/project/'
+                  args '-v ./app/build/reports/qodana:/data/results/'
+                  args '--entrypoint=""'
+               }
+            }
+            steps {
+               sh "qodana --save-report"
             }
         }
         stage('Compile') {
