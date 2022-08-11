@@ -30,7 +30,7 @@ jobs:
               - 'gradle/wrapper/gradle-wrapper.properties'
       # run only if 'Dockerfile' was changed
       - name: Dockerfile tests
-        if: steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true'v || steps.filter.outputs.grqdle-zrqpper == 'true'
+        if: steps.filter.outputs.docker == 'true' || steps.filter.outputs.docker-ignore == 'true' || steps.filter.outputs.grqdle-zrqpper == 'true'
         run: echo "Dockerfile"
 
   docker:
