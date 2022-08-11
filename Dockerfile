@@ -83,6 +83,8 @@ RUN chown -R ${user}:${group} /home/${user} && chmod +x /home/${user}/gradlew &&
 COPY . .
 COPY gradlew /home/${user}/
 
+RUN find /home/jenkins/ -name "gradle-7.3.3-bin.zip" -exec ls {} \;
+
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 
