@@ -16,32 +16,41 @@ pipeline {
         timestamps()
     }
     stages {
-        stage('Checkout') {
-            agent any
-            steps {
-                echo 'Checkout if needed'
-            }
-        }
-//        stage('Static Analysis') {
+//        stage('Checkout') {
+//            agent any
 //            steps {
-//                 echo 'Run the static analysis to the code'
-//                 sh 'chmod +x ./gradlew'
-//                 sh './gradlew detekt --auto-correct'
-//                 sh 'git diff'
-//                 sh './gradlew check'
+//                echo 'Checkout if needed'
 //            }
-//        }
-       stage('Qodana') {
-            agent {
-               docker {
-                  image 'jetbrains/qodana-jvm-android'
-                  args '-v .:/data/project/'
-                  args '-v ./app/build/reports/qodana:/data/results/'
-                  args '--entrypoint=""'
-               }
+        }
+        parallel {
+            stage('Static Analysis') {
+                agent {
+                    docker {
+                        alwaysPull true
+                        image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                        label 'ubuntu'
+                    }
+                }
+                steps {
+                     echo 'Run the static analysis to the code'
+                     sh 'chmod +x ./gradlew'
+                     sh './gradlew detekt --auto-correct'
+                    sh 'git diff'
+                    sh './gradlew check'
+                }
             }
-            steps {
-               sh "qodana --save-report"
+            stage('Qodana') {
+                agent {
+                    docker {
+                        image 'jetbrains/qodana-jvm-android'
+                        args '-v .:/data/project/'
+                        args '-v ./app/build/reports/qodana:/data/results/'
+                        args '--entrypoint=""'
+                    }
+                }
+                steps {
+                sh "qodana --save-report"
+                }
             }
         }
         stage('Compile') {
