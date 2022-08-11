@@ -12,7 +12,7 @@ RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 # JDK 17 is supported, so let's move to that
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-17-jdk-headless
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends adb build-essential curl file git unzip openjdk-17-jdk-headless
 
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 
