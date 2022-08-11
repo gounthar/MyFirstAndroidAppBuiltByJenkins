@@ -11,18 +11,13 @@ pipeline {
         BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
-    agent {
-        docker {
-            alwaysPull true
-            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-            label 'ubuntu'
-        }
-    }
+    agent none
     options {
         timestamps()
     }
     stages {
         stage('Checkout') {
+            agent any
             steps {
                 echo 'Checkout if needed'
             }
@@ -53,6 +48,13 @@ pipeline {
             environment {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
+             agent {
+                docker {
+                    alwaysPull true
+                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                    label 'ubuntu'
+                }
+            }
             steps {
                 script {
                     sh 'echo "Compile the source code"'
@@ -66,18 +68,33 @@ pipeline {
             }
         }
         stage('Security Check') {
+            agent any
             steps {
                 echo 'Run the security check against the application'
                 echo 'Something like dependency check or dependabot'
             }
         }
         stage('Run Unit Tests') {
+            agent {
+                docker {
+                    alwaysPull true
+                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                    label 'ubuntu'
+                }
+            }
             steps {
                 echo 'Run unit tests from the source code'
                 sh './gradlew test'
             }
         }
         stage('Run Instrumented Tests') {
+            agent {
+                docker {
+                    alwaysPull true
+                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                    label 'ubuntu'
+                }
+            }
             steps {
                 echo 'Run only instrumented tests from the source code'
                 // We don't have any device connected yet
@@ -86,6 +103,7 @@ pipeline {
             }
         }
         stage('Publish Artifacts') {
+            agent any
             steps {
                 echo 'Save the assemblies generated from the compilation'
             }
@@ -94,6 +112,13 @@ pipeline {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                docker {
+                    alwaysPull true
+                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                    label 'ubuntu'
+                }
             }
             steps {
                 script {
@@ -116,6 +141,13 @@ pipeline {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                docker {
+                    alwaysPull true
+                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                    label 'ubuntu'
+                }
             }
             steps {
                 echo 'Publishes the bundle on the Google Play Store'
