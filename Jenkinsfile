@@ -27,15 +27,15 @@ pipeline {
                 echo 'Checkout if needed'
             }
         }
-        stage('Static Analysis') {
-            steps {
+//        stage('Static Analysis') {
+//            steps {
 //                 echo 'Run the static analysis to the code'
 //                 sh 'chmod +x ./gradlew'
 //                 sh './gradlew detekt --auto-correct'
 //                 sh 'git diff'
 //                 sh './gradlew check'
-            }
-        }
+//            }
+//        }
        stage('Qodana') {
             agent {
                docker {
