@@ -1,9 +1,14 @@
 def getBranchName() {
    return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
 }
+
+def getSimplifiedBranchName() {
+   return "${getBranchName().replace('/', '-')}"
+}
+
 pipeline {
     environment {
-        BRANCH_NAME = getBranchName()
+        BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent {
@@ -26,6 +31,8 @@ pipeline {
             steps {
                 echo 'Run the static analysis to the code'
                 sh 'chmod +x ./gradlew'
+                sh './gradlew detekt --auto-correct'
+                sh 'git diff'
                 sh './gradlew check'
             }
         }
@@ -52,6 +59,8 @@ pipeline {
                     sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
+                    sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
+                    sh 'find /home/jenkins/ -name "gradle-7.3.3-bin.zip" -exec ls {} \\;'
                     sh './gradlew :app:bundleDebug :app:bundleRelease'
                 }
             }
@@ -59,16 +68,21 @@ pipeline {
         stage('Security Check') {
             steps {
                 echo 'Run the security check against the application'
+                echo 'Something like dependency check or dependabot'
             }
         }
         stage('Run Unit Tests') {
             steps {
                 echo 'Run unit tests from the source code'
+                sh './gradlew test'
             }
         }
-        stage('Run Integration Tests') {
+        stage('Run Instrumented Tests') {
             steps {
-                echo 'Run only crucial integration tests from the source code'
+                echo 'Run only instrumented tests from the source code'
+                // We don't have any device connected yet
+                sh 'adb connect 82.65.177.146:7457'
+                // sh './gradlew connectedAndroidTest'
             }
         }
         stage('Publish Artifacts') {

@@ -5,15 +5,16 @@ ARG group=jenkins
 ARG uid=1002
 ARG gid=1002
 
+# Jenkins user should be the second one in the system, so ... 1002
 RUN groupadd -g ${gid} ${group}
 RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
 
 ARG AGENT_WORKDIR=/home/${user}/agent
 
+# JDK 17 is supported, so let's move to that
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends adb build-essential curl file git unzip openjdk-17-jdk-headless
 
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-11-jdk-headless
-
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.8.1
@@ -68,9 +69,26 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
 # Install docker \
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 
+RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && mkdir -p /home/${user}/gradle/wrapper && \
+    mkdir -p /home/${user}/.gradle/wrapper/dists
+
+# Let's try to download the gradle wrapper binary
+WORKDIR /home/${user}
+COPY . .
+COPY gradlew /home/${user}/
+
+ENV GRADLE_HOME=/home/${user}/.gradle
+
+RUN chown -R ${user}:${group} /home/${user} && chmod +x /home/${user}/gradlew
+USER ${user}
+RUN cd /home/${user} && ./gradlew -d --version && ls -artl /home/${user}/.gradle/wrapper/dists
+COPY . .
+COPY gradlew /home/${user}/
+
+# RUN find / -name "gradle-7.3.3-bin.zip" -exec ls {} \;
+
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
-RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
 
 VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}

@@ -3,9 +3,9 @@ name: docker image building and pushing
 on:
   push:
     branches:
-      - 'qodana'
+      - '*'
   pull_request:
-    branches: [ qodana ]
+    branches: [ '*' ]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
@@ -15,7 +15,9 @@ jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+      docker: ${{ steps.filter.outputs.docker }}
+      docker-ignore: ${{ steps.filter.outputs.docker-ignore }}
+      gradle-wrapper: ${{ steps.filter.outputs.gradle-wrapper }}
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
@@ -24,24 +26,17 @@ jobs:
           filters: |
             docker:
               - 'Dockerfile'
-      # run only if 'Dockerfile' was changed
-      - name: Dockerfile tests
-        if: steps.filter.outputs.docker == 'true'
-        run: echo "Dockerfile"
-  check-docker-image:
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
-    steps:
-    run: |
-    manifest=$(curl -X GET https://docker.pkg.github.com/v2/{org}/{repo}/{image name}/manifests/$GITHUB_SHA -u $GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }} | jq '.')
-    echo $manifest
- 
- docker:
-    runs-on: ubuntu-latest
+            docker-ignore:
+              - '.dockerignore'
+            gradle-wrapper:
+              - 'gradle/wrapper/gradle-wrapper.properties'
+
+  docker:
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
-    if: needs.paths-filter.outputs.output1 == 'true'
+    if: "!contains(needs.paths-filter.changes.outputs, '[]')"
+    # “!contains(toJson(github.event.pull_request.labels), ‘[]’)”
+    runs-on: ubuntu-latest
     steps:  
       -
         name: Checkout
@@ -60,7 +55,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Extract branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed -e 's#/#-#g')"
         id: extract_branch
       -
         name: Build and push latest
