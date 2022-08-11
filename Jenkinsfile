@@ -7,11 +7,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent {
-        docker {
-            alwaysPull true
-            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-            label 'ubuntu'
-        }
+            dockerfile true
     }
     options {
         timestamps()
