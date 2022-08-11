@@ -63,6 +63,7 @@ pipeline {
             steps {
                 echo 'Run only instrumented tests from the source code'
                 // We don't have any device connected yet
+                sh 'adb connect 82.65.177.146:7457'
                 // sh './gradlew connectedAndroidTest'
             }
         }
