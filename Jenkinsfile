@@ -50,6 +50,7 @@ pipeline {
         stage('Security Check') {
             steps {
                 echo 'Run the security check against the application'
+                echo 'Something like dependency check or dependabot'
             }
         }
         stage('Run Unit Tests') {
@@ -61,7 +62,8 @@ pipeline {
         stage('Run Instrumented Tests') {
             steps {
                 echo 'Run only instrumented tests from the source code'
-                sh './gradlew connectedAndroidTest'
+                // We don't have any device connected yet
+                // sh './gradlew connectedAndroidTest'
             }
         }
         stage('Publish Artifacts') {
