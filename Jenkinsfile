@@ -22,34 +22,36 @@ pipeline {
 //                echo 'Checkout if needed'
 //            }
 //        }
-        parallel {
-            stage('Static Analysis') {
-                agent {
-                    docker {
-                        alwaysPull true
-                        image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                        label 'ubuntu'
+        stage('Static Analysis') {
+            parallel {
+                stage('Static Analysis') {
+                    agent {
+                        docker {
+                            alwaysPull true
+                            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
+                            label 'ubuntu'
+                        }
+                    }
+                    steps {
+                        echo 'Run the static analysis to the code'
+                        sh 'chmod +x ./gradlew'
+                        sh './gradlew detekt --auto-correct'
+                        sh 'git diff'
+                        sh './gradlew check'
                     }
                 }
-                steps {
-                     echo 'Run the static analysis to the code'
-                     sh 'chmod +x ./gradlew'
-                     sh './gradlew detekt --auto-correct'
-                    sh 'git diff'
-                    sh './gradlew check'
-                }
-            }
-            stage('Qodana') {
-                agent {
-                    docker {
-                        image 'jetbrains/qodana-jvm-android'
-                        args '-v .:/data/project/'
-                        args '-v ./app/build/reports/qodana:/data/results/'
-                        args '--entrypoint=""'
+                stage('Qodana') {
+                    agent {
+                        docker {
+                            image 'jetbrains/qodana-jvm-android'
+                            args '-v .:/data/project/'
+                            args '-v ./app/build/reports/qodana:/data/results/'
+                            args '--entrypoint=""'
+                        }
                     }
-                }
-                steps {
-                sh "qodana --save-report"
+                    steps {
+                        sh "qodana --save-report"
+                    }
                 }
             }
         }
