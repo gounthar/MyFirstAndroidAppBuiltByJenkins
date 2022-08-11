@@ -74,12 +74,12 @@ RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && mkdir -p /home/
 
 # Let's try to download the gradle wrapper binary
 WORKDIR /home/${user}
-COPY . .
-COPY gradlew /home/${user}/
 
 ENV GRADLE_HOME=/home/${user}/.gradle
 RUN chown -R ${user}:${group} /home/${user} && chmod +x /home/${user}/gradlew && \
     cd /home/${user} && ./gradlew -d --version && ls -artl /home/${user}/.gradle/wrapper/dists
+COPY . .
+COPY gradlew /home/${user}/
 
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
