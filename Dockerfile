@@ -5,15 +5,16 @@ ARG group=jenkins
 ARG uid=1002
 ARG gid=1002
 
+# Jenkins user should be the second one in the system, so ... 1002
 RUN groupadd -g ${gid} ${group}
 RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
 
 ARG AGENT_WORKDIR=/home/${user}/agent
 
+# JDK 17 is supported, so let's move to that
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-17-jdk-headless
 
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y --no-install-recommends build-essential curl file git unzip openjdk-11-jdk-headless
-
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.8.1
