@@ -20,7 +20,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkout if needed'
-                sh 'ls -artl /home/jenkins/.gradle/wrapper/dists/gradle-7.3.3-bin'
             }
         }
         stage('Static Analysis') {
@@ -56,11 +55,13 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 echo 'Run unit tests from the source code'
+                sh './gradlew test'
             }
         }
-        stage('Run Integration Tests') {
+        stage('Run Instrumented Tests') {
             steps {
-                echo 'Run only crucial integration tests from the source code'
+                echo 'Run only instrumented tests from the source code'
+                sh './gradlew connectedAndroidTest'
             }
         }
         stage('Publish Artifacts') {
