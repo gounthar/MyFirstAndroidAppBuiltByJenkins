@@ -56,7 +56,7 @@ android {
     staticAnalysis {
         penalty {
             maxErrors = 0
-            maxWarnings = 0
+            maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
         pmd {}
