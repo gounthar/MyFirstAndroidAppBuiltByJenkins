@@ -24,7 +24,7 @@ pipeline {
 //        }
         stage('Static Analysis') {
             parallel {
-                stage('Static Analysis') {
+                stage('Static Analysis with gradlew check') {
                     agent {
                         docker {
                             alwaysPull true
