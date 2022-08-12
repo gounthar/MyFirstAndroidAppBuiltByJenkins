@@ -8,6 +8,7 @@ plugins {
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "5.0.9"
     id("io.gitlab.arturbosch.detekt")
+    id 'jacoco'
 }
 
 android {
