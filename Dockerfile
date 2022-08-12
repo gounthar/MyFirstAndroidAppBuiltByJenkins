@@ -1,23 +1,15 @@
 FROM jenkins/ssh-agent:bullseye-jdk17-preview as ssh-agent
-#
-#ARG user=jenkins
-#ARG group=jenkins
-#ARG uid=1002
-#ARG gid=1002
 
-# Jenkins user should be the second one in the system, so ... 1002
-#RUN groupadd -g ${gid} ${group}
-#RUN useradd -c "Jenkins user" -d /home/${user} -u ${uid} -g ${gid} -m ${user}
-#
-#ARG JENKINS_AGENT_HOME=${JENKINS_AGENT_HOME}/agent
-
-# JDK 17 is supported, so let's move to that
+# ca-certificates because curl will need it later on for the Maven installation
 RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git unzip
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.8.6
 # Add a checksum for the maven binary
 RUN curl -sS -L -O --output-dir /tmp/ --create-dirs  https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+    && echo "$(sha512sum /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz)" | sha512sum -c - \
+    && curl -sS -L -O --output-dir /tmp/ --create-dirs  https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz.sha512 \
+    && echo "$(cat /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz.sha512) /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | sha512sum --check --status \
     && tar xzf "/tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -C /opt/ \
     && rm "/tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
     && ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven \
