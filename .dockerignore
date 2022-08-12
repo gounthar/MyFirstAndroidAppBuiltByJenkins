@@ -1,4 +1,5 @@
 *
+!entrypoint.sh
 !gradlew
 !gradle
 !.gradle
