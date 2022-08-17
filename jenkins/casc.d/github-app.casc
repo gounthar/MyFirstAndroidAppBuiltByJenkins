@@ -1,0 +1,10 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - gitHubApp:
+            appID: "220265"
+            description: "GitHub app"
+            id: "github-app"
+            # apiUri: https://my-custom-github-enterprise.com/api/v3 # optional only required for GitHub enterprise
+            privateKey: "${GITHUB_APP_KEY}"

@@ -1,0 +1,27 @@
+#  docker compose up -d --build --force-recreate
+services:
+    jenkins:
+        build: ./controller
+        restart: always
+        ports:
+            - "8080:8080"
+        volumes:
+            - jenkins-data:/var/jenkins_home:rw
+            - ./casc.d:/var/jenkins_home/casc.d/:ro
+            # Mounting the ssh private key as "container secret" makes it available in JCasc as the variable ${SSH_AGENT_KEY}
+            - ./secrets/id_jenkins.pem:/run/secrets/SSH_AGENT_KEY:ro
+            #- ./secrets/converted-github-app.pem:GITHUB_APP_KEY:ro
+        environment:
+            - JENKINS_EXT_URL=http://localhost:8080
+            - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
+            - GITHUB_APP_ID
+            - GITHUB_APP_KEY
+#           - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
+    jenkins-agent:
+        build: ../
+        restart: always
+        privileged: true
+        environment:
+            - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
+volumes:
+    jenkins-data:
