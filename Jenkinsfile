@@ -60,7 +60,7 @@ pipeline {
             environment {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
-             agent {
+            agent {
                 docker {
                     alwaysPull true
                     image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
