@@ -8,3 +8,6 @@ RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 COPY --chown=jenkins:jenkins ./plugins.txt /usr/share/jenkins/plugins.txt
 RUN jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt
 
+# Poor man's Jcasc
+COPY --chown=jenkins:jenkins ./FirstJob /usr/share/jenkins/ref/jobs/FirstJob
+
