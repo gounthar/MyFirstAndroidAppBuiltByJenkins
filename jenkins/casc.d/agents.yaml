@@ -1,6 +1,7 @@
 jenkins:
   nodes:
     - permanent:
+        labelString: "docker ubuntu"
         launcher:
           ssh:
             credentialsId: "jenkins-agent-ssh-key"
