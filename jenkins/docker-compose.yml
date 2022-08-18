@@ -19,7 +19,7 @@ services:
             - GITHUB_APP_KEY
 #           - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
-        build: ../
+        build: ./agent
         restart: always
         privileged: true
         environment:
