@@ -5,6 +5,7 @@ services:
         restart: always
         ports:
             - "8080:8080"
+            - "50000:50000"
         volumes:
             - jenkins-data:/var/jenkins_home:rw
             - ./casc.d:/var/jenkins_home/casc.d/:ro
@@ -18,7 +19,7 @@ services:
             - GITHUB_APP_KEY
 #           - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
-        build: ../
+        build: ./agent
         restart: always
         privileged: true
         environment:
