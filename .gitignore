@@ -63,3 +63,4 @@ Screenshot_20220715_104832.png
 /myjenkinsinstancev.2022-08-16.private-key.pem
 /jenkins/secrets/converted-github-app.pem
 /jenkins/backup/
+/jenkins/.env
