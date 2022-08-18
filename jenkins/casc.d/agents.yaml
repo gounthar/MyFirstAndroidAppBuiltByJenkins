@@ -15,3 +15,16 @@ jenkins:
         numExecutors: 2
         remoteFS: "/home/jenkins"
         retentionStrategy: "always"
+    - permanent:
+        labelString: "linux docker ubuntu"
+        launcher:
+          jnlp:
+            workDirSettings:
+              disabled: false
+              failIfWorkDirIsMissing: false
+              internalDir: "remoting"
+        name: "GCP"
+        nodeDescription: "GCP, if you're lucky enough to have one"
+        numExecutors: 8
+        remoteFS: "/home/jenkins"
+        retentionStrategy: "always"
