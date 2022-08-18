@@ -56,8 +56,8 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     apt update && apt install -y --no-install-recommends gh
 
 # Install docker \
-RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
-RUN adduser jenkins docker
+# RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+# RUN adduser jenkins docker
 
 # mkdir ${JENKINS_AGENT_HOME}/.jenkins && mkdir -p ${JENKINS_AGENT_HOME}/ &&
 RUN mkdir -p "${JENKINS_AGENT_HOME}/gradle/wrapper" "${JENKINS_AGENT_HOME}/.gradle/wrapper/dists"
