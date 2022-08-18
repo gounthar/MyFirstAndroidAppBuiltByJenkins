@@ -25,6 +25,6 @@ jenkins:
               internalDir: "remoting"
         name: "GCP"
         nodeDescription: "GCP, if you're lucky enough to have one"
-        numExecutors: 8
+        numExecutors: 4
         remoteFS: "/home/jenkins"
         retentionStrategy: "always"
