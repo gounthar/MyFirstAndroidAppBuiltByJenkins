@@ -1,0 +1,66 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1232.v5a_4c994312f1">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2114.v2654ca_721309"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2114.v2654ca_721309">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.jenkinsci.plugins.workflow.multibranch.BranchJobProperty plugin="workflow-multibranch@716.vc692a_e52371b_">
+      <branch plugin="branch-api@2.1046.v0ca_37783ecc5">
+        <sourceId>a9b89500-26bc-4b17-b6a5-f77ad1044614</sourceId>
+        <head class="org.jenkinsci.plugins.github_branch_source.BranchSCMHead" plugin="github-branch-source@1677.v731f745ea_0cf">
+          <name>main</name>
+        </head>
+        <scm class="hudson.plugins.git.GitSCM" plugin="git@4.11.4">
+          <configVersion>2</configVersion>
+          <userRemoteConfigs>
+            <hudson.plugins.git.UserRemoteConfig>
+              <name>origin</name>
+              <refspec>+refs/heads/main:refs/remotes/origin/main</refspec>
+              <url>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins.git</url>
+              <credentialsId>MyJenkinsInstancev</credentialsId>
+            </hudson.plugins.git.UserRemoteConfig>
+          </userRemoteConfigs>
+          <branches class="singleton-list">
+            <hudson.plugins.git.BranchSpec>
+              <name>main</name>
+            </hudson.plugins.git.BranchSpec>
+          </branches>
+          <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+          <browser class="hudson.plugins.git.browser.GithubWeb">
+            <url>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins</url>
+          </browser>
+          <submoduleCfg class="empty-list"/>
+          <extensions>
+            <jenkins.plugins.git.GitSCMSourceDefaults>
+              <includeTags>false</includeTags>
+            </jenkins.plugins.git.GitSCMSourceDefaults>
+          </extensions>
+        </scm>
+        <properties/>
+        <actions>
+          <org.jenkinsci.plugins.github__branch__source.GitHubLink plugin="github-branch-source@1677.v731f745ea_0cf">
+            <iconClassName>icon-github-branch</iconClassName>
+            <url>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins/tree/main</url>
+          </org.jenkinsci.plugins.github__branch__source.GitHubLink>
+          <jenkins.scm.api.metadata.ObjectMetadataAction plugin="scm-api@621.vda_a_b_055e58f7">
+            <objectDisplayName>main</objectDisplayName>
+            <objectUrl>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins/tree/main</objectUrl>
+          </jenkins.scm.api.metadata.ObjectMetadataAction>
+          <jenkins.scm.api.metadata.PrimaryInstanceMetadataAction plugin="scm-api@621.vda_a_b_055e58f7"/>
+        </actions>
+      </branch>
+    </org.jenkinsci.plugins.workflow.multibranch.BranchJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.multibranch.SCMBinder" plugin="workflow-multibranch@716.vc692a_e52371b_">
+    <scriptPath>Jenkinsfile</scriptPath>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
