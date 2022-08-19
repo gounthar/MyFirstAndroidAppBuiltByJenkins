@@ -25,4 +25,3 @@ jenkins:
         nodeDescription: "GCP, if you're lucky enough to have one"
         numExecutors: 4
         remoteFS: "/home/jenkins"
-        retentionStrategy: "always"
