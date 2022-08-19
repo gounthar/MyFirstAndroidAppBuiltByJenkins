@@ -17,7 +17,7 @@ services:
             - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
             - GITHUB_APP_ID
             - GITHUB_APP_KEY
-#           - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
+            # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
         build: ./agent
         restart: always
