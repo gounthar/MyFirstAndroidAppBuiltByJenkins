@@ -22,7 +22,10 @@ services:
         build: ./agent
         restart: always
         privileged: true
+        volumes:
+            - agent-workspace:/home/jenkins:rw
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
 volumes:
     jenkins-data:
+    agent-workspace:
