@@ -84,7 +84,7 @@ pipeline {
             }
             steps {
                 echo 'Run unit tests from the source code'
-                sh './gradlew test'
+                sh 'chmod +x gradlew && ./gradlew test'
             }
         }
         stage('Run Instrumented Tests') {
