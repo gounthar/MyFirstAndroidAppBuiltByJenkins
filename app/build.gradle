@@ -8,7 +8,16 @@ plugins {
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "5.0.9"
     id("io.gitlab.arturbosch.detekt")
-    id 'jacoco'
+    id("com.dicedmelon.gradle.jacoco-android")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
 }
 
 android {
@@ -76,7 +85,6 @@ android {
             /*baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
         //}
     }
-
 }
 
 dependencies {
