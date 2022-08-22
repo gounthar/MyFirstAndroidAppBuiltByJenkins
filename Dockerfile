@@ -73,5 +73,5 @@ RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}" && chmod +x "${JENKINS_AGEN
 #COPY . .
 #COPY gradlew ${JENKINS_AGENT_HOME}
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT [ "bash", "/entrypoint.sh"]
+# COPY entrypoint.sh /entrypoint.sh
+# ENTRYPOINT [ "bash", "-c"]

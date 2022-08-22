@@ -26,11 +26,7 @@ pipeline {
             parallel {
                 stage('Static Analysis with gradlew check') {
                     agent {
-                        docker {
-                            alwaysPull true
-                            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                            label 'ubuntu'
-                        }
+                        label 'android'
                     }
                     steps {
                         echo 'Run the static analysis to the code'
@@ -61,11 +57,7 @@ pipeline {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
             agent {
-                docker {
-                    alwaysPull true
-                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                    label 'ubuntu'
-                }
+                label 'android'
             }
             steps {
                 script {
@@ -88,24 +80,16 @@ pipeline {
         }
         stage('Run Unit Tests') {
             agent {
-                docker {
-                    alwaysPull true
-                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                    label 'ubuntu'
-                }
+                label 'android'
             }
             steps {
                 echo 'Run unit tests from the source code'
-                sh './gradlew test'
+                sh 'chmod +x gradlew && ./gradlew test'
             }
         }
         stage('Run Instrumented Tests') {
             agent {
-                docker {
-                    alwaysPull true
-                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                    label 'ubuntu'
-                }
+                label 'android'
             }
             steps {
                 echo 'Run only instrumented tests from the source code'
@@ -126,11 +110,7 @@ pipeline {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
             agent {
-                docker {
-                    alwaysPull true
-                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                    label 'ubuntu'
-                }
+                label 'android'
             }
             steps {
                 script {
@@ -155,11 +135,7 @@ pipeline {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
             }
             agent {
-                docker {
-                    alwaysPull true
-                    image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                    label 'ubuntu'
-                }
+                label 'android'
             }
             steps {
                 echo 'Publishes the bundle on the Google Play Store'

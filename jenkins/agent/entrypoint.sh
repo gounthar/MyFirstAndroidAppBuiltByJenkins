@@ -3,10 +3,16 @@
 set -eux -o pipefail
 
 # Pre Hooks
-# We could have something better by adjusting
-# settings in daemon.json (maybe in /etc/docker/daemon.json)
-# because of failed to start daemon: pid file found, ensure docker is not running or delete /var/run/docker.pid
-rm -rf /var/run/docker*
-dockerd --storage-driver=vfs --iptables=false &
+# Prepare Permissions by adding jenkins to the group owner of /var/run/docker.sock (this GID changes on different hosts/docker engines)
+dockersock_growner_id="$(stat -c "%g" /var/run/docker.sock)"
+if [[ "$dockersock_growner_id" == "0" ]]; then
+  chown root:docker /var/run/docker.sock
+  chmod 660 /var/run/docker.sock
+else
+  delgroup docker || true
+  addgroup docker --gid "${dockersock_growner_id}"
+fi
+adduser jenkins docker
+
 # Run default entrypoint
 exec /usr/local/bin/setup-sshd "$@"
