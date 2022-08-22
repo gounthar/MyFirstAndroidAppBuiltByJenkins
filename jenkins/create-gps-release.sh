@@ -57,7 +57,7 @@ publishOnPlayStore(){
     # https://github.com/Triple-T/gradle-play-publisher#uploading-developer-facing-release-names
     # Note: the Play Store limits your release names to a maximum of 50 characters.
     printf %s "${versionName:0:500}" > $releaseNamesDir/internal.txt
-    chmod +x ./gradlew && /gradlew publishBundle
+    chmod +x ./gradlew && ./gradlew publishBundle
 }
 
 suffix=$(echo $versionName | sed 's/.*-//')
