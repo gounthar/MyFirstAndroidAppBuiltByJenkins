@@ -26,11 +26,7 @@ pipeline {
             parallel {
                 stage('Static Analysis with gradlew check') {
                     agent {
-                        docker {
-                            alwaysPull true
-                            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-                            label 'ubuntu'
-                        }
+                        label 'android'
                     }
                     steps {
                         echo 'Run the static analysis to the code'
