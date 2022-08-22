@@ -10,7 +10,7 @@ if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
   # We're in the main branch, so no more alpha, beta or snapshot versions.
   printVersionOptions="-Palpha=false -Pbeta=false -Psnapshot=false"
 } fi
-versionName=$(./gradlew printVersion $printVersionOptions | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
+versionName=$(chmod +x ./gradlew && ./gradlew printVersion $printVersionOptions | grep "Version name:" | cut -d ' ' -f 3 | sed -e 's/^[[:space:]]*//')
 # because of origin/master, we need to remove the first part of the branch name
 GIT_BRANCH=$(echo "/$GIT_BRANCH" | sed 's/.*[/]//')
 if [[ "$GIT_BRANCH" != "main" && "$GIT_BRANCH" != "master" ]]; then {
@@ -57,7 +57,7 @@ publishOnPlayStore(){
     # https://github.com/Triple-T/gradle-play-publisher#uploading-developer-facing-release-names
     # Note: the Play Store limits your release names to a maximum of 50 characters.
     printf %s "${versionName:0:500}" > $releaseNamesDir/internal.txt
-    ./gradlew publishBundle
+    chmod +x ./gradlew && /gradlew publishBundle
 }
 
 suffix=$(echo $versionName | sed 's/.*-//')
