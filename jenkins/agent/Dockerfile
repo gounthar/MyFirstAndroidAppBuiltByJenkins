@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends adb build-essen
 
 # Install docker \
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
-RUN adduser jenkins docker
+#RUN adduser jenkins docker
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "bash", "/entrypoint.sh"]
