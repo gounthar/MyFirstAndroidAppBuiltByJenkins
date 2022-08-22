@@ -54,38 +54,39 @@ pipeline {
         }
         stage('Compile and Code Coverage') {
             parallel {
-            stage('Compile') {
-                environment {
-                    ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-                }
-                agent {
-                    label 'android'
-                }
-                steps {
-                    script {
-                        sh 'echo "Compile the source code"'
-                        sh 'env | grep $HOME'
-                        sh 'chmod +x ./gradlew'
-                        sh './gradlew build'
-                        sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
-                        sh 'find /home/jenkins/ -name "gradle-7.3.3-bin.zip" -exec ls {} \\;'
-                        sh './gradlew :app:bundleDebug :app:bundleRelease'
+                stage('Compile') {
+                    environment {
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        script {
+                            sh 'echo "Compile the source code"'
+                            sh 'env | grep $HOME'
+                            sh 'chmod +x ./gradlew'
+                            sh './gradlew build'
+                            sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
+                            sh 'find /home/jenkins/ -name "gradle-7.3.3-bin.zip" -exec ls {} \\;'
+                            sh './gradlew :app:bundleDebug :app:bundleRelease'
+                        }
                     }
                 }
-            }
-            stage('Code Coverage') {
-                environment {
-                    ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-                }
-                agent {
-                    label 'android'
-                }
-                steps {
-                    script {
-                        sh 'echo "Ensure that the code coverage is not just wishful thinking"'
-                        sh 'chmod +x ./gradlew'
-                        sh 'chmod +x ./gradlew && ./gradlew jacocoTestReport'
-                        sh 'ls -artl build/reports/jacoco/jacocoTestPaidDebugUnitTestReport*'
+                stage('Code Coverage') {
+                    environment {
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        script {
+                            sh 'echo "Ensure that the code coverage is not just wishful thinking"'
+                            sh 'chmod +x ./gradlew'
+                            sh 'chmod +x ./gradlew && ./gradlew jacocoTestReport'
+                            sh 'ls -artl build/reports/jacoco/jacocoTestPaidDebugUnitTestReport*'
+                        }
                     }
                 }
             }
