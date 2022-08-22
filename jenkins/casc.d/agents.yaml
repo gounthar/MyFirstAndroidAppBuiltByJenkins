@@ -10,7 +10,20 @@ jenkins:
             sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
         name: "jenkins-agent"
         nodeDescription: "SSH agent used to execute builds"
-        numExecutors: 2
+        numExecutors: 4
+        remoteFS: "/home/jenkins"
+        retentionStrategy: "always"
+    - permanent:
+        labelString: "android"
+        launcher:
+          ssh:
+            credentialsId: "jenkins-agent-ssh-key"
+            host: "android-agent"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "android-agent"
+        nodeDescription: "SSH agent used to execute Android builds"
+        numExecutors: 4
         remoteFS: "/home/jenkins"
         retentionStrategy: "always"
     - permanent:
