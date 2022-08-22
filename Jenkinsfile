@@ -1,6 +1,7 @@
 def getBranchName() {
    return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
 }
+
 def getSimplifiedBranchName() {
    return "${getBranchName().replace('/', '-')}"
 }
@@ -10,34 +11,53 @@ pipeline {
         BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
-    agent {
-        docker {
-            alwaysPull true
-            image "gounthar/jenkinsci-docker-android-base:${BRANCH_NAME}"
-            label 'ubuntu'
-        }
-    }
+    agent any
     options {
         timestamps()
     }
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checkout if needed'
-            }
-        }
+//        stage('Checkout') {
+//            agent any
+//            steps {
+//                echo 'Checkout if needed'
+//            }
+//        }
         stage('Static Analysis') {
-            steps {
-                echo 'Run the static analysis to the code'
-                sh 'chmod +x ./gradlew'
-                sh './gradlew detekt --auto-correct'
-                sh 'git diff'
-                sh './gradlew check'
+            parallel {
+                stage('Static Analysis with gradlew check') {
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        echo 'Run the static analysis to the code'
+                        sh 'chmod +x ./gradlew'
+                        sh './gradlew detekt --auto-correct'
+                        sh 'git diff'
+                        sh './gradlew check'
+                    }
+                }
+                stage('Qodana') {
+                    agent {
+                        docker {
+                            label 'ubuntu'
+                            image 'jetbrains/qodana-jvm-android'
+                            args '-v .:/data/project/'
+                            args '-v ./app/build/reports/qodana:/data/results/'
+                            args '--entrypoint=""'
+                        }
+                    }
+                    steps {
+                        sh "qodana --save-report"
+                    }
+                }
             }
         }
         stage('Compile') {
             environment {
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
             }
             steps {
                 script {
@@ -52,18 +72,25 @@ pipeline {
             }
         }
         stage('Security Check') {
+            agent any
             steps {
                 echo 'Run the security check against the application'
                 echo 'Something like dependency check or dependabot'
             }
         }
         stage('Run Unit Tests') {
+            agent {
+                label 'android'
+            }
             steps {
                 echo 'Run unit tests from the source code'
-                sh './gradlew test'
+                sh 'chmod +x gradlew && ./gradlew test'
             }
         }
         stage('Run Instrumented Tests') {
+            agent {
+                label 'android'
+            }
             steps {
                 echo 'Run only instrumented tests from the source code'
                 // We don't have any device connected yet
@@ -72,6 +99,7 @@ pipeline {
             }
         }
         stage('Publish Artifacts') {
+            agent any
             steps {
                 echo 'Save the assemblies generated from the compilation'
             }
@@ -80,6 +108,9 @@ pipeline {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
             }
             steps {
                 script {
@@ -102,6 +133,9 @@ pipeline {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
                 ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
             }
             steps {
                 echo 'Publishes the bundle on the Google Play Store'

@@ -60,3 +60,7 @@ Screenshot_20220715_104832.png
 /jenkins/short-result.html
 /app/src/main/play/listings/en-US/title.txt
 /typescript
+/myjenkinsinstancev.2022-08-16.private-key.pem
+/jenkins/secrets/converted-github-app.pem
+/jenkins/backup/
+/jenkins/.env

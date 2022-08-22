@@ -1,0 +1,40 @@
+jenkins:
+  nodes:
+    - permanent:
+        labelString: "docker linux ubuntu"
+        launcher:
+          ssh:
+            credentialsId: "jenkins-agent-ssh-key"
+            host: "jenkins-agent"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "jenkins-agent"
+        nodeDescription: "SSH agent used to execute builds"
+        numExecutors: 4
+        remoteFS: "/home/jenkins"
+        retentionStrategy: "always"
+    - permanent:
+        labelString: "android"
+        launcher:
+          ssh:
+            credentialsId: "jenkins-agent-ssh-key"
+            host: "android-agent"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "android-agent"
+        nodeDescription: "SSH agent used to execute Android builds"
+        numExecutors: 4
+        remoteFS: "/home/jenkins"
+        retentionStrategy: "always"
+    - permanent:
+        labelString: "docker linux ubuntu"
+        launcher:
+          jnlp:
+            workDirSettings:
+              disabled: false
+              failIfWorkDirIsMissing: false
+              internalDir: "remoting"
+        name: "GCP"
+        nodeDescription: "GCP, if you're lucky enough to have one"
+        numExecutors: 4
+        remoteFS: "/home/jenkins"

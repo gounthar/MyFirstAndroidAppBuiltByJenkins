@@ -1,0 +1,88 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@716.vc692a_e52371b_">
+  <actions/>
+  <description>Let&apos;s try an empty Android App just to see how to build it with Jenkins</description>
+  <displayName>MultiBranchAndroidPipeline</displayName>
+  <properties>
+    <com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty plugin="cloudbees-folder@6.758.vfd75d09eea_a_1">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@1139.veb_9579fca_33b_">
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList>
+            <org.jenkinsci.plugins.github__branch__source.GitHubAppCredentials plugin="github-branch-source@1677.v731f745ea_0cf">
+              <id>MyJenkinsInstancev</id>
+              <description>MyJenkinsInstancev</description>
+              <appID>220265</appID>
+              <privateKey>{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}</privateKey>
+              <apiUri></apiUri>
+            </org.jenkinsci.plugins.github__branch__source.GitHubAppCredentials>
+          </java.util.concurrent.CopyOnWriteArrayList>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+    <org.jenkinsci.plugins.docker.workflow.declarative.FolderConfig plugin="docker-workflow@521.v1a_a_dd2073b_2e">
+      <dockerLabel></dockerLabel>
+      <registry plugin="docker-commons@1.19"/>
+    </org.jenkinsci.plugins.docker.workflow.declarative.FolderConfig>
+  </properties>
+  <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.1046.v0ca_37783ecc5">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </folderViews>
+  <healthMetrics>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@6.758.vfd75d09eea_a_1">
+      <nonRecursive>false</nonRecursive>
+    </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+  </healthMetrics>
+  <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api@2.1046.v0ca_37783ecc5">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </icon>
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.758.vfd75d09eea_a_1">
+    <pruneDeadBranches>true</pruneDeadBranches>
+    <daysToKeep>7</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <abortBuilds>false</abortBuilds>
+  </orphanedItemStrategy>
+  <triggers>
+    <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.758.vfd75d09eea_a_1">
+      <spec>H/5 * * * *</spec>
+      <interval>900000</interval>
+    </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+  </triggers>
+  <disabled>false</disabled>
+  <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.1046.v0ca_37783ecc5">
+    <data>
+      <jenkins.branch.BranchSource>
+        <source class="org.jenkinsci.plugins.github_branch_source.GitHubSCMSource" plugin="github-branch-source@1677.v731f745ea_0cf">
+          <id>a9b89500-26bc-4b17-b6a5-f77ad1044614</id>
+          <apiUri>https://api.github.com</apiUri>
+          <credentialsId>MyJenkinsInstancev</credentialsId>
+          <repoOwner>gounthar</repoOwner>
+          <repository>MyFirstAndroidAppBuiltByJenkins</repository>
+          <repositoryUrl>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins.git</repositoryUrl>
+          <traits>
+            <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+              <trust class="org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission"/>
+            </org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+          </traits>
+        </source>
+        <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+          <properties class="empty-list"/>
+        </strategy>
+      </jenkins.branch.BranchSource>
+    </data>
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </sources>
+  <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+    <scriptPath>Jenkinsfile</scriptPath>
+  </factory>
+</org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>

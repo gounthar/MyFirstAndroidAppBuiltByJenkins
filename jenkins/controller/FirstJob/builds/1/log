@@ -1,0 +1,8 @@
+Started by user [8mha:////4MzOlSM+HKHv69DcVmuu+eolZjvB6446Z7mFVrGOyvElAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+[EnvInject] - Loading node environment variables.
+Building remotely on [8mha:////4DkSmFuJEiscFddPLVaYDGey0cEepjyX5qEdV/dGiUM8AAAAox+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzeEgZx/eT83ILSktQi/azUvOzMvGLdxPTUvBIAjWbCM8wAAAA=[0mjenkins-agent (11 Debian Debian-11 amd64-Debian-11 ubuntu amd64-Debian amd64 docker) in workspace /home/jenkins/workspace/FirstJob
+[FirstJob] $ /bin/sh -xe /tmp/jenkins16109888960761458146.sh
++ uname -a
+Linux b978db14cc19 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022 x86_64 GNU/Linux
+Finished: SUCCESS
