@@ -35,6 +35,18 @@ services:
             - android-agent-data:/home/jenkins:rw
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD
+    emulator:
+        image: us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2
+        restart: unless-stopped
+        ports:
+            - 8554:8554
+            - 5555:5555
+        environment:
+            - ADBKEY
+        devices:
+            - /dev/kvm
+
+
 volumes:
     jenkins-data:
     jenkins-agent-data:
