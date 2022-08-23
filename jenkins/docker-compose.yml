@@ -17,6 +17,8 @@ services:
             - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
             - GITHUB_APP_ID
             - GITHUB_APP_KEY
+            - ANDROID_PUBLISHER_CREDENTIALS
+            - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
         build: ./agent

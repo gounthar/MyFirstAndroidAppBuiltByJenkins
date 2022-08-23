@@ -43,6 +43,7 @@ pipeline {
                             image 'jetbrains/qodana-jvm-android'
                             args '-v .:/data/project/'
                             args '-v ./app/build/reports/qodana:/data/results/'
+                            args '-v /home/jenkins/:/data/cache/'
                             args '--entrypoint=""'
                         }
                     }
