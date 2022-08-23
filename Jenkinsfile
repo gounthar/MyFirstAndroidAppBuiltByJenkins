@@ -118,6 +118,7 @@ pipeline {
                 sh 'adb connect emulator:5555'
                 sh 'adb devices'
                 sh 'adb wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
+                sh 'adb shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
                 sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
             }
         }
