@@ -117,7 +117,7 @@ pipeline {
                 // We don't have any device connected yet
                 sh 'adb connect emulator:5555'
                 sh 'adb devices'
-                // sh './gradlew connectedAndroidTest'
+                sh './gradlew connectedAndroidTest'
             }
         }
         stage('Publish Artifacts') {
