@@ -164,6 +164,16 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            junit 'app/build/jacoco/*.xml'
+            junit 'app/build/test-results/**/*.xml'
+            junit 'app/build/reports/tests/*.xml'
+            junit 'app/build/reports/*.xml'
+            junit 'app/build/reports/detekt/*.xml'
+            junit 'app/build/reports/spotbugs/*.xml'
+        }
+    }
 }
 
 void releaseAlreadyExist(config) {
