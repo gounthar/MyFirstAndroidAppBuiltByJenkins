@@ -1,7 +1,7 @@
 jenkins:
   nodes:
     - permanent:
-        labelString: "docker linux ubuntu"
+        labelString: "docker linux"
         launcher:
           ssh:
             credentialsId: "jenkins-agent-ssh-key"
@@ -27,7 +27,7 @@ jenkins:
         remoteFS: "/home/jenkins"
         retentionStrategy: "always"
     - permanent:
-        labelString: "docker linux ubuntu"
+        labelString: "docker linux"
         launcher:
           jnlp:
             workDirSettings:
