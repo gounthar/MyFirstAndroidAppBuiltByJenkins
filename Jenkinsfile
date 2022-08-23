@@ -117,6 +117,7 @@ pipeline {
                 // We don't have any device connected yet
                 sh 'adb connect emulator:5555'
                 sh 'adb devices'
+                sh 'adb wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
                 sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
             }
         }
