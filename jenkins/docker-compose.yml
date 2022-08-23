@@ -45,8 +45,16 @@ services:
             - ADBKEY
         devices:
             - /dev/kvm
-
-
+    genymotion:
+        image: budtmo/docker-android-x86-8.1
+        restart: unless-stopped
+        ports:
+            - 6080:6080
+            - 5554:5554
+            - 5556:5555
+        privileged: true
+        environment:
+            - DEVICE="Samsung Galaxy S6"
 volumes:
     jenkins-data:
     jenkins-agent-data:
