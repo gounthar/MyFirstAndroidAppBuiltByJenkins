@@ -41,10 +41,8 @@ pipeline {
                         docker {
                             label 'docker'
                             image 'jetbrains/qodana-jvm-android'
-                            args '-v .:/data/project/'
-                            args '-v ./app/build/reports/qodana:/data/results/'
-                            args '-v /home/jenkins/:/data/cache/'
-                            args '--entrypoint=""'
+                            // Add comments there
+                            args '-v /data:/data --entrypoint=""'
                         }
                     }
                     steps {
@@ -125,6 +123,13 @@ pipeline {
                 echo 'Save the assemblies generated from the compilation'
             }
         }
+        stage ("Report") {
+            agent any
+            steps {
+                echo 'Generate the report'
+                //testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+             }
+        }
         stage('Release on GitHub') {
             environment {
                 GITHUB_CREDENTIALS = credentials('github-app-android')
@@ -164,6 +169,17 @@ pipeline {
             }
         }
     }
+//     post {
+//         always {
+// //             junit '/app/build/jacoco/*.xml'
+// //             junit '/app/build/test-results/**/*.xml'
+// //             junit '/app/build/reports/tests/*.xml'
+// //             junit '/app/build/reports/*.xml'
+// //             junit '/app/build/reports/detekt/*.xml'
+// //             junit '/app/build/reports/spotbugs/*.xml'
+// 	        testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+//         }
+//     }
 }
 
 void releaseAlreadyExist(config) {
@@ -184,3 +200,20 @@ void createGooglePlayStoreRelease() {
         returnStdout: true
     )
 }
+
+testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                      recipientsList: 'nick@some.com,mairy@some.com',
+                      outOfDateResults: '10',
+                      sortresults: 'Job Name',
+                      subject: 'Test Results'
+                    	 jobs: [
+                            // Group with 2 Jobs
+                            [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+                            [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+                            // jobFriendlyName is optional
+                            [jobName: 'My CI Job3', groupName: 'TeamB'],
+                            [jobName: 'My CI Job4', groupName: 'TeamB'],
+                            // No Groups, groupName is optional
+                            [jobName: 'My CI Job6'],
+                            [jobName: 'My CI Job7']
+                        ]
