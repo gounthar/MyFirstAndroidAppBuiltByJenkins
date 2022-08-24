@@ -40,13 +40,10 @@ pipeline {
                     agent {
                         docker {
                             label 'docker'
-                            image 'jetbrains/qodana-jvm-android'
-                            // Add comments there
-                            args '-v /data:/data --entrypoint=""'
                         }
                     }
                     steps {
-                        sh "qodana --save-report"
+                        sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
                     }
                 }
             }
