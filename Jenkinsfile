@@ -38,9 +38,7 @@ pipeline {
                 }
                 stage('Qodana') {
                     agent {
-                        docker {
-                            label 'docker'
-                        }
+                        label 'docker'
                     }
                     steps {
                         sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
