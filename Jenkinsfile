@@ -125,12 +125,12 @@ pipeline {
                     agent any
                     steps {
                         echo 'Save the assemblies generated from the compilation'
-                        archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk'
-                        archiveArtifacts artifacts: 'app/build/outputs/bundle/**/*.aab'
-                        archiveArtifacts artifacts: 'app/build/reports/*xml'
-                        archiveArtifacts artifacts: 'app/build/reports/*html'
-                        archiveArtifacts artifacts: 'app/build/reports/**/*.xml'
-                        archiveArtifacts artifacts: 'app/build/reports/**/*.html'
+                        archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/bundle/**/*.aab', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
                     }
                 }
                 stage('Release on GitHub') {
