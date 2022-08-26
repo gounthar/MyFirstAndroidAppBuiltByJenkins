@@ -40,7 +40,7 @@ Change the references to `https://github.com/gounthar/MyFirstAndroidAppBuiltByJe
 You can try this at home *easily* by using `docker compose up -d --build --force-recreate` once you are in the `jenkins`
 folder. 
 This will launch a Jenkins server and agents on your local machine on ports 8080 and 50000.
-This has been tested on `MacOs X86_64` and `Ubuntu 22.04`.
+This has been tested on `MacOs X86_64`, `MacOs aarch64 (M1)` and `Ubuntu 22.04`.
 
 ### Launching on Windows
 When using Windows, you may have to use `docker-compose up -d --build --force-recreate` instead.
