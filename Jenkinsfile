@@ -119,48 +119,58 @@ pipeline {
                 // sh './gradlew connectedAndroidTest'
             }
         }
-        stage('Publish Artifacts') {
-            agent any
-            steps {
-                echo 'Save the assemblies generated from the compilation'
-            }
-        }
-        stage('Release on GitHub') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-            }
-            agent {
-                label 'android'
-            }
-            steps {
-                script {
-                // Later on, move everything into functions and call them here.
-                     releaseAlreadyExists = sh (
-                            script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
-                            returnStdout: true
-                        )
-                        echo "Release already exists: $releaseAlreadyExists."
-                        if (releaseAlreadyExists == 'false') {
-                            echo "The release does not exist yet, so we can create it."
-                            createRelease()
-                        } else {
-                            echo "The release already exists, so we won't create it."
-                        }
+        stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
+            parallel {
+                stage('Publish Artifacts') {
+                    agent any
+                    steps {
+                        echo 'Save the assemblies generated from the compilation'
+                        archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk'
+                        archiveArtifacts artifacts: 'app/build/outputs/bundle/**/*.aab'
+                        archiveArtifacts artifacts: 'app/build/reports/*xml'
+                        archiveArtifacts artifacts: 'app/build/reports/*html'
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.xml'
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.html'
+                    }
                 }
-            }
-        }
-        stage('Release on Google Play Store') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-            }
-            agent {
-                label 'android'
-            }
-            steps {
-                echo 'Publishes the bundle on the Google Play Store'
-                createGooglePlayStoreRelease()
+                stage('Release on GitHub') {
+                    environment {
+                        GITHUB_CREDENTIALS = credentials('github-app-android')
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        script {
+                        // Later on, move everything into functions and call them here.
+                             releaseAlreadyExists = sh (
+                                    script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
+                                    returnStdout: true
+                                )
+                                echo "Release already exists: $releaseAlreadyExists."
+                                if (releaseAlreadyExists == 'false') {
+                                    echo "The release does not exist yet, so we can create it."
+                                    createRelease()
+                                } else {
+                                    echo "The release already exists, so we won't create it."
+                                }
+                        }
+                    }
+                }
+                stage('Release on Google Play Store') {
+                    environment {
+                        GITHUB_CREDENTIALS = credentials('github-app-android')
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        echo 'Publishes the bundle on the Google Play Store'
+                        createGooglePlayStoreRelease()
+                    }
+                }
             }
         }
     }
