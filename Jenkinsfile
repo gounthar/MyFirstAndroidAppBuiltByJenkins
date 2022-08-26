@@ -158,19 +158,19 @@ pipeline {
                         }
                     }
                 }
-                stage('Release on Google Play Store') {
-                    environment {
-                        GITHUB_CREDENTIALS = credentials('github-app-android')
-                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-                    }
-                    agent {
-                        label 'android'
-                    }
-                    steps {
-                        echo 'Publishes the bundle on the Google Play Store'
-                        createGooglePlayStoreRelease()
-                    }
-                }
+            }
+        }
+        stage('Release on Google Play Store') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
+            }
+            steps {
+                echo 'Publishes the bundle on the Google Play Store'
+                createGooglePlayStoreRelease()
             }
         }
     }
