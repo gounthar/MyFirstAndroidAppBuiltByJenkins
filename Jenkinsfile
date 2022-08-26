@@ -164,6 +164,19 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: './app/build/outputs/apk/**/*.apk'
+            archiveArtifacts artifacts: './app/build/outputs/bundle/**/*.aab'
+            archiveArtifacts artifacts: './app/build/reports/*xml'
+            archiveArtifacts artifacts: './app/build/reports/*html'
+            archiveArtifacts artifacts: './app/build/reports/**/*.xml'
+            archiveArtifacts artifacts: './app/build/reports/**/*.html'
+                                         //./app/build/outputs/apk/release/app-release-unsigned.apk
+                                         //./app/build/outputs/apk/debug/app-debug.apk
+
+        }
+    }
 }
 
 void releaseAlreadyExist(config) {
