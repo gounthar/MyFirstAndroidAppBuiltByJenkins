@@ -59,6 +59,7 @@ services:
         privileged: true
         environment:
             - DEVICE="Samsung Galaxy S6"
+            - TYPE=SaaS
 volumes:
     jenkins-data:
     jenkins-agent-data:
