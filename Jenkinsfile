@@ -41,7 +41,7 @@ pipeline {
                         label 'docker'
                     }
                     steps {
-                        sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android ls -artl /data/project"
+                        sh "docker run --entrypoint='' jetbrains/qodana-jvm-android ls -artl /data/project"
                         sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
                     }
                 }
