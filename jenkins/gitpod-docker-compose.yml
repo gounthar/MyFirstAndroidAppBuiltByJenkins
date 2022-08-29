@@ -1,4 +1,4 @@
-#  docker compose up -d --build --force-recreate
+# docker compose -f gitpod-docker-compose.yml up -d --build --force-recreate
 services:
     jenkins:
         image: gounthar/jenkinsci-docker-controller:gitpod
@@ -44,8 +44,4 @@ volumes:
     jenkins-agent-data:
     android-agent-data:
     qodana-data:
-        driver: local
-        driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: '/workspace/MyFirstAndroidAppBuiltByJenkins'
+        external: true

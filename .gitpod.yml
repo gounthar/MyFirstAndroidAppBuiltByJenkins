@@ -1,5 +1,9 @@
 tasks:
   - init: |
+      docker volume create --driver local \
+        --opt type=none \
+        --opt device=/workspace/MyFirstAndroidAppBuiltByJenkins \
+        --opt o=bind qodana-data
       docker-compose -f jenkins/gitpod-docker-compose.yml pull
   - command: |
       docker-compose -f jenkins/gitpod-docker-compose.yml up
