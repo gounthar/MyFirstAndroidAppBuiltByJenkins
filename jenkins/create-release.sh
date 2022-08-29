@@ -53,6 +53,6 @@ if [[ "$GH_OPTS" =~ .*"DO_NOT_RELEASE".* ]]; then
     echo "It's a release, so we'll publish it."
     echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
     # We should prefix the version with v to make it a valid tag and then the branch name
-    chmod +x ./gradlew && ./gradlew build
+    chmod +x ./gradlew && ./gradlew build || true
     gh release create v$versionName --generate-notes $GH_OPTS ./app/build/outputs/apk/**/*apk
 } fi
