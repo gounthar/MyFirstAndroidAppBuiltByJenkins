@@ -2,6 +2,7 @@
 Let's try an empty Android App just to see how to build it with Jenkins.
 
 ## How to run Jenkins to build the app
+
 ### A self contained Jenkins server
 
 This repo contains the source code for the Android application, but also the configuration files to get an up and 
@@ -24,9 +25,11 @@ ANDROID_PUBLISHER_CREDENTIALS='<your_android_publisher_credentials>'
 GITHUB_APP_KEY='<github_app_key>'
 ADB_KEY='<your_adb_key>'
 ```
-You can get `<your_github_app_id>` and `'<github_app_key>'` after applying what's explained in the [Github App settings](https://github.com/jenkinsci/github-branch-source-plugin/blob/master/docs/github-app.adoc).
+You can get `<your_github_app_id>` and `'<github_app_key>'` after applying what's explained in the
+[Github App settings](https://github.com/jenkinsci/github-branch-source-plugin/blob/master/docs/github-app.adoc).
 
-`'<your_android_publisher_credentials>'` will be found after following this [tutorial](https://github.com/Triple-T/gradle-play-publisher#quickstart-guide).
+`'<your_android_publisher_credentials>'` will be found after following this
+[tutorial](https://github.com/Triple-T/gradle-play-publisher#quickstart-guide).
 
 `'<your_adb_key>'` will be found in your home directory, in `.android/adbkey` (if you have ever installed and used
 Android Studio, you should have this file).
@@ -56,7 +59,8 @@ This has been tested on `Vagrant 2.3.0`.
 
 ### Launching via Gitpod
 This is a work in progress for GitPod (the `Jenkins` agent using DonD does not work yet). You can try it anyway thanks
-to the Gitpod button if you have installed the extension, or via this link: [try this repo with gitpod](https://gitpod.io/#https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins).
+to the Gitpod button if you have installed the extension, or via this link:
+[try this repo with gitpod](https://gitpod.io/#https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins).
 One part of the pipeline won't work though, because it's using DonD, and I haven't found a way to use it with Gitpod.
 
 ## How to build the app 
