@@ -131,6 +131,12 @@ pipeline {
                         archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'release.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
                     }
                 }
                 stage('Release on GitHub') {
@@ -206,19 +212,20 @@ void createGooglePlayStoreRelease() {
     )
 }
 
-testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
-                      recipientsList: 'nick@some.com,mairy@some.com',
-                      outOfDateResults: '10',
-                      sortresults: 'Job Name',
-                      subject: 'Test Results'
-                    	 jobs: [
-                            // Group with 2 Jobs
-                            [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
-                            [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
-                            // jobFriendlyName is optional
-                            [jobName: 'My CI Job3', groupName: 'TeamB'],
-                            [jobName: 'My CI Job4', groupName: 'TeamB'],
-                            // No Groups, groupName is optional
-                            [jobName: 'My CI Job6'],
-                            [jobName: 'My CI Job7']
-                        ]
+// testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+//                       recipientsList: 'nick@some.com,mairy@some.com',
+//                       outOfDateResults: '10',
+//                       sortresults: 'Job Name',
+//                       subject: 'Test Results'
+//                     	 jobs: [
+//                             // Group with 2 Jobs
+//                             [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+//                             [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+//                             // jobFriendlyName is optional
+//                             [jobName: 'My CI Job3', groupName: 'TeamB'],
+//                             [jobName: 'My CI Job4', groupName: 'TeamB'],
+//                             // No Groups, groupName is optional
+//                             [jobName: 'My CI Job6'],
+//                             [jobName: 'My CI Job7']
+//                         ]
+
