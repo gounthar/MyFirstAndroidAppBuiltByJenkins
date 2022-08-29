@@ -38,17 +38,10 @@ pipeline {
                 }
                 stage('Qodana') {
                     agent {
-                        docker {
-                            label 'docker'
-                            image 'jetbrains/qodana-jvm-android'
-                            args '-v .:/data/project/'
-                            args '-v ./app/build/reports/qodana:/data/results/'
-                            args '-v /home/jenkins/:/data/cache/'
-                            args '--entrypoint=""'
-                        }
+                        label 'docker'
                     }
                     steps {
-                        sh "qodana --save-report"
+                        sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
                     }
                 }
             }
@@ -228,4 +221,3 @@ void createGooglePlayStoreRelease() {
 //                             [jobName: 'My CI Job6'],
 //                             [jobName: 'My CI Job7']
 //                         ]
-
