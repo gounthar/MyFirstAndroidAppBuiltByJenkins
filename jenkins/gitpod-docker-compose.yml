@@ -44,3 +44,8 @@ volumes:
     jenkins-agent-data:
     android-agent-data:
     qodana-data:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/workspace/MyFirstAndroidAppBuiltByJenkins'
