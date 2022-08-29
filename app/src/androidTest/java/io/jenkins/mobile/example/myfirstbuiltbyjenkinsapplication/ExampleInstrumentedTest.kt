@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.myfirstbuiltbyjenkinsapplications", appContext.packageName)
+        assertEquals("io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication", appContext.packageName)
     }
 }
