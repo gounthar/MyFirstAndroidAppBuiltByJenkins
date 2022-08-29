@@ -58,10 +58,27 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed -e 's#/#-#g')"
         id: extract_branch
       -
-        name: Build and push latest
+        name: Build and push android ssh agent
         uses: docker/build-push-action@v3
         with:
           context: .
           platforms: linux/amd64
           push: true
           tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push jenkins controller
+        uses: docker/build-push-action@v3
+        with:
+          context: ./jenkins/controller
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: gounthar/jenkinsci-docker-controller:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push jenkins DinD agent
+        uses: docker/build-push-action@v3
+        with:
+          context: ./jenkins/agent
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: gounthar/jenkinsci-docker-dind-agent:${{ steps.extract_branch.outputs.branch }}
+

@@ -122,34 +122,50 @@ pipeline {
                 sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
             }
         }
-        stage('Publish Artifacts') {
-            agent any
-            steps {
-                echo 'Save the assemblies generated from the compilation'
-            }
-        }
-        stage('Release on GitHub') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-            }
-            agent {
-                label 'android'
-            }
-            steps {
-                script {
-                // Later on, move everything into functions and call them here.
-                     releaseAlreadyExists = sh (
+        stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
+            parallel {
+                stage('Publish Artifacts') {
+                    agent any
+                    steps {
+                        echo 'Save the assemblies generated from the compilation'
+                        archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/bundle/**/*.aab', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'release.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                    }
+                }
+                stage('Release on GitHub') {
+                    environment {
+                        GITHUB_CREDENTIALS = credentials('github-app-android')
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        script {
+                          // Later on, move everything into functions and call them here.
+                          releaseAlreadyExists = sh (
                             script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
                             returnStdout: true
-                        )
-                        echo "Release already exists: $releaseAlreadyExists."
-                        if (releaseAlreadyExists == 'false') {
+                          )
+                          echo "Release already exists: $releaseAlreadyExists."
+                          if (releaseAlreadyExists == 'false') {
                             echo "The release does not exist yet, so we can create it."
                             createRelease()
-                        } else {
+                          } else {
                             echo "The release already exists, so we won't create it."
+                          }
                         }
+                    }
                 }
             }
         }
@@ -167,6 +183,17 @@ pipeline {
             }
         }
     }
+//     post {
+//         always {
+// //             junit '/app/build/jacoco/*.xml'
+// //             junit '/app/build/test-results/**/*.xml'
+// //             junit '/app/build/reports/tests/*.xml'
+// //             junit '/app/build/reports/*.xml'
+// //             junit '/app/build/reports/detekt/*.xml'
+// //             junit '/app/build/reports/spotbugs/*.xml'
+// 	        testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+//         }
+//     }
 }
 
 void releaseAlreadyExist(config) {
@@ -187,3 +214,21 @@ void createGooglePlayStoreRelease() {
         returnStdout: true
     )
 }
+
+// testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+//                       recipientsList: 'nick@some.com,mairy@some.com',
+//                       outOfDateResults: '10',
+//                       sortresults: 'Job Name',
+//                       subject: 'Test Results'
+//                     	 jobs: [
+//                             // Group with 2 Jobs
+//                             [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+//                             [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+//                             // jobFriendlyName is optional
+//                             [jobName: 'My CI Job3', groupName: 'TeamB'],
+//                             [jobName: 'My CI Job4', groupName: 'TeamB'],
+//                             // No Groups, groupName is optional
+//                             [jobName: 'My CI Job6'],
+//                             [jobName: 'My CI Job7']
+//                         ]
+
