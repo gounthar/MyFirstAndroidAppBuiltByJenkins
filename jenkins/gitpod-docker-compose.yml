@@ -1,0 +1,46 @@
+#  docker compose up -d --build --force-recreate
+services:
+    jenkins:
+        image: gounthar/jenkinsci-docker-controller:gitpod
+        restart: always
+        ports:
+            - "8080:8080"
+            - "50000:50000"
+        volumes:
+            - jenkins-data:/var/jenkins_home:rw
+            - ./casc.d:/var/jenkins_home/casc.d/:ro
+            # Mounting the ssh private key as "container secret" makes it available in JCasc as the variable ${SSH_AGENT_KEY}
+            - ./secrets/id_jenkins.pem:/run/secrets/SSH_AGENT_KEY:ro
+            #- ./secrets/converted-github-app.pem:GITHUB_APP_KEY:ro
+        environment:
+            - JENKINS_EXT_URL=http://localhost:8080
+            - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
+            - GITHUB_APP_ID
+            - GITHUB_APP_KEY
+            - ANDROID_PUBLISHER_CREDENTIALS
+            - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
+            # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
+    jenkins-agent:
+        platform: linux/amd64
+        image: gounthar/jenkinsci-docker-dind-agent:gitpod
+        restart: unless-stopped
+        volumes:
+            - qodana-data:/data:rw
+            - jenkins-agent-data:/home/jenkins:rw
+            - /var/run/docker.sock:/var/run/docker.sock:rw
+        environment:
+            - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
+    android-agent:
+        platform: linux/amd64
+        image: gounthar/jenkinsci-docker-android-base:gitpod
+        restart: unless-stopped
+        volumes:
+            - qodana-data:/data:rw
+            - android-agent-data:/home/jenkins:rw
+        environment:
+            - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD
+volumes:
+    jenkins-data:
+    jenkins-agent-data:
+    android-agent-data:
+    qodana-data:

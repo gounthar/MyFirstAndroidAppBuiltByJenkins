@@ -1,8 +1,8 @@
 tasks:
   - init: |
-      docker-compose -f jenkins/docker-compose.yml pull
+      docker-compose -f jenkins/gitpod-docker-compose.yml pull
   - command: |
-      docker-compose -f jenkins/docker-compose.yml up
+      docker-compose -f jenkins/gitpod-docker-compose.yml up
 
 
 ports:
