@@ -42,7 +42,7 @@ pipeline {
                     }
                     steps {
                         sh "docker run -v /workspace/MyFirstAndroidAppBuiltByJenkins:/data/project/ -v /workspace/MyFirstAndroidAppBuiltByJenkins/app/build/reports/qodana:/data/results/ -v /home/jenkins/:/data/cache/ --entrypoint='' jetbrains/qodana-jvm-android ls -artl /data"
-                        sh "docker run -v /data:/data --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
+                        sh "docker run -v /workspace/MyFirstAndroidAppBuiltByJenkins:/data/project/ -v /workspace/MyFirstAndroidAppBuiltByJenkins/app/build/reports/qodana:/data/results/ -v /home/jenkins/:/data/cache/ --entrypoint='' jetbrains/qodana-jvm-android qodana --save-report"
                     }
                 }
             }
