@@ -134,6 +134,7 @@ pipeline {
                         archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/androidTest-results/connected/*.pb', allowEmptyArchive: true
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
