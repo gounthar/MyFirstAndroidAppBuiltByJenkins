@@ -21,6 +21,7 @@ services:
             - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
+        platform: linux/amd64
         build: ./agent
         restart: unless-stopped
         volumes:
@@ -30,6 +31,7 @@ services:
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
     android-agent:
+        platform: linux/amd64
         build: ../
         restart: unless-stopped
         volumes:
