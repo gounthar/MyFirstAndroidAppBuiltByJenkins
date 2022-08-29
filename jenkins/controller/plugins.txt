@@ -1,3 +1,4 @@
+# https://github.com/jenkinsci/docker#usage-1
 ace-editor:1.1
 ant:475.vf34069fef73c
 antisamy-markup-formatter:2.7
@@ -56,6 +57,7 @@ git-server:99.va_0826a_b_cdfa_d
 git:4.11.4
 github-api:1.303-400.v35c2d8258028
 github-branch-source:1677.v731f745ea_0cf
+github-checks:1.0.18
 github:1.35.0
 google-oauth-plugin:1.0.6
 gradle:1.39.4
@@ -118,6 +120,7 @@ ssh-credentials:295.vced876c18eb_4
 ssh-slaves:1.834.v622da_57f702c
 sshd:3.249.v2dc2ea_416e33
 structs:324.va_f5d6774f3a_d
+test-results-aggregator:1.2.10
 timestamper:1.18
 token-macro:308.v4f2b_ed62b_b_16
 trilead-api:1.71.v9e7860a_67a_df
@@ -126,7 +129,6 @@ windows-slaves:1.8.1
 workflow-aggregator:590.v6a_d052e5a_a_b_5
 workflow-api:1192.v2d0deb_19d212
 workflow-basic-steps:991.v43d80fea_ff66
-pipeline-groovy-lib:612.v84da_9c54906d
 workflow-cps:2759.v87459c4eea_ca_
 workflow-durable-task-step:1199.v02b_9244f8064
 workflow-job:1232.v5a_4c994312f1

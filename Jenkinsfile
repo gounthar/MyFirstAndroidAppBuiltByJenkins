@@ -143,18 +143,18 @@ pipeline {
                     }
                     steps {
                         script {
-                        // Later on, move everything into functions and call them here.
-                             releaseAlreadyExists = sh (
-                                    script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
-                                    returnStdout: true
-                                )
-                                echo "Release already exists: $releaseAlreadyExists."
-                                if (releaseAlreadyExists == 'false') {
-                                    echo "The release does not exist yet, so we can create it."
-                                    createRelease()
-                                } else {
-                                    echo "The release already exists, so we won't create it."
-                                }
+                          // Later on, move everything into functions and call them here.
+                          releaseAlreadyExists = sh (
+                            script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
+                            returnStdout: true
+                          )
+                          echo "Release already exists: $releaseAlreadyExists."
+                          if (releaseAlreadyExists == 'false') {
+                            echo "The release does not exist yet, so we can create it."
+                            createRelease()
+                          } else {
+                            echo "The release already exists, so we won't create it."
+                          }
                         }
                     }
                 }
@@ -174,19 +174,17 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            archiveArtifacts artifacts: './app/build/outputs/apk/**/*.apk'
-            archiveArtifacts artifacts: './app/build/outputs/bundle/**/*.aab'
-            archiveArtifacts artifacts: './app/build/reports/*xml'
-            archiveArtifacts artifacts: './app/build/reports/*html'
-            archiveArtifacts artifacts: './app/build/reports/**/*.xml'
-            archiveArtifacts artifacts: './app/build/reports/**/*.html'
-                                         //./app/build/outputs/apk/release/app-release-unsigned.apk
-                                         //./app/build/outputs/apk/debug/app-debug.apk
-
-        }
-    }
+//     post {
+//         always {
+// //             junit '/app/build/jacoco/*.xml'
+// //             junit '/app/build/test-results/**/*.xml'
+// //             junit '/app/build/reports/tests/*.xml'
+// //             junit '/app/build/reports/*.xml'
+// //             junit '/app/build/reports/detekt/*.xml'
+// //             junit '/app/build/reports/spotbugs/*.xml'
+// 	        testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+//         }
+//     }
 }
 
 void releaseAlreadyExist(config) {
@@ -207,3 +205,20 @@ void createGooglePlayStoreRelease() {
         returnStdout: true
     )
 }
+
+testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                      recipientsList: 'nick@some.com,mairy@some.com',
+                      outOfDateResults: '10',
+                      sortresults: 'Job Name',
+                      subject: 'Test Results'
+                    	 jobs: [
+                            // Group with 2 Jobs
+                            [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+                            [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+                            // jobFriendlyName is optional
+                            [jobName: 'My CI Job3', groupName: 'TeamB'],
+                            [jobName: 'My CI Job4', groupName: 'TeamB'],
+                            // No Groups, groupName is optional
+                            [jobName: 'My CI Job6'],
+                            [jobName: 'My CI Job7']
+                        ]
