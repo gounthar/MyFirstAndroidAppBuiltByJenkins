@@ -48,9 +48,9 @@ services:
             - ADBKEY
         devices:
             - /dev/kvm
-    genymotion:
+    android-12-emulator:
         platform: linux/amd64
-        image: budtmo/docker-android-genymotion
+        image: budtmo/docker-android-x86-12.0
         restart: unless-stopped
         ports:
             - 6080:6080
@@ -58,8 +58,7 @@ services:
             - 5556:5555
         privileged: true
         environment:
-            - DEVICE="Samsung Galaxy S6"
-            - TYPE=SaaS
+            - DEVICE="Samsung Galaxy S10"
 volumes:
     jenkins-data:
     jenkins-agent-data:
