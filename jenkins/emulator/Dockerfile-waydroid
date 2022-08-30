@@ -1,0 +1,15 @@
+FROM debian:bullseye as base
+
+EXPOSE 5555/tcp
+EXPOSE 8554/tcp
+
+ENV DISTRO="bullseye"
+RUN apt update && apt install --no-install-recommends curl ca-certificates -y && curl --proto '=https' --tlsv1.2 \
+        -Sf https://repo.waydro.id/waydroid.gpg --output /usr/share/keyrings/waydroid.gpg && \
+        echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg] https://repo.waydro.id/ $DISTRO main" > ~/waydroid.list \
+        && mv ~/waydroid.list /etc/apt/sources.list.d/waydroid.list && apt update && \
+        apt install --no-install-recommends waydroid -y
+
+RUN waydroid init
+
+ENTRYPOINT [ "waydroid", "container", "start" ]
