@@ -26,7 +26,7 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 # > SDK location not found. Define location with an ANDROID_SDK_ROOT environment variable or by setting the sdk.dir path in your project's local properties file at '/home/jenkins/workspace/First Android Job/local.properties'.
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 ENV CMDLINE_TOOLS_HOME $ANDROID_HOME/cmdline-tools/latest
-ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin
+ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin:$ANDROID_HOME/:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
 
 RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/android-sdk-linux && \
