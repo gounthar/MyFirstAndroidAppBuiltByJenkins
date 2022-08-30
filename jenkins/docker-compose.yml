@@ -51,17 +51,6 @@ services:
             - ADBKEY
         devices:
             - /dev/kvm
-    second-emulator:
-        platform: linux/amd64
-        image: us-docker.pkg.dev/android-emulator-268719/images/30-playstore-x64
-        restart: unless-stopped
-        ports:
-            - 8555:8554
-            - 5557:5555
-        environment:
-            - ADBKEY
-        devices:
-            - /dev/kvm
 volumes:
     jenkins-data:
     jenkins-agent-data:
