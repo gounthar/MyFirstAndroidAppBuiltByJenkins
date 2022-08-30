@@ -115,8 +115,13 @@ pipeline {
             steps {
                 echo 'Run only instrumented tests from the source code'
                 // We don't have any device connected yet
-                sh 'adb connect 82.65.177.146:7457'
-                // sh './gradlew connectedAndroidTest'
+                sh 'adb connect emulator:5555'
+                sh 'adb connect second-emulator:5557'
+                sh 'adb devices'
+                sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
+                sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
+                sh 'adb devices'
+                sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
             }
         }
         stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
@@ -131,6 +136,7 @@ pipeline {
                         archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/androidTest-results/connected/*.pb', allowEmptyArchive: true
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
