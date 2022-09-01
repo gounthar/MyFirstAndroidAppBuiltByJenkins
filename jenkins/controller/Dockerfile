@@ -11,6 +11,7 @@ RUN jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt
 # Poor man's Jcasc
 COPY --chown=jenkins:jenkins ./FirstJob /usr/share/jenkins/ref/jobs/FirstJob
 COPY --chown=jenkins:jenkins ./MultiBranchAndroidPipeline /usr/share/jenkins/ref/jobs/MultiBranchAndroidPipeline
+COPY --chown=jenkins:jenkins ./AutoUpdaterMultiBranches /usr/share/jenkins/ref/jobs/AutoUpdaterMultiBranches
 
 # because of /var/jenkins_home/.ssh/known_hosts [SSH] No Known Hosts file was found at /var/jenkins_home/.ssh/known_hosts. Please ensure one is created at this path and that Jenkins can read it.
 RUN mkdir -p /var/jenkins_home/.ssh/ && touch /var/jenkins_home/.ssh/known_hosts && chown -R jenkins:jenkins /var/jenkins_home/.ssh/

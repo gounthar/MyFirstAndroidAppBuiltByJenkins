@@ -1,0 +1,23 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<jenkins.branch.MultiBranchProject_-State plugin="branch-api@2.1046.v0ca_37783ecc5">
+  <sourceActions>
+    <entry>
+      <string>a9b89500-26bc-4b17-b6a5-f77ad1044614</string>
+      <list>
+        <org.jenkinsci.plugins.github__branch__source.GitHubRepoMetadataAction plugin="github-branch-source@1687.v7618247e672d"/>
+        <jenkins.scm.api.metadata.ObjectMetadataAction plugin="scm-api@621.vda_a_b_055e58f7">
+          <objectDescription>Let&apos;s try an empty Android App just to see how to build it with Jenkins</objectDescription>
+        </jenkins.scm.api.metadata.ObjectMetadataAction>
+        <org.jenkinsci.plugins.github__branch__source.GitHubLink plugin="github-branch-source@1687.v7618247e672d">
+          <iconClassName>icon-github-repo</iconClassName>
+          <url>https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins</url>
+        </org.jenkinsci.plugins.github__branch__source.GitHubLink>
+        <org.jenkinsci.plugins.github__branch__source.GitHubDefaultBranch plugin="github-branch-source@1687.v7618247e672d">
+          <repoOwner>gounthar</repoOwner>
+          <repository>MyFirstAndroidAppBuiltByJenkins</repository>
+          <defaultBranch>main</defaultBranch>
+        </org.jenkinsci.plugins.github__branch__source.GitHubDefaultBranch>
+      </list>
+    </entry>
+  </sourceActions>
+</jenkins.branch.MultiBranchProject_-State>
