@@ -23,7 +23,7 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     # git push --set-upstream origin "${new_branch_name}"
     git push --set-upstream https://"$GITHUB_CREDENTIALS_USR":"$GITHUB_CREDENTIALS_PSW"@github.com/gounthar/MyFirstAndroidAppBuiltByJenkins.git "${new_branch_name}"
     # Now use gh to create a pull request from new_branch_name to branch_name
-    gh pr create -B "$branch_name" -t "Update plugins.txt" -b "Update plugins.txt"
+    gh pr create -B "$branch_name" -t "Update plugins.txt" -b "Update plugins.txt" --head "${new_branch_name}" --base "$branch_name"
     git switch "${branch_name}"
 else
     echo "Plugins have not changed"
