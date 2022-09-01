@@ -1,0 +1,37 @@
+def getBranchName() {
+   return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+}
+
+def getSimplifiedBranchName() {
+   return "${getBranchName().replace('/', '-')}"
+}
+
+pipeline {
+    environment {
+        BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
+        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
+    }
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Updating the plugin list to the latest available versions') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+            }
+            agent {
+                label 'android'
+            }
+            steps {
+                script {
+                    // Later on, move everything into functions and call them here.
+                    releaseAlreadyExists = sh (
+                        script: 'chmod +x ./jenkins/controller/update-plugins.sh && bash -x jenkins/controller/update-plugins.sh',
+                        returnStdout: true
+                    )
+                }
+            }
+        }
+    }
+}
