@@ -14,6 +14,8 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     branch_name=$GIT_BRANCH
     echo "Working on branch $branch_name"
     new_branch_name="update-$branch_name/"$(sha1sum /tmp/jenkins_plugins.diff | cut -d " " -f1)
+    git config --global user.email "116569+gounthar@users.noreply.github.com"
+    git config --global user.name "Poddingue WhatIf"
     git switch -c "${new_branch_name}" -m
     git commit -m "Update plugins.txt"
     git push --set-upstream origin "${new_branch_name}"
