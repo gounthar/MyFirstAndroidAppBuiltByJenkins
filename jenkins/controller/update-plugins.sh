@@ -1,6 +1,7 @@
 #!/bin/bash -x
 JENKINS_HOST=admin:butler@jenkins:8080
 #JENKINS_HOST=admin:butler@localhost:8080
+cd jenkins/controller/
 curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/' > /tmp/jenkins_plugins.txt
 sort -o /tmp/sorted_jenkins_plugins.txt /tmp/jenkins_plugins.txt
 sed -i '1s/^/# See https:\/\/github.com\/jenkinsci\/docker#usage-1\n/' /tmp/sorted_jenkins_plugins.txt
