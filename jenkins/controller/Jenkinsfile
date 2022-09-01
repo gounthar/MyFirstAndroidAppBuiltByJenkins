@@ -1,0 +1,75 @@
+def getBranchName() {
+   return "${GIT_BRANCH.split('/').size() > 1 ? GIT_BRANCH.split('/')[1..-1].join('/') : GIT_BRANCH}"
+}
+
+def getSimplifiedBranchName() {
+   return "${getBranchName().replace('/', '-')}"
+}
+
+pipeline {
+    environment {
+        BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
+        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
+    }
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
+            }
+            steps {
+                script {
+                    // Later on, move everything into functions and call them here.
+                    releaseAlreadyExists = sh (
+                        script: 'chmod +x ./jenkins/controller/update-plugins.sh && bash -x jenkins/controller/update-plugins.sh',
+                        returnStdout: true
+                    )
+                }
+            }
+        }
+    }
+}
+
+void releaseAlreadyExist(config) {
+    GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
+    echo $GITHUB_CREDENTIALS_PSW
+}
+
+void createRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-release.sh && ./jenkins/create-release.sh',
+        returnStdout: true
+    )
+}
+
+void createGooglePlayStoreRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-gps-release.sh && ./jenkins/create-gps-release.sh',
+        returnStdout: true
+    )
+}
+
+// testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+//                       recipientsList: 'nick@some.com,mairy@some.com',
+//                       outOfDateResults: '10',
+//                       sortresults: 'Job Name',
+//                       subject: 'Test Results'
+//                     	 jobs: [
+//                             // Group with 2 Jobs
+//                             [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+//                             [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+//                             // jobFriendlyName is optional
+//                             [jobName: 'My CI Job3', groupName: 'TeamB'],
+//                             [jobName: 'My CI Job4', groupName: 'TeamB'],
+//                             // No Groups, groupName is optional
+//                             [jobName: 'My CI Job6'],
+//                             [jobName: 'My CI Job7']
+//                         ]
+
