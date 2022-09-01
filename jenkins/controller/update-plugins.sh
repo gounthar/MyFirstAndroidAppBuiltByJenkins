@@ -11,6 +11,7 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
     cp /tmp/sorted_jenkins_plugins.txt ./plugins.txt
     git add ./plugins.txt
+    git add ./update-plugins.sh
     # Get current branch name
     branch_name=$GIT_BRANCH
     echo "Working on branch $branch_name for repo $GIT_URL"
