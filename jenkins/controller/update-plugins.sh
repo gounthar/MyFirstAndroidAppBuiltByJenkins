@@ -11,8 +11,7 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     cp /tmp/sorted_jenkins_plugins.txt ./plugins.txt
     git add ./plugins.txt
     # Get current branch name
-    branch_name="$(git symbolic-ref HEAD 2>/dev/null)" || branch_name="(unnamed branch)"     # detached HEAD
-    branch_name=${branch_name##refs/heads/}
+    branch_name=$GIT_BRANCH
     echo "Working on branch $branch_name"
     new_branch_name="update-$branch_name/"$(sha1sum /tmp/jenkins_plugins.diff | cut -d " " -f1)
     git switch -c "${new_branch_name}" -m
