@@ -41,10 +41,12 @@ pipeline {
                         docker {
                             label 'docker'
                             image 'jetbrains/qodana-jvm-android'
-                            args '-v $(pwd):/data/project/'
-                            args '-v $(pwd)/app/build/reports/qodana:/data/results/'
-                            args '-v /home/jenkins/:/data/cache/'
-                            args '--entrypoint=""'
+                            args '''
+                            -v $(pwd):/data/project/
+                            -v $(pwd)/app/build/reports/qodana:/data/results/
+                            -v /home/jenkins/:/data/cache/
+                            --entrypoint=""
+                            '''
                         }
                     }
                     steps {
