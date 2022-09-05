@@ -48,6 +48,7 @@ pipeline {
                         }
                     }
                     steps {
+                        sh "pwd"
                         sh "qodana --save-report"
                     }
                 }
