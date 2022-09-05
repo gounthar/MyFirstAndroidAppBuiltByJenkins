@@ -42,10 +42,10 @@ pipeline {
                             label 'docker'
                             image 'jetbrains/qodana-jvm-android'
                             args '''
-                            -v /opt/qodana/reports:/data/reports
-                            -v /opt/qodana/cache:/data/cache
-                            -v /opt/qodana/results:/data/results
-                            -v /opt/qodana/qodana.sarif.json:/data/qodana.sarif.json
+                            -v /home/jenkins/qodana/reports:/data/reports
+                            -v /home/jenkins/qodana/cache:/data/cache
+                            -v /home/jenkins/qodana/results:/data/results
+                            -v /home/jenkins/qodana/qodana.sarif.json:/data/qodana.sarif.json
                             --entrypoint=""
                             '''
                         }
