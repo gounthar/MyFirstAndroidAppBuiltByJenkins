@@ -7,7 +7,7 @@ def getSimplifiedBranchName() {
 }
 
 pipeline {
-    triggers { cron('0 0 10 ? * * *') }
+    triggers { cron('H 4/* 0 0 1-5') }
     environment {
         BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
