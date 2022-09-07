@@ -49,6 +49,8 @@ pipeline {
                             }
                     }
                     steps {
+                        echo 'Run the Qodana static analysis to the code'
+                        // sh 'qodana --save-report'
                         sh 'qodana --save-report'
                         // If ever the above command was not working, you can switch to this one while not having
                         // to declare anything for the agent except for `label docker`
@@ -161,6 +163,7 @@ pipeline {
                     }
                     steps {
                         script {
+                        input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
                           // Later on, move everything into functions and call them here.
                           releaseAlreadyExists = sh (
                             script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
@@ -187,6 +190,7 @@ pipeline {
                 label 'android'
             }
             steps {
+                input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
                 echo 'Publishes the bundle on the Google Play Store'
                 createGooglePlayStoreRelease()
             }
