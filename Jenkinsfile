@@ -116,8 +116,8 @@ pipeline {
             agent {
                 label 'android'
             }
-            lock('MyEmulator') {
-                steps {
+            steps {
+                lock('MyEmulator') {
                     echo 'Run only instrumented tests from the source code'
                     // We don't have any device connected yet
                     sh 'adb connect emulator:5555'
