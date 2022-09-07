@@ -42,17 +42,17 @@ pipeline {
                             label 'docker'
                             image 'jetbrains/qodana-jvm-android'
                             args '''
-                            -v /home/jenkins/qodana/reports:/data/reports
-                            -v /home/jenkins/qodana/cache:/data/cache
-                            -v /home/jenkins/qodana/results:/data/results
-                            -v /home/jenkins/qodana/qodana.sarif.json:/data/qodana.sarif.json
-                            --entrypoint=""
+                                -v qodana-data:/data
+                                -v $PWD:/data/project
+                                --entrypoint=""
                             '''
-                        }
+                            }
                     }
                     steps {
-                        sh "pwd"
-                        sh "qodana --save-report"
+                        sh 'qodana --save-report'
+                        // If ever the above command was not working, you can switch to this one while not having
+                        // to declare anything for the agent except for `label docker`
+                        // sh 'docker run -u 1000:1000 -v qodana-data:/data -v "$(pwd)":/data/project --entrypoint="qodana" jetbrains/qodana-jvm-android "--save-report"'
                     }
                 }
             }
