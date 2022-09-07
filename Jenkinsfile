@@ -41,14 +41,18 @@ pipeline {
                         docker {
                             label 'docker'
                             image 'jetbrains/qodana-jvm-android'
-                            args '-v .:/data/project/'
-                            args '-v ./app/build/reports/qodana:/data/results/'
-                            args '-v /home/jenkins/:/data/cache/'
-                            args '--entrypoint=""'
-                        }
+                            args '''
+                                -v qodana-data:/data
+                                -v $PWD:/data/project
+                                --entrypoint=""
+                            '''
+                            }
                     }
                     steps {
-                        sh "qodana --save-report"
+                        sh 'qodana --save-report'
+                        // If ever the above command was not working, you can switch to this one while not having
+                        // to declare anything for the agent except for `label docker`
+                        // sh 'docker run -u 1000:1000 -v qodana-data:/data -v "$(pwd)":/data/project --entrypoint="qodana" jetbrains/qodana-jvm-android "--save-report"'
                     }
                 }
             }
@@ -113,15 +117,17 @@ pipeline {
                 label 'android'
             }
             steps {
-                echo 'Run only instrumented tests from the source code'
-                // We don't have any device connected yet
-                sh 'adb connect emulator:5555'
-                sh 'adb connect second-emulator:5557'
-                sh 'adb devices'
-                sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
-                sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
-                sh 'adb devices'
-                sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
+                lock('MyEmulator') {
+                    echo 'Run only instrumented tests from the source code'
+                    // We don't have any device connected yet
+                    sh 'adb connect emulator:5555'
+                    sh 'adb connect second-emulator:5557'
+                    sh 'adb devices'
+                    sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
+                    sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
+                    sh 'adb devices'
+                    sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
+                }
             }
         }
         stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
