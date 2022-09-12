@@ -49,7 +49,9 @@ pipeline {
                             }
                     }
                     steps {
+                        sh 'ls -artl /data/results /data/cache'
                         sh 'qodana --save-report'
+                        sh 'ls -artl /data/results /data/cache'
                         // If ever the above command was not working, you can switch to this one while not having
                         // to declare anything for the agent except for `label docker`
                         // sh 'docker run -u 1000:1000 -v qodana-data:/data -v "$(pwd)":/data/project --entrypoint="qodana" jetbrains/qodana-jvm-android "--save-report"'
