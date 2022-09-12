@@ -84,8 +84,8 @@ lockable-resources:2.16
 mailer:438.v02c7f0a_12fa_4
 matrix-auth:3.1.5
 matrix-project:785.v06b_7f47b_c631
-mina-sshd-api-common:2.8.0-36.v8e25ce90d4b_1
-mina-sshd-api-core:2.8.0-36.v8e25ce90d4b_1
+mina-sshd-api-common:2.9.1-44.v476733c11f82
+mina-sshd-api-core:2.9.1-44.v476733c11f82
 momentjs:1.1.1
 oauth-credentials:0.5
 okhttp-api:4.9.3-108.v0feda04578cf
@@ -118,11 +118,11 @@ slack:616.v03b_1e98d13dd
 snakeyaml-api:1.31-84.ve43da_fb_49d0b
 sse-gateway:1.26
 ssh-credentials:305.v8f4381501156
-ssh-slaves:1.834.v622da_57f702c
+ssh-slaves:2.846.v1b_70190624f5
 sshd:3.249.v2dc2ea_416e33
 structs:324.va_f5d6774f3a_d
 test-results-aggregator:1.2.10
-timestamper:1.19
+timestamper:1.20
 token-macro:308.v4f2b_ed62b_b_16
 trilead-api:2.72.v2a_3236754f73
 variant:59.vf075fe829ccb
