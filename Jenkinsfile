@@ -51,6 +51,7 @@ pipeline {
                     steps {
                         sh 'ls -artl /data/results /data/cache'
                         sh 'qodana --save-report'
+                        sh 'mv /data/results/* ${env.WORKSPACE}/qodana'
                         sh 'ls -artl /data/results /data/cache'
                         // If ever the above command was not working, you can switch to this one while not having
                         // to declare anything for the agent except for `label docker`
