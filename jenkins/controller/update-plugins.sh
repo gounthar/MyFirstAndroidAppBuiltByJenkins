@@ -10,6 +10,7 @@ if [ ! -z "${UPDATE_LIST}" ]; then
     java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST} -deploy -restart;
 fi
 rm jenkins-cli.jar
+sleep 15
 
 curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/' > /tmp/jenkins_plugins.txt
 sort -o /tmp/sorted_jenkins_plugins.txt /tmp/jenkins_plugins.txt
