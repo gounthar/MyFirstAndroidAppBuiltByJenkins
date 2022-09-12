@@ -18,7 +18,7 @@ sed -i '1s/^/# See https:\/\/github.com\/jenkinsci\/docker#usage-1\n/' /tmp/sort
 diff -u ./plugins.txt /tmp/sorted_jenkins_plugins.txt > /tmp/jenkins_plugins.diff
 if [ -s /tmp/jenkins_plugins.diff ]; then
     echo "Plugins have changed, updating plugins.txt"
-    echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
+    echo "$GITHUB_CREDENTIALS_PSW" | gh auth login --with-token
     cp /tmp/sorted_jenkins_plugins.txt ./plugins.txt
     git add ./plugins.txt
     git add ./update-plugins.sh

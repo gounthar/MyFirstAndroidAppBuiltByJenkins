@@ -49,6 +49,7 @@ pipeline {
                             }
                     }
                     steps {
+                        echo 'Run the Qodana static analysis to the code'
                         sh 'qodana --save-report'
                         // If ever the above command was not working, you can switch to this one while not having
                         // to declare anything for the agent except for `label docker`
@@ -117,15 +118,17 @@ pipeline {
                 label 'android'
             }
             steps {
-                echo 'Run only instrumented tests from the source code'
-                // We don't have any device connected yet
-                sh 'adb connect emulator:5555'
-                sh 'adb connect second-emulator:5557'
-                sh 'adb devices'
-                sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
-                sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
-                sh 'adb devices'
-                sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
+                lock('MyEmulator') {
+                    echo 'Run only instrumented tests from the source code'
+                    // We don't have any device connected yet
+                    sh 'adb connect emulator:5555'
+                    sh 'adb connect second-emulator:5557'
+                    sh 'adb devices'
+                    sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
+                    sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
+                    sh 'adb devices'
+                    sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
+                }
             }
         }
         stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
@@ -159,6 +162,7 @@ pipeline {
                     }
                     steps {
                         script {
+                        input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
                           // Later on, move everything into functions and call them here.
                           releaseAlreadyExists = sh (
                             script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
@@ -185,6 +189,7 @@ pipeline {
                 label 'android'
             }
             steps {
+                input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
                 echo 'Publishes the bundle on the Google Play Store'
                 createGooglePlayStoreRelease()
             }
