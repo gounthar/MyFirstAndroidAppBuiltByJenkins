@@ -50,7 +50,6 @@ pipeline {
                     }
                     steps {
                         echo 'Run the Qodana static analysis to the code'
-                        // sh 'qodana --save-report'
                         sh 'qodana --save-report'
                         // If ever the above command was not working, you can switch to this one while not having
                         // to declare anything for the agent except for `label docker`
