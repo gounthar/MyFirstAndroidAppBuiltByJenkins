@@ -1,13 +1,24 @@
 #!/bin/bash -x
 JENKINS_HOST=admin:butler@jenkins:8080
 cd jenkins/controller/
+
+curl -O "http://$JENKINS_HOST/jnlpJars/jenkins-cli.jar"
+UPDATE_LIST=$( java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ list-plugins | grep -e ')$' | awk '{ print $1 }' );
+
+if [ ! -z "${UPDATE_LIST}" ]; then
+    echo Updating Jenkins Plugins: ${UPDATE_LIST};
+    java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST} -deploy -restart;
+    sleep 15
+fi
+rm jenkins-cli.jar
+
 curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/' > /tmp/jenkins_plugins.txt
 sort -o /tmp/sorted_jenkins_plugins.txt /tmp/jenkins_plugins.txt
 sed -i '1s/^/# See https:\/\/github.com\/jenkinsci\/docker#usage-1\n/' /tmp/sorted_jenkins_plugins.txt
 diff -u ./plugins.txt /tmp/sorted_jenkins_plugins.txt > /tmp/jenkins_plugins.diff
 if [ -s /tmp/jenkins_plugins.diff ]; then
     echo "Plugins have changed, updating plugins.txt"
-    echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
+    echo "$GITHUB_CREDENTIALS_PSW" | gh auth login --with-token
     cp /tmp/sorted_jenkins_plugins.txt ./plugins.txt
     git add ./plugins.txt
     git add ./update-plugins.sh
