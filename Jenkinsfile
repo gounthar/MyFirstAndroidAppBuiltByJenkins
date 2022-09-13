@@ -38,22 +38,11 @@ pipeline {
                 }
                 stage('Qodana') {
                     agent {
-                        docker {
-                            label 'docker'
-                            image 'jetbrains/qodana-jvm-android'
-                            args '''
-                                -v qodana-data:/data
-                                -v $PWD:/data/project
-                                --entrypoint=""
-                            '''
-                            }
+                        label 'docker'
                     }
                     steps {
-                        echo 'Run the Qodana static analysis to the code'
-                        sh 'qodana --save-report'
-                        // If ever the above command was not working, you can switch to this one while not having
-                        // to declare anything for the agent except for `label docker`
-                        // sh 'docker run -u 1000:1000 -v qodana-data:/data -v "$(pwd)":/data/project --entrypoint="qodana" jetbrains/qodana-jvm-android "--save-report"'
+                        sh 'docker build --tag=qodana-build-1 --file=jenkins/qodana/Dockerfile --progress=plain --output qodana-results .'
+                        archiveArtifacts artifacts: 'qodana-results/**', allowEmptyArchive: true
                     }
                 }
             }
