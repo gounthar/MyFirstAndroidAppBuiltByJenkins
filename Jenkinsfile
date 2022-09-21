@@ -134,11 +134,11 @@ pipeline {
                         archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
                         archiveArtifacts artifacts: 'app/build/outputs/androidTest-results/connected/*.pb', allowEmptyArchive: true
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'release.html', reportName: 'Lint Report', reportTitles: ''])
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
-                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Detekt Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Spotbugs Debug Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'release.html', reportName: 'Spotbugs Release Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Test Debug Unit Testing Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Test Release Unit Testing', reportTitles: ''])
                     }
                 }
                 stage('Invoke Pipeline PublishAppToGitHubAndGoogle') {
