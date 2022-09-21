@@ -7,6 +7,15 @@ def getSimplifiedBranchName() {
 }
 
 pipeline {
+    environment {
+        BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
+        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
+    }
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
     stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
         parallel {
             stage('Publish Artifacts') {
@@ -71,6 +80,7 @@ pipeline {
             }
         }
     }
+}
 
 void releaseAlreadyExist(config) {
     GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
