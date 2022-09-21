@@ -1,0 +1,86 @@
+pipeline {
+    stage('Publishing Artifacts on Jenkins/GitHub/GooglePlayStore') {
+            parallel {
+                stage('Publish Artifacts') {
+                    agent any
+                    steps {
+                        echo 'Save the assemblies generated from the compilation'
+                        archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/bundle/**/*.aab', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/*html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.xml', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/reports/**/*.html', allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'app/build/outputs/androidTest-results/connected/*.pb', allowEmptyArchive: true
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports', reportFiles: 'lint-results-debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/detekt', reportFiles: 'detekt.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'debug.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/spotbugs', reportFiles: 'release.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testDebugUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
+                    }
+                }
+                stage('Release on GitHub') {
+                    environment {
+                        GITHUB_CREDENTIALS = credentials('github-app-android')
+                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+                    }
+                    agent {
+                        label 'android'
+                    }
+                    steps {
+                        script {
+                        input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
+                          // Later on, move everything into functions and call them here.
+                          releaseAlreadyExists = sh (
+                            script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
+                            returnStdout: true
+                          )
+                          echo "Release already exists: $releaseAlreadyExists."
+                          if (releaseAlreadyExists == 'false') {
+                            echo "The release does not exist yet, so we can create it."
+                            createRelease()
+                          } else {
+                            echo "The release already exists, so we won't create it."
+                          }
+                        }
+                    }
+                }
+            }
+        }
+        stage('Release on Google Play Store') {
+            environment {
+                GITHUB_CREDENTIALS = credentials('github-app-android')
+                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
+            }
+            agent {
+                label 'android'
+            }
+            steps {
+                input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
+                echo 'Publishes the bundle on the Google Play Store'
+                createGooglePlayStoreRelease()
+            }
+        }
+    }
+}
+
+
+void releaseAlreadyExist(config) {
+    GITHUB_CREDENTIALS_PSW = credentials('github-app-android').toString()
+    echo $GITHUB_CREDENTIALS_PSW
+}
+
+void createRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-release.sh && ./jenkins/create-release.sh',
+        returnStdout: true
+    )
+}
+
+void createGooglePlayStoreRelease() {
+    sh (
+        script: 'chmod +x ./jenkins/create-gps-release.sh && ./jenkins/create-gps-release.sh',
+        returnStdout: true
+    )
+}
