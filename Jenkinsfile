@@ -143,7 +143,7 @@ pipeline {
                 }
                 stage('Invoke Pipeline PublishAppToGitHubAndGoogle') {
                     steps {
-                        build job: 'PublishAppToGitHubAndGoogle', parameters: [], propagate: true, wait: false
+                        build wait: false, propagate: false, job: 'PublishAppToGitHubAndGoogle'
                     }
                 }
             }
