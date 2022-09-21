@@ -141,46 +141,11 @@ pipeline {
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'app/build/reports/tests/testReleaseUnitTest', reportFiles: 'index.html', reportName: 'Lint Report', reportTitles: ''])
                     }
                 }
-                stage('Release on GitHub') {
-                    environment {
-                        GITHUB_CREDENTIALS = credentials('github-app-android')
-                        ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-                    }
-                    agent {
-                        label 'android'
-                    }
+                stage('Invoke Pipeline PublishAppToGitHubAndGoogle') {
                     steps {
-                        script {
-                        input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
-                          // Later on, move everything into functions and call them here.
-                          releaseAlreadyExists = sh (
-                            script: 'chmod +x ./jenkins/release-already-exists.sh && bash -x ./jenkins/release-already-exists.sh',
-                            returnStdout: true
-                          )
-                          echo "Release already exists: $releaseAlreadyExists."
-                          if (releaseAlreadyExists == 'false') {
-                            echo "The release does not exist yet, so we can create it."
-                            createRelease()
-                          } else {
-                            echo "The release already exists, so we won't create it."
-                          }
-                        }
+                        build job: 'PublishAppToGitHubAndGoogle', parameters: [], propagate: true, wait: false
                     }
                 }
-            }
-        }
-        stage('Release on Google Play Store') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-                ANDROID_PUBLISHER_CREDENTIALS = credentials('android-publisher-credentials')
-            }
-            agent {
-                label 'android'
-            }
-            steps {
-                input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
-                echo 'Publishes the bundle on the Google Play Store'
-                createGooglePlayStoreRelease()
             }
         }
     }
