@@ -7,8 +7,9 @@ UPDATE_LIST=$( java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ list-plugins |
 
 if [ ! -z "${UPDATE_LIST}" ]; then
     echo Updating Jenkins Plugins: ${UPDATE_LIST};
-    java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST} -deploy -restart;
-    sleep 15
+    java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ -f ./plugins.txt --available-updates --output txt > updated_plugins.txt
+    # java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST} -deploy -restart;
+    cat updated_plugins.txt
 fi
 rm jenkins-cli.jar
 
