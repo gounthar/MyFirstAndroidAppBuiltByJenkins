@@ -26,8 +26,8 @@ pipeline {
             steps {
                 script {
                     // Later on, move everything into functions and call them here.
-                    releaseAlreadyExists = sh (
-                        script: 'chmod +x ./jenkins/controller/update-plugins.sh && bash -x jenkins/controller/update-plugins.sh',
+                    pluginsAreUpToDate = sh (
+                        script: 'bash -x jenkins/controller/update-plugins.sh',
                         returnStdout: true
                     )
                 }
