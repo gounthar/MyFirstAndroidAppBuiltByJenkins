@@ -25,7 +25,7 @@ blueocean-rest:1.25.8
 blueocean-web:1.25.8
 blueocean:1.25.8
 bootstrap4-api:4.6.0-5
-bootstrap5-api:5.2.0-3
+bootstrap5-api:5.2.1-1
 bouncycastle-api:2.26
 branch-api:2.1046.v0ca_37783ecc5
 build-timeout:1.24
@@ -36,7 +36,7 @@ cloudbees-folder:6.758.vfd75d09eea_a_1
 command-launcher:90.v669d7ccb_7c31
 configuration-as-code:1512.vb_79d418d5fc8
 credentials-binding:523.vd859a_4b_122e6
-credentials:1143.vb_e8b_b_ceee347
+credentials:1189.vf61b_a_5e2f62e
 declarative-pipeline-migration-assistant-api:1.5.2
 declarative-pipeline-migration-assistant:1.5.2
 display-url-api:2.3.6
@@ -51,7 +51,7 @@ email-ext:2.91
 envinject-api:1.199.v3ce31253ed13
 envinject:2.875.v9b_9e962da_a_ec
 favorite:2.4.1
-font-awesome-api:6.1.2-1
+font-awesome-api:6.2.0-1
 git-client:3.12.0
 git-server:99.va_0826a_b_cdfa_d
 git:4.12.1
@@ -76,7 +76,7 @@ jdk-tool:55.v1b_32b_6ca_f9ca
 jenkins-design-language:1.25.8
 jjwt-api:0.11.5-77.v646c772fddb_0
 jnr-posix-api:3.1.15-1
-jquery3-api:3.6.0-4
+jquery3-api:3.6.1-1
 jsch:0.1.55.61.va_e9ee26616e7
 junit:1119.1121.vc43d0fc45561
 ldap:2.12
@@ -114,7 +114,7 @@ saferestart:0.3
 schedule-build:345.vc2d8f6ef9182
 scm-api:621.vda_a_b_055e58f7
 script-security:1183.v774b_0b_0a_a_451
-slack:616.v03b_1e98d13dd
+slack:625.va_eeb_b_168ffb_0
 snakeyaml-api:1.31-84.ve43da_fb_49d0b
 sse-gateway:1.26
 ssh-credentials:305.v8f4381501156
@@ -132,7 +132,7 @@ workflow-api:1192.v2d0deb_19d212
 workflow-basic-steps:994.vd57e3ca_46d24
 workflow-cps:2759.v87459c4eea_ca_
 workflow-durable-task-step:1199.v02b_9244f8064
-workflow-job:1232.v5a_4c994312f1
+workflow-job:1236.vc3a_d1602f439
 workflow-multibranch:716.vc692a_e52371b_
 workflow-scm-step:400.v6b_89a_1317c9a_
 workflow-step-api:639.v6eca_cd8c04a_a_
