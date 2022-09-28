@@ -1,0 +1,39 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@1232.v5a_4c994312f1">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamCause plugin="pipeline-build-step@2.18">
+            <upstreamProject>MultiBranchAndroidPipeline/PR-151</upstreamProject>
+            <upstreamUrl>job/MultiBranchAndroidPipeline/job/PR-151/</upstreamUrl>
+            <upstreamBuild>5</upstreamBuild>
+            <upstreamCauses>
+              <jenkins.branch.BranchIndexingCause plugin="branch-api@2.1046.v0ca_37783ecc5"/>
+            </upstreamCauses>
+            <nodeId>192</nodeId>
+          </org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamNodeAction plugin="pipeline-build-step@2.18">
+      <upstreamNodeId>192</upstreamNodeId>
+      <upstreamRunId>MultiBranchAndroidPipeline/PR-151#5</upstreamRunId>
+    </org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamNodeAction>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters/>
+      <parameterDefinitionNames class="empty-list"/>
+    </hudson.model.ParametersAction>
+  </actions>
+  <queueId>1265</queueId>
+  <timestamp>1663752717134</timestamp>
+  <startTime>1663752717139</startTime>
+  <result>FAILURE</result>
+  <duration>97</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList"/>
+</flow-build>
