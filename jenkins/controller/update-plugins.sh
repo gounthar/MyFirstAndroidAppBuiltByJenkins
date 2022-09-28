@@ -31,7 +31,7 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     git config --global user.email "116569+gounthar@users.noreply.github.com"
     git config --global user.name "$GITHUB_CREDENTIALS_USR"
     git switch -c "${new_branch_name}" -m
-    git commit -m "Update plugins.txt"
+    git commit -m "Update plugins.txt for ${UPDATE_LIST} plugins"
     # git push --set-upstream origin "${new_branch_name}"
     git push --set-upstream https://"$GITHUB_CREDENTIALS_USR":"$GITHUB_CREDENTIALS_PSW"@github.com/gounthar/MyFirstAndroidAppBuiltByJenkins.git "${new_branch_name}"
     # Now use gh to create a pull request from new_branch_name to branch_name
