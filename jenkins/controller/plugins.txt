@@ -43,7 +43,7 @@ display-url-api:2.3.6
 distfork:1.7
 docker-commons:1.21
 docker-java-api:3.2.13-37.vf3411c9828b9
-docker-plugin:1.2.9
+docker-plugin:1.2.10
 docker-workflow:521.v1a_a_dd2073b_2e
 durable-task:500.v8927d9fd99d8
 echarts-api:5.3.3-1
@@ -52,7 +52,7 @@ envinject-api:1.199.v3ce31253ed13
 envinject:2.881.v37c62073ff97
 favorite:2.4.1
 font-awesome-api:6.2.0-3
-git-client:3.12.0
+git-client:3.12.1
 git-server:99.va_0826a_b_cdfa_d
 git:4.12.1
 github-api:1.303-400.v35c2d8258028
@@ -60,7 +60,7 @@ github-branch-source:1695.v88de84e9f6b_9
 github-checks:1.0.19
 github:1.35.0
 google-oauth-plugin:1.0.7
-gradle:1.39.4
+gradle:1.40
 handlebars:3.0.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
