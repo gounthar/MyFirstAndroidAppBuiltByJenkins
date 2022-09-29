@@ -5,7 +5,7 @@ cd jenkins/controller/
 curl -O "http://$JENKINS_HOST/jnlpJars/jenkins-cli.jar"
 UPDATE_LIST=$( java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ list-plugins | grep -e ')$' | awk '{ print $1 }' );
 
-if [ ! -n "${UPDATE_LIST}" ]; then
+if [ ! -z "${UPDATE_LIST}" ]; then
     echo Updating Jenkins Plugins: ${UPDATE_LIST};
     # No such command -f -f ./plugins.txt
     java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST};
