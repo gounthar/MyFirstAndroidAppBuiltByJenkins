@@ -53,8 +53,55 @@ services:
             - ADBKEY
         devices:
             - /dev/kvm
+    rethinkdb:
+        container_name: rethinkdb
+        image: rethinkdb:2.3
+        restart: unless-stopped
+        volumes:
+            - "rethinkdb-data:/data"
+        command: "rethinkdb --bind all --cache-size 2048"
+    adb:
+        container_name: adb
+        image: devicefarmer/adb:latest
+        restart: unless-stopped
+        volumes:
+            - "/dev/bus/usb:/dev/bus/usb"
+        privileged: true
+        command: sh -c "adb -a -P 5037 server nodaemon"
+        depends_on:
+            - emulator
+    adb-connector:
+        container_name: adb-connector
+        build: ./adb-connector
+        privileged: true
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:rw
+        command:
+            - sleep 30 && docker exec adb adb connect emulator:5555
+        depends_on:
+            - adb
+    stf:
+        container_name: stf
+        image: devicefarmer/stf
+        ports:
+            - "7100:7100"
+            - "7110:7110"
+            - "7400-7500:7400-7500"
+        environment:
+            - TZ='America/Los_Angeles'
+            - RETHINKDB_PORT_28015_TCP=tcp://rethinkdb:28015
+            - STF_ADMIN_EMAIL=<YOUR_EMAIL>
+            - STF_ADMIN_NAME=<YOUR_NAME>
+        restart: unless-stopped
+        command: stf local --adb-host adb --public-ip localhost --provider-min-port 7400 --provider-max-port 7500 --allow-remote
+        depends_on:
+            - rethinkdb
+            - adb
+            - adb-connector
 volumes:
     qodana-data:
     jenkins-data:
     jenkins-agent-data:
     android-agent-data:
+    rethinkdb-data:
+
