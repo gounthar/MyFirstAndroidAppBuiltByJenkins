@@ -7,9 +7,9 @@ def getSimplifiedBranchName() {
 }
 
 pipeline {
+    triggers { cron('0 10 * * *') }
     environment {
-        BRANCH_NAME = getSimplifiedBranchName() // getBranchName()
-        DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
+        BRANCH_NAME = getSimplifiedBranchName()
     }
     agent any
     options {
@@ -17,15 +17,9 @@ pipeline {
     }
     stages {
         stage('Updating the plugin list to the latest available versions') {
-            environment {
-                GITHUB_CREDENTIALS = credentials('github-app-android')
-            }
-            agent {
-                label 'android'
-            }
+            agent any
             steps {
                 script {
-                    // Later on, move everything into functions and call them here.
                     pluginsAreUpToDate = sh (
                         script: 'bash -x jenkins/controller/update-plugins.sh',
                         returnStdout: true
