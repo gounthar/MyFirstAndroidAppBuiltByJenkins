@@ -26,7 +26,9 @@ pipeline {
             }
             steps {
                 script {
-                    input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
+                    timeout(time:15, unit:'MINUTES') {
+                        input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for GitHub', submitter: 'No.'
+                    }
                     // Later on, move everything into functions and call them here.
                     releaseAlreadyExists = sh (
                         script: 'bash -x ./jenkins/release-already-exists.sh',
@@ -51,7 +53,9 @@ pipeline {
                 label 'android'
             }
             steps {
-                input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
+                timeout(time:15, unit:'MINUTES') {
+                    input message: 'Would you like to create a new release for this build?', ok: 'Yes, create for Google', submitter: 'No.'
+                }
                 echo 'Publishes the bundle on the Google Play Store'
                 createGooglePlayStoreRelease()
             }

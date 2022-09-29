@@ -7,7 +7,8 @@ UPDATE_LIST=$( java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ list-plugins |
 
 if [ ! -z "${UPDATE_LIST}" ]; then
     echo Updating Jenkins Plugins: ${UPDATE_LIST};
-    java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ -f ./plugins.txt --available-updates --output txt > updated_plugins.txt
+    # No such command -f -f ./plugins.txt
+    java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST};
     # java -jar jenkins-cli.jar -s http://$JENKINS_HOST/ install-plugin ${UPDATE_LIST} -deploy -restart;
     cat updated_plugins.txt
 fi
@@ -30,7 +31,7 @@ if [ -s /tmp/jenkins_plugins.diff ]; then
     git config --global user.email "116569+gounthar@users.noreply.github.com"
     git config --global user.name "$GITHUB_CREDENTIALS_USR"
     git switch -c "${new_branch_name}" -m
-    git commit -m "Update plugins.txt"
+    git commit -m "Update plugins.txt for ${UPDATE_LIST} plugins"
     # git push --set-upstream origin "${new_branch_name}"
     git push --set-upstream https://"$GITHUB_CREDENTIALS_USR":"$GITHUB_CREDENTIALS_PSW"@github.com/gounthar/MyFirstAndroidAppBuiltByJenkins.git "${new_branch_name}"
     # Now use gh to create a pull request from new_branch_name to branch_name
