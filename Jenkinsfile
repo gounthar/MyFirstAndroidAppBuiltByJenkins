@@ -111,10 +111,12 @@ pipeline {
                     echo 'Run only instrumented tests from the source code'
                     // We don't have any device connected yet
                     // sh 'adb connect emulator:5555'
-                    sh 'adb connect stf:7401'
+                    sh 'adb connect stf:7413'
+                    sh 'sleep 10'
+                    sh 'adb connect stf:7413'
                     sh 'adb devices'
-                    sh 'adb -s emulator:5555 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
-                    sh 'adb -s emulator:5555 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
+                    sh 'adb -s stf:7413 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
+                    sh 'adb -s stf:7413 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
                     sh 'adb devices'
                     sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
                 }
