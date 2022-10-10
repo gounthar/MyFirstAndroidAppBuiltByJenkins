@@ -77,7 +77,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:rw
         command:
-            - sleep 30 && docker exec adb adb connect emulator:5555
+            - sleep 30 && docker exec adb adb connect emulator:5555 && docker exec adb adb connect ${ANDROID_PHONE_IP}
         depends_on:
             - adb
     stf:
