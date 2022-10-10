@@ -19,6 +19,7 @@ services:
             - GITHUB_APP_KEY
             - ANDROID_PUBLISHER_CREDENTIALS
             - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
+            - PUBLIC_IP
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
         platform: linux/amd64
@@ -92,6 +93,7 @@ services:
             - RETHINKDB_PORT_28015_TCP=tcp://rethinkdb:28015
             - STF_ADMIN_EMAIL=${YOUR_EMAIL}
             - STF_ADMIN_NAME=${YOUR_NAME}
+            - PUBLIC_IP=${PUBLIC_IP}
         restart: unless-stopped
         command: stf local --adb-host adb --public-ip ${PUBLIC_IP} --provider-min-port 7400 --provider-max-port 7500 --allow-remote
         depends_on:
