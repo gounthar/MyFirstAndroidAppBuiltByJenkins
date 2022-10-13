@@ -11,7 +11,7 @@ jenkins:
     - envVars:
         env:
           - key: "PUBLIC_IP"
-            value: "192.168.0.144"
+            value: "${PUBLIC_IP}"
   numExecutors: 0
 unclassified:
   location:
