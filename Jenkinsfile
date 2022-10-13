@@ -105,6 +105,8 @@ pipeline {
         stage('Run Instrumented Tests') {
             environment {
                 PUBLIC_IP = "${env.PUBLIC_IP}"
+                STF_API_TOKEN = credentials('stf-api-token')
+                ANDROID_VERSION = '11'
             }
             agent {
                 label 'android'
@@ -114,12 +116,13 @@ pipeline {
                     echo 'Run only instrumented tests from the source code'
                     // We don't have any device connected yet
                     // sh 'adb connect emulator:5555'
+                    sh '/usr/local/stf/android-stf-api.py --token $STF_API_TOKEN --version $ANDROID_VERSION connect'
                     sh 'adb connect ${PUBLIC_IP}:7401'
                     sh 'sleep 10'
                     sh 'adb connect ${PUBLIC_IP}:7401'
                     sh 'adb devices'
                     sh 'adb -s ${PUBLIC_IP}:7401 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
-                    sh 'adb -s ${PUBLIC_IP}:7401 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication/io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
+                    sh 'adb -s ${PUBLIC_IP}:7401 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
                     sh 'adb devices'
                     sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
                 }
