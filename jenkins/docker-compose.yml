@@ -20,6 +20,7 @@ services:
             - ANDROID_PUBLISHER_CREDENTIALS
             - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
             - PUBLIC_IP
+            - STF_API_TOKEN
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
         platform: linux/amd64
@@ -38,6 +39,8 @@ services:
         restart: unless-stopped
         volumes:
             - android-agent-data:/home/jenkins:rw
+            - ../adbkey.pub:/home/jenkins/.android/adbkey.pub:rw
+            - ../adbkey.txt:/home/jenkins/.android/adbkey:rw
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD
     emulator:
@@ -54,6 +57,12 @@ services:
             - ADBKEY
         devices:
             - /dev/kvm
+        healthcheck:
+            test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
+            interval: 5s
+            timeout: 3s
+            retries: 10
+            start_period: 15s
     rethinkdb:
         container_name: rethinkdb
         image: rethinkdb:2.3
@@ -69,6 +78,12 @@ services:
             - "/dev/bus/usb:/dev/bus/usb"
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
+        healthcheck:
+            test: [ "CMD", "/opt/platform-tools/adb", "devices" ]
+            interval: 5s
+            timeout: 3s
+            retries: 10
+            start_period: 15s
         depends_on:
             - emulator
     adb-connector:
@@ -78,9 +93,10 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:rw
         command:
-            - sleep 30 && docker exec adb adb connect emulator:5555 && docker exec adb adb connect ${ANDROID_PHONE_IP}
+            - docker exec adb adb connect emulator:5555 && docker exec adb adb connect ${ANDROID_PHONE_IP}
         depends_on:
             - adb
+            - emulator
     stf:
         container_name: stf
         image: devicefarmer/stf
@@ -93,9 +109,9 @@ services:
             - RETHINKDB_PORT_28015_TCP=tcp://rethinkdb:28015
             - STF_ADMIN_EMAIL=${YOUR_EMAIL}
             - STF_ADMIN_NAME=${YOUR_NAME}
-            - PUBLIC_IP=${PUBLIC_IP}
+            - STF_HOST_NAME=${STF_HOST_NAME}
         restart: unless-stopped
-        command: stf local --adb-host adb --public-ip ${PUBLIC_IP} --provider-min-port 7400 --provider-max-port 7500 --allow-remote
+        command: stf local --adb-host adb --public-ip ${STF_HOST_NAME} --provider-min-port 7400 --provider-max-port 7500 --allow-remote
         depends_on:
             - rethinkdb
             - adb
