@@ -125,11 +125,14 @@ pipeline {
                     // sh 'adb -s ${PUBLIC_IP}:7401 wait-for-device shell \'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;\''
                     // sh 'adb -s ${STF_HOST_NAME}:7401 shell am start -n "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
                     sh 'chmod +x ./gradlew &&./gradlew connectedAndroidTest'
+                    sh '/usr/local/stf/android-stf-api.py --token $STF_API_TOKEN --version $ANDROID_VERSION disconnect'
                 }
             }
             post {
                 always {
-                    sh '/usr/local/stf/android-stf-api.py --token $STF_API_TOKEN --version $ANDROID_VERSION disconnect'
+                    lock('MyEmulator') {
+                        sh '/usr/local/stf/android-stf-api.py --token $STF_API_TOKEN --version $ANDROID_VERSION disconnect'
+                    }
                 }
             }
         }
