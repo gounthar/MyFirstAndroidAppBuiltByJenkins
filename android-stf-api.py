@@ -229,7 +229,7 @@ def main(argv):
 
         if (str(STATUS) == "True"):
 
-            STF_ADB_ADRESS = RESPONSE['remoteConnectUrl']
+            STF_ADB_ADDRESS = RESPONSE['remoteConnectUrl']
             print("   SUCCESS : ADB remoteConnectUrl is reached (" + str(STF_ADB_ADDRESS) + ")" + "\n")
 
             try:
@@ -244,7 +244,7 @@ def main(argv):
 
                 # print ("   SUCCESS: ADB successfully restarted "+"\n")
 
-                # print("-> Downloading granted adb keys ADB device (" + str(STF_ADB_ADRESS) + ")...")
+                # print("-> Downloading granted adb keys ADB device (" + str(STF_ADB_ADDRESS) + ")...")
                 # adbPrivKeyDownload = os.system(
                 #    "curl -s -o /home/jenkins/.android/adbkey https://kazan.atosworldline.com/share/data/technical-user-kazan-mobile/docker/ressources/adbkey")
                 # adbPrubKeyDownload = os.system(
@@ -253,7 +253,7 @@ def main(argv):
                 # if (adbPrivKeyDownload == 0 and adbPrubKeyDownload == 0):
                 #    print("   SUCCESS: Download of adbkey and abkey.pub " + "\n")
                 # else:
-                #    print("ERROR: download ADB keys from kazan mobile sharedspace " + STF_ADB_ADRESS)
+                #    print("ERROR: download ADB keys from kazan mobile sharedspace " + STF_ADB_ADDRESS)
                 #   exit(1)
 
                 print("-> Connecting to ADB device (" + str(STF_ADB_ADDRESS) + ")...")
@@ -308,7 +308,7 @@ def main(argv):
                 print("\n" + "-> Disconnecting device ADB session from DeviceFarmer STF...")
                 url = SERVER_URL + "/api/v1/user/devices/" + STF_DEVICE_SERIAL + "/remoteConnect"
                 headers = {'Content-type': 'application/json', 'Authorization': "Bearer " + token}
-                response = requests.delete(url, proxies=proxies, headers=headers)
+                response = requests.delete(url, headers=headers)
 
                 RESPONSE = json.loads(response.text)
 
