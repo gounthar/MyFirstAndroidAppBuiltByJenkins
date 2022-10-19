@@ -35,8 +35,8 @@ cloudbees-bitbucket-branch-source:791.vb_eea_a_476405b
 cloudbees-folder:6.770.ve57b_a_fb_6a_67c
 command-launcher:90.v669d7ccb_7c31
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
-commons-text-api:1.9-19.v8df45c678366
-configuration-as-code:1512.vb_79d418d5fc8
+commons-text-api:1.10.0-27.vb_fa_3896786a_7
+configuration-as-code:1559.v38a_b_2e3b_6b_b_7
 credentials-binding:523.vd859a_4b_122e6
 credentials:1189.vf61b_a_5e2f62e
 declarative-pipeline-migration-assistant-api:1.5.2
@@ -68,7 +68,7 @@ handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
 instance-identity:116.vf8f487400980
-ionicons-api:28.va_f3a_84439e5f
+ionicons-api:31.v4757b_6987003
 jackson2-api:2.13.4-293.vee957901b_6fb
 jakarta-activation-api:2.0.1-2
 jakarta-mail-api:2.0.1-2
@@ -81,7 +81,7 @@ jjwt-api:0.11.5-77.v646c772fddb_0
 jnr-posix-api:3.1.15-2
 jquery3-api:3.6.1-2
 jsch:0.1.55.61.va_e9ee26616e7
-junit:1150.v5c2848328b_60
+junit:1153.v1c24f1a_d2553
 ldap:2.12
 lockable-resources:2.18
 mailer:438.v02c7f0a_12fa_4
@@ -131,10 +131,10 @@ trilead-api:2.72.v2a_3236754f73
 variant:59.vf075fe829ccb
 windows-slaves:1.8.1
 workflow-aggregator:590.v6a_d052e5a_a_b_5
-workflow-api:1198.v4596ea_5329b_6
+workflow-api:1200.v8005c684b_a_c6
 workflow-basic-steps:994.vd57e3ca_46d24
 workflow-cps:2802.v5ea_628154b_c2
-workflow-durable-task-step:1199.v02b_9244f8064
+workflow-durable-task-step:1206.v8a_d5f86e336b
 workflow-job:1239.v71b_b_a_124a_725
 workflow-multibranch:716.vc692a_e52371b_
 workflow-scm-step:400.v6b_89a_1317c9a_
