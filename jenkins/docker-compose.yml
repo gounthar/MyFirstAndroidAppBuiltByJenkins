@@ -60,11 +60,19 @@ services:
         devices:
             - /dev/kvm
         healthcheck:
-            test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
+            # test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
+            # interval: 5s
+            # timeout: 3s
+            # retries: 10
+            # start_period: 15s"
+            test: [
+                    "CMD-SHELL",
+                    "/android/sdk/platform-tools/adb shell getprop dev.bootcomplete | grep \"1\""
+                ]
             interval: 5s
             timeout: 3s
-            retries: 10
             start_period: 15s
+            retries: 10
     rethinkdb:
         container_name: rethinkdb
         image: rethinkdb:2.3
@@ -81,7 +89,7 @@ services:
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
         healthcheck:
-            test: [ "CMD", "/opt/platform-tools/adb", "devices" ]
+            test: [ "CMD", "/opt/platform-tools/adb", "connect", "emulator:5555" ]
             interval: 5s
             timeout: 3s
             retries: 10
@@ -97,8 +105,11 @@ services:
         command:
             - docker exec adb adb connect emulator:5555 && docker exec adb adb connect ${ANDROID_PHONE_IP}
         depends_on:
-            - adb
-            - emulator
+            # please see the documentation at https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on
+            adb:
+                condition: service_healthy
+            emulator:
+                condition: service_healthy
     stf:
         container_name: stf
         image: devicefarmer/stf
