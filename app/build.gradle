@@ -6,7 +6,7 @@ plugins {
     id 'kotlin-android'
     id("com.github.triplet.play") version "3.7.0"
     id("com.gradleup.static-analysis") version "1.4"
-    id("com.github.spotbugs") version "5.0.12"
+    id("com.github.spotbugs") version "5.0.13"
     id("io.gitlab.arturbosch.detekt")
     id("com.dicedmelon.gradle.jacoco-android")
 }
