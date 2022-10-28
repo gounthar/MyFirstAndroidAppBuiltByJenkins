@@ -62,7 +62,7 @@ github-branch-source:1695.v88de84e9f6b_9
 github-checks:1.0.19
 github:1.36.0
 google-oauth-plugin:1.0.7
-gradle:1.40
+gradle:2.0
 handlebars:3.0.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
