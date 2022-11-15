@@ -29,7 +29,7 @@ jenkins:
     - permanent:
         labelString: "docker linux"
         launcher:
-          jnlp:
+          inbound:
             workDirSettings:
               disabled: false
               failIfWorkDirIsMissing: false
