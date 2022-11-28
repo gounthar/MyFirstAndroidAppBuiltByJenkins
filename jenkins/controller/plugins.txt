@@ -57,7 +57,7 @@ favorite:2.4.1
 font-awesome-api:6.2.1-1
 git-client:3.13.0
 git-server:99.va_0826a_b_cdfa_d
-git:4.14.0
+git:4.14.1
 github-api:1.303-400.v35c2d8258028
 github-branch-source:1696.v3a_7603564d04
 github-checks:1.0.19
@@ -70,7 +70,7 @@ htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
 instance-identity:116.vf8f487400980
 ionicons-api:31.v4757b_6987003
-jackson2-api:2.13.4.20221013-295.v8e29ea_354141
+jackson2-api:2.14.1-313.v504cdd45c18b
 jakarta-activation-api:2.0.1-2
 jakarta-mail-api:2.0.1-2
 javax-activation-api:1.2.0-5
@@ -82,7 +82,7 @@ jjwt-api:0.11.5-77.v646c772fddb_0
 jnr-posix-api:3.1.16-1
 jquery3-api:3.6.1-2
 jsch:0.1.55.61.va_e9ee26616e7
-junit:1160.vf1f01a_a_ea_b_7f
+junit:1166.va_436e268e972
 ldap:2.12
 lockable-resources:1069.v726298f53f8c
 mailer:438.v02c7f0a_12fa_4
@@ -98,15 +98,15 @@ pipeline-build-step:2.18
 pipeline-github-lib:38.v445716ea_edda_
 pipeline-graph-analysis:195.v5812d95a_a_2f9
 pipeline-groovy-lib:621.vb_44ce045b_582
-pipeline-input-step:456.vd8a_957db_5b_e9
+pipeline-input-step:466.v6d0a_5df34f81
 pipeline-milestone-step:101.vd572fef9d926
 pipeline-model-api:2.2118.v31fd5b_9944b_5
 pipeline-model-definition:2.2118.v31fd5b_9944b_5
 pipeline-model-extensions:2.2118.v31fd5b_9944b_5
-pipeline-rest-api:2.27
+pipeline-rest-api:2.28
 pipeline-stage-step:296.v5f6908f017a_5
 pipeline-stage-tags-metadata:2.2118.v31fd5b_9944b_5
-pipeline-stage-view:2.27
+pipeline-stage-view:2.28
 plain-credentials:139.ved2b_9cf7587b
 platformlabeler:1774.v72fe59cc815e
 plugin-util-api:2.18.0
