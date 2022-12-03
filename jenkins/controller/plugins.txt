@@ -32,7 +32,7 @@ build-timeout:1.25
 caffeine-api:2.9.3-65.v6a_47d0f4d1fe
 checks-api:1.8.0
 cloudbees-bitbucket-branch-source:791.vb_eea_a_476405b
-cloudbees-folder:6.795.v3e23d3c6f194
+cloudbees-folder:6.800.v71307ca_b_986b
 command-launcher:90.v669d7ccb_7c31
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-27.vb_fa_3896786a_7
@@ -48,7 +48,7 @@ docker-commons:1.21
 docker-java-api:3.2.13-37.vf3411c9828b9
 docker-plugin:1.2.10
 docker-workflow:528.v7c193a_0b_e67c
-durable-task:501.ve5d4fc08b0be
+durable-task:503.v57154d18d478
 echarts-api:5.4.0-1
 email-ext:2.92
 envinject-api:1.199.v3ce31253ed13
