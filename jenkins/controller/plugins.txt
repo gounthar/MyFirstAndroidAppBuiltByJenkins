@@ -63,7 +63,7 @@ github-branch-source:1696.v3a_7603564d04
 github-checks:1.0.19
 github:1.36.0
 google-oauth-plugin:1.0.7
-gradle:2.1.1
+gradle:2.2
 handlebars:3.0.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
@@ -84,7 +84,7 @@ jquery3-api:3.6.1-2
 jsch:0.1.55.61.va_e9ee26616e7
 junit:1166.va_436e268e972
 ldap:2.12
-lockable-resources:1069.v726298f53f8c
+lockable-resources:1102.vde5663d777cf
 mailer:438.v02c7f0a_12fa_4
 matrix-auth:3.1.6
 matrix-project:785.v06b_7f47b_c631
@@ -97,7 +97,7 @@ pam-auth:1.10
 pipeline-build-step:2.18
 pipeline-github-lib:38.v445716ea_edda_
 pipeline-graph-analysis:195.v5812d95a_a_2f9
-pipeline-groovy-lib:621.vb_44ce045b_582
+pipeline-groovy-lib:629.vb_5627b_ee2104
 pipeline-input-step:466.v6d0a_5df34f81
 pipeline-milestone-step:101.vd572fef9d926
 pipeline-model-api:2.2118.v31fd5b_9944b_5
@@ -125,7 +125,7 @@ ssh-credentials:305.v8f4381501156
 ssh-slaves:2.854.v7fd446b_337c9
 sshd:3.275.v9e17c10f2571
 structs:324.va_f5d6774f3a_d
-test-results-aggregator:1.2.10
+test-results-aggregator:1.2.11
 timestamper:1.21
 token-macro:321.vd7cc1f2a_52c8
 trilead-api:2.84.v72119de229b_7
