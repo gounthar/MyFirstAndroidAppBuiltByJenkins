@@ -40,8 +40,8 @@ configuration-as-code:1569.vb_72405b_80249
 credentials-binding:523.vd859a_4b_122e6
 credentials:1214.v1de940103927
 data-tables-api:1.12.1-4
-declarative-pipeline-migration-assistant-api:1.5.2
-declarative-pipeline-migration-assistant:1.5.2
+declarative-pipeline-migration-assistant-api:1.5.4
+declarative-pipeline-migration-assistant:1.5.4
 display-url-api:2.3.7
 distfork:1.7
 docker-commons:1.21
@@ -55,9 +55,9 @@ envinject-api:1.199.v3ce31253ed13
 envinject:2.892.v25453b_80e595
 favorite:2.4.1
 font-awesome-api:6.2.1-1
-git-client:3.13.1
+git-client:4.0.0
 git-server:99.va_0826a_b_cdfa_d
-git:4.14.3
+git:5.0.0
 github-api:1.303-400.v35c2d8258028
 github-branch-source:1696.v3a_7603564d04
 github-checks:1.0.19
