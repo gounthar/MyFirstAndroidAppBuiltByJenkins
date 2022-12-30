@@ -40,8 +40,8 @@ configuration-as-code:1569.vb_72405b_80249
 credentials-binding:523.vd859a_4b_122e6
 credentials:1214.v1de940103927
 data-tables-api:1.12.1-4
-declarative-pipeline-migration-assistant-api:1.5.2
-declarative-pipeline-migration-assistant:1.5.2
+declarative-pipeline-migration-assistant-api:1.5.4
+declarative-pipeline-migration-assistant:1.5.4
 display-url-api:2.3.7
 distfork:1.7
 docker-commons:1.21
