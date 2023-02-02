@@ -70,7 +70,7 @@ htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
 instance-identity:142.v04572ca_5b_265
 ionicons-api:31.v4757b_6987003
-jackson2-api:2.14.1-313.v504cdd45c18b
+jackson2-api:2.14.2-319.v37853346a_229
 jakarta-activation-api:2.0.1-2
 jakarta-mail-api:2.0.1-2
 javax-activation-api:1.2.0-5
