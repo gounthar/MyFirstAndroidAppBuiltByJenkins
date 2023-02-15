@@ -1,6 +1,6 @@
 # My First Android App Built by Jenkins
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)]([https://github.com/codespaces/gounthar-congenial-memory-r494j6ww6h946](https://github.com/codespaces/new?hide_repo_select=true&ref=stf&repo=509125330&machine=standardLinux32gb&location=WestEurope))
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=stf&repo=509125330&machine=standardLinux32gb&location=WestEurope)
 
 Let's try an empty Android App just to see how to build it with Jenkins.
 
