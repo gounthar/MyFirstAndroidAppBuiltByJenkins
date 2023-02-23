@@ -1,4 +1,5 @@
 # See https://github.com/jenkinsci/docker#usage-1
+ace-editor:1.1
 ant:481.v7b_09e538fcca
 antisamy-markup-formatter:155.v795fb_8702324
 apache-httpcomponents-client-4-api:4.5.13-138.v4e7d9a_7b_a_e61
@@ -63,6 +64,7 @@ github-checks:1.0.19
 github:1.37.0
 google-oauth-plugin:1.0.7
 gradle:2.3
+handlebars:3.0.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
@@ -88,6 +90,7 @@ matrix-auth:3.1.6
 matrix-project:785.v06b_7f47b_c631
 mina-sshd-api-common:2.9.2-50.va_0e1f42659a_a
 mina-sshd-api-core:2.9.2-50.va_0e1f42659a_a
+momentjs:1.1.1
 oauth-credentials:0.5
 okhttp-api:4.10.0-125.v3593b_a_f8c97b_
 pam-auth:1.10
