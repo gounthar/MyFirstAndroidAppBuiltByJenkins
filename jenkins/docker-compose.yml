@@ -35,7 +35,7 @@ services:
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
     android-agent:
-        platform: linux/amd64
+      # platform: linux/amd64
         build: ../
         restart: unless-stopped
         volumes:
@@ -74,6 +74,7 @@ services:
             start_period: 15s
             retries: 10
     rethinkdb:
+        platform: linux/amd64
         container_name: rethinkdb
         image: rethinkdb:2.3
         restart: unless-stopped
@@ -81,6 +82,7 @@ services:
             - "rethinkdb-data:/data"
         command: "rethinkdb --bind all --cache-size 2048"
     adb:
+        platform: linux/amd64
         container_name: adb
         image: devicefarmer/adb:latest
         restart: unless-stopped
@@ -97,6 +99,7 @@ services:
         depends_on:
             - emulator
     adb-connector:
+        platform: linux/amd64
         container_name: adb-connector
         build: ./adb-connector
         privileged: true
@@ -111,6 +114,7 @@ services:
             emulator:
                 condition: service_healthy
     stf:
+        platform: linux/amd64
         container_name: stf
         image: devicefarmer/stf
         ports:
