@@ -21,3 +21,4 @@ updates:
       - "vector-im/element-android-reviewers"
     ignore:
       - dependency-name: com.google.zxing:core
+runs-on: self-hosted
