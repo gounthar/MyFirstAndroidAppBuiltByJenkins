@@ -12,6 +12,9 @@ pipeline {
         DOCKER_IMAGE_NAME = "gounthar/jenkinsci-docker-android-base:$BRANCH_NAME"
     }
     agent any
+    triggers {
+      cron(BRANCH_NAME == "main" ? '''H H * * *''' : '')
+    }
     options {
         timestamps()
     }

@@ -1,7 +1,7 @@
 FROM jenkins/ssh-agent:bullseye-jdk17 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
-RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git unzip
+RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git python3 python3-pip unzip
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.8.6
@@ -59,6 +59,23 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
 # RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 # RUN adduser jenkins docker
 
+# Install ADB keys for DeviceFarmer STF
+RUN mkdir -p /home/jenkins/.android && touch /home/jenkins/.android/adbkey.pub && touch /home/jenkins/.android/adbkey
+COPY adbkey.txt /home/jenkins/.android/adbkey
+# monter dans docker compose à l     place de jenkins
+COPY adbkey.pub /home/jenkins/adbkey.pub
+
+# Install DeviceFarmer STF script
+ENV DEVICEFARMER_STF_HOME /usr/local/stf
+RUN mkdir -p "${DEVICEFARMER_STF_HOME}" && chown -R jenkins:jenkins /home/jenkins/.android && \
+    chmod 644 /home/jenkins/.android/adbkey* && chmod -R 777 /home/jenkins/.android
+COPY android-stf-api.py "${DEVICEFARMER_STF_HOME}"
+RUN chmod 755 "${DEVICEFARMER_STF_HOME}"/android-stf-api.py && chown -R jenkins:jenkins /home/jenkins/.android && \
+# Install Python dependencies for the script \
+    pip3 install --upgrade pip && pip3 install requests
+
+ENV PATH $PATH:$DEVICEFARMER_STF_HOME
+
 # mkdir ${JENKINS_AGENT_HOME}/.jenkins && mkdir -p ${JENKINS_AGENT_HOME}/ &&
 RUN mkdir -p "${JENKINS_AGENT_HOME}/gradle/wrapper" "${JENKINS_AGENT_HOME}/.gradle/wrapper/dists"
 
@@ -70,8 +87,6 @@ ENV GRADLE_HOME="${JENKINS_AGENT_HOME}"/.gradle
 
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}" && chmod +x "${JENKINS_AGENT_HOME}"/gradlew && \
     su - jenkins -c "./gradlew -d --version"
-#COPY . .
-#COPY gradlew ${JENKINS_AGENT_HOME}
 
 # COPY entrypoint.sh /entrypoint.sh
 # ENTRYPOINT [ "bash", "-c"]

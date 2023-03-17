@@ -7,6 +7,11 @@ jenkins:
         - id: "admin"
           password: "butler"
   authorizationStrategy: loggedInUsersCanDoAnything
+  globalNodeProperties:
+    - envVars:
+        env:
+          - key: "PUBLIC_IP"
+            value: "${PUBLIC_IP}"
   numExecutors: 0
 unclassified:
   location:

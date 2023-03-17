@@ -3,3 +3,6 @@
 !gradlew
 !gradle
 !.gradle
+!android-stf-api.py
+!adbkey.pub
+!adbkey.txt
