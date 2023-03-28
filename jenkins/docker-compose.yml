@@ -63,7 +63,7 @@ services:
             # start_period: 15s"
             test: [
                     "CMD-SHELL",
-                    "/android/sdk/platform-tools/adb shell getprop dev.bootcomplete | grep \"1\""
+                    "getprop dev.bootcomplete | grep \"1\""
                 ]
             interval: 5s
             timeout: 3s
