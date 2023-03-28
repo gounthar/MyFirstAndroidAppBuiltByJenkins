@@ -1,3 +1,6 @@
 [submodule "jenkins/stf"]
 	path = jenkins/stf
 	url = https://github.com/DeviceFarmer/stf.git
+[submodule "jenkins/docker-adb"]
+	path = jenkins/docker-adb
+	url = https://github.com/DeviceFarmer/docker-adb.git

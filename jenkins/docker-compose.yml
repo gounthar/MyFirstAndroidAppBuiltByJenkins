@@ -56,11 +56,6 @@ services:
         environment:
             - ADBKEY
         healthcheck:
-            # test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
-            # interval: 5s
-            # timeout: 3s
-            # retries: 10
-            # start_period: 15s"
             test: [
                     "CMD-SHELL",
                     "getprop dev.bootcomplete | grep \"1\""
