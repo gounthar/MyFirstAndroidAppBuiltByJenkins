@@ -112,7 +112,10 @@ services:
     stf:
       #platform: linux/amd64
         container_name: stf
-        image: devicefarmer/stf
+        #image: devicefarmer/stf
+        build:
+          context: ./stf
+          dockerfile: Dockerfile-debian-armhf
         ports:
             - "7100:7100"
             - "7110:7110"
