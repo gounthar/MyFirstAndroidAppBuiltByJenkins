@@ -72,7 +72,8 @@ services:
     rethinkdb:
       #platform: linux/amd64
         container_name: rethinkdb
-        image: rethinkdb:2.3
+          #image: rethinkdb:2.3
+        image: gounthar/docker-rethinkdb:latest
         restart: unless-stopped
         volumes:
             - "rethinkdb-data:/data"
