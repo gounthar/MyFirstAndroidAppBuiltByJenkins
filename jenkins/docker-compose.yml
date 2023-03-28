@@ -24,7 +24,7 @@ services:
             - STF_HOST_NAME
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
-        platform: linux/amd64
+      #platform: linux/amd64
         build: ./agent
         restart: unless-stopped
         privileged: true
@@ -46,19 +46,15 @@ services:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD
             - STF_HOST_NAME
     emulator:
-        # NOTE: The images should not run in docker on mac or windows
-        # https://github.com/google/android-emulator-container-scripts
-        # In fact, the one we chose is working...
-        platform: linux/amd64
-        image: us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2
-        restart: unless-stopped
+        privileged: true
+        volumes:
+            - '~/data:/data'
         ports:
-            - 8554:8554
-            - 5555:5555
+            - '5555:5555'
+        image: 'redroid/redroid:11.0.0-latest'        
+        restart: unless-stopped
         environment:
             - ADBKEY
-        devices:
-            - /dev/kvm
         healthcheck:
             # test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
             # interval: 5s
@@ -74,7 +70,7 @@ services:
             start_period: 15s
             retries: 10
     rethinkdb:
-        platform: linux/amd64
+      #platform: linux/amd64
         container_name: rethinkdb
         image: rethinkdb:2.3
         restart: unless-stopped
@@ -82,9 +78,9 @@ services:
             - "rethinkdb-data:/data"
         command: "rethinkdb --bind all --cache-size 2048"
     adb:
-        platform: linux/amd64
+      #platform: linux/amd64
         container_name: adb
-        image: devicefarmer/adb:latest
+        image: gounthar/docker-adb:aarch64
         restart: unless-stopped
         volumes:
             - "/dev/bus/usb:/dev/bus/usb"
@@ -99,7 +95,7 @@ services:
         depends_on:
             - emulator
     adb-connector:
-        platform: linux/amd64
+      #platform: linux/amd64
         container_name: adb-connector
         build: ./adb-connector
         privileged: true
@@ -114,7 +110,7 @@ services:
             emulator:
                 condition: service_healthy
     stf:
-        platform: linux/amd64
+      #platform: linux/amd64
         container_name: stf
         image: devicefarmer/stf
         ports:
