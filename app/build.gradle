@@ -21,7 +21,7 @@ tasks.withType(Test) {
 }
 
 android {
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "33.0.1"
     compileSdk 33
 
     defaultConfig {
@@ -85,6 +85,7 @@ android {
             /*baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
         //}
     }
+    namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
 }
 
 dependencies {
