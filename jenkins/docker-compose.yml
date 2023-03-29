@@ -65,10 +65,10 @@ services:
             start_period: 15s
             retries: 10
     rethinkdb:
-      #platform: linux/amd64
+        platform: linux/amd64
         container_name: rethinkdb
-          #image: rethinkdb:2.3
-        image: gounthar/docker-rethinkdb:latest
+        image: rethinkdb:2.3
+          #image: gounthar/docker-rethinkdb:latest
         restart: unless-stopped
         volumes:
             - "rethinkdb-data:/data"
@@ -76,14 +76,20 @@ services:
     adb:
       #platform: linux/amd64
         container_name: adb
-        image: gounthar/docker-adb:aarch64
+        build: ./docker-adb
+        #image: gounthar/docker-adb:aarch64
         restart: unless-stopped
+        environment:
+            - QEMU_EXECVE=1
         volumes:
+            - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+            - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+            - /usr/bin/qemu-x86_64-static:/usr/bin/qemu-x86_64-static:ro
             - "/dev/bus/usb:/dev/bus/usb"
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
         healthcheck:
-            test: [ "CMD", "/opt/platform-tools/adb", "connect", "emulator:5555" ]
+            test: [ "CMD", "adb", "connect", "emulator:5555" ]
             interval: 5s
             timeout: 3s
             retries: 10
