@@ -1,5 +1,8 @@
 FROM jenkins/ssh-agent:bullseye-jdk17 as ssh-agent
 
+RUN echo "deb http://deb.debian.org/debian bullseye-backports main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free" >> /etc/apt/sources.list
+
 # ca-certificates because curl will need it later on for the Maven installation
 RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git python3 python3-pip unzip
 
@@ -29,21 +32,23 @@ ENV CMDLINE_TOOLS_HOME $ANDROID_HOME/cmdline-tools/latest
 ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin:$ANDROID_HOME/:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ARG ANDROID_BUILD_TOOLS_VERSION=33.0.1
 
-RUN apt-get install -y android-sdk android-sdk-platform-23 android-sdk-build-tools android-sdk-platform-tools
+RUN apt-get install -y --no-install-recommends android-sdk android-sdk-platform-23 android-sdk-build-tools android-sdk-platform-tools sdkmanager
 ENV ANDROID_HOME=/usr/lib/android-sdk
 ENV ANDROID_SDK_ROOT=/usr/lib/android-sdk
+# RUN find / -name sdkmanager gave /usr/bin/sdkmanager
 
-RUN yes|$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses && \
-  $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --update && \
-  $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list && \
-  $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" \
-                                                      "ndk;25.0.8775105" \
-                                                      "extras;google;m2repository" \
+RUN yes|sdkmanager --licenses && \
+  #sdkmanager --update && \
+  sdkmanager --list && \
+  sdkmanager "platform-tools" \
+                                                      "ndk;25.2.9519653" \
+  #                                                    "extras;google;m2repository"  \
                                                       "extras;android;m2repository" \
                                                       "platforms;android-33" \
                                                       "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
-                                                      "add-ons;addon-google_apis-google-24" \
-                                                      "add-ons;addon-google_apis-google-23" 2>&1 >/dev/null && \
+  #                                                    "add-ons;addon-google_apis-google-24" \
+  #                                                    "add-ons;addon-google_apis-google-23"
+ 2>&1 >/dev/null && \
   chown -R jenkins:jenkins $ANDROID_HOME && ls -artl $ANDROID_HOME
 ENV PATH $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION/:$PATH
 
