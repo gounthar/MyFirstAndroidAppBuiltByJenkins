@@ -35,7 +35,7 @@ services:
         environment:
             - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
     android-agent:
-      # platform: linux/amd64
+      #platform: linux/amd64
         build: ../
         restart: unless-stopped
         volumes:
@@ -74,17 +74,17 @@ services:
             - "rethinkdb-data:/data"
         command: "rethinkdb --bind all --cache-size 2048"
     adb:
-      #platform: linux/amd64
+        platform: linux/amd64
         container_name: adb
         build: ./docker-adb
         #image: gounthar/docker-adb:aarch64
         restart: unless-stopped
-        environment:
-            - QEMU_EXECVE=1
+          #environment:
+          #  - QEMU_EXECVE=1
         volumes:
-            - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
-            - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
-            - /usr/bin/qemu-x86_64-static:/usr/bin/qemu-x86_64-static:ro
+          #  - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+          #  - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+          #  - /usr/bin/qemu-x86_64-static:/usr/bin/qemu-x86_64-static:ro
             - "/dev/bus/usb:/dev/bus/usb"
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
