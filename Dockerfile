@@ -29,7 +29,7 @@ ENV CMDLINE_TOOLS_HOME $ANDROID_HOME/cmdline-tools/latest
 ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin:$ANDROID_HOME/:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ARG ANDROID_BUILD_TOOLS_VERSION=33.0.1
 
-RUN apt-get install android-sdk android-sdk-platform-23 android-sdk-build-tools android-sdk-platform-tools
+RUN apt-get install -y android-sdk android-sdk-platform-23 android-sdk-build-tools android-sdk-platform-tools
 ENV ANDROID_HOME=/usr/lib/android-sdk
 ENV ANDROID_SDK_ROOT=/usr/lib/android-sdk
 
