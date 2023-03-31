@@ -2,7 +2,7 @@
 ant:481.v7b_09e538fcca
 antisamy-markup-formatter:159.v25b_c67cd35fb_
 apache-httpcomponents-client-4-api:4.5.14-150.v7a_b_9d17134a_5
-authentication-tokens:1.4
+authentication-tokens:1.53.v1c90fd9191a_b_
 blueocean-autofavorite:1.2.5
 blueocean-bitbucket-pipeline:1.27.3
 blueocean-commons:1.27.3
