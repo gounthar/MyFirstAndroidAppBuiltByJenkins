@@ -35,7 +35,7 @@ cloudbees-folder:6.815.v0dd5a_cb_40e0e
 command-launcher:90.v669d7ccb_7c31
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
-configuration-as-code:1616.v11393eccf675
+configuration-as-code:1625.v27444588cc3d
 credentials-binding:523.vd859a_4b_122e6
 credentials:1224.vc23ca_a_9a_2cb_0
 data-tables-api:1.13.3-3
