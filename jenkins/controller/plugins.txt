@@ -92,7 +92,7 @@ mina-sshd-api-core:2.9.2-62.v199162f0a_2f8
 oauth-credentials:0.5
 okhttp-api:4.10.0-132.v7a_7b_91cef39c
 pam-auth:1.10
-pipeline-build-step:487.va_823138eee8b_
+pipeline-build-step:488.v8993df156e8d
 pipeline-github-lib:42.v0739460cda_c4
 pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-groovy-lib:629.vb_5627b_ee2104
