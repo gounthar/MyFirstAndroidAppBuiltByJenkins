@@ -62,7 +62,7 @@ github-branch-source:1703.vd5a_2b_29c6cdc
 github-checks:1.0.19
 github:1.37.0
 google-oauth-plugin:1.0.8
-gradle:2.3.2
+gradle:2.4
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
