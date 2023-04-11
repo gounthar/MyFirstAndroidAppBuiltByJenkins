@@ -49,7 +49,7 @@ docker-plugin:1.3.0
 docker-workflow:563.vd5d2e5c4007f
 durable-task:504.vb10d1ae5ba2f
 echarts-api:5.4.0-3
-email-ext:2.95
+email-ext:2.96
 envinject-api:1.199.v3ce31253ed13
 envinject:2.901.v0038b_6471582
 favorite:2.4.1
@@ -83,7 +83,7 @@ jquery3-api:3.6.4-1
 jsch:0.1.55.61.va_e9ee26616e7
 junit:1189.v1b_e593637fa_e
 ldap:671.v2a_9192a_7419d
-lockable-resources:1131.vb_7c3d377e723
+lockable-resources:1141.v7c5f8f31d2ee
 mailer:448.v5b_97805e3767
 matrix-auth:3.1.6
 matrix-project:785.v06b_7f47b_c631
@@ -111,7 +111,7 @@ plugin-util-api:3.2.0
 popper-api:1.16.1-3
 popper2-api:2.11.6-2
 pubsub-light:1.17
-resource-disposer:0.21
+resource-disposer:0.22
 saferestart:0.7
 schedule-build:448.vb_1dccb_0961b_d
 scm-api:631.v9143df5b_e4a_a
@@ -124,7 +124,7 @@ ssh-slaves:2.877.v365f5eb_a_b_eec
 sshd:3.275.v9e17c10f2571
 structs:324.va_f5d6774f3a_d
 test-results-aggregator:1.2.11
-timestamper:1.23
+timestamper:1.24
 token-macro:321.vd7cc1f2a_52c8
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
@@ -138,4 +138,4 @@ workflow-multibranch:733.v109046189126
 workflow-scm-step:408.v7d5b_135a_b_d49
 workflow-step-api:639.v6eca_cd8c04a_a_
 workflow-support:839.v35e2736cfd5c
-ws-cleanup:0.44
+ws-cleanup:0.45
