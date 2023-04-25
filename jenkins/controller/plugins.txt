@@ -81,7 +81,7 @@ jnr-posix-api:3.1.16-2
 job-restrictions:0.8
 jquery3-api:3.6.4-1
 jsch:0.1.55.61.va_e9ee26616e7
-junit:1196.vb_4cf28b_c7724
+junit:1198.ve38db_d1b_c975
 ldap:673.v034ec70ec2b_b_
 lockable-resources:1141.v7c5f8f31d2ee
 mailer:448.v5b_97805e3767
@@ -89,7 +89,7 @@ matrix-auth:3.1.7
 matrix-project:789.v57a_725b_63c79
 mina-sshd-api-common:2.9.2-62.v199162f0a_2f8
 mina-sshd-api-core:2.9.2-62.v199162f0a_2f8
-oauth-credentials:0.5
+oauth-credentials:0.645.ve666a_c332668
 okhttp-api:4.10.0-132.v7a_7b_91cef39c
 pam-auth:1.10
 pipeline-build-step:488.v8993df156e8d
