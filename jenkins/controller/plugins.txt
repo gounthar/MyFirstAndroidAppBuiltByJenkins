@@ -28,7 +28,7 @@ bootstrap5-api:5.2.2-2
 bouncycastle-api:2.27
 branch-api:2.1071.v1a_188a_562481
 build-timeout:1.30
-caffeine-api:2.9.3-65.v6a_47d0f4d1fe
+caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
 cloudbees-bitbucket-branch-source:800.va_b_b_9a_a_5035c1
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
@@ -68,7 +68,7 @@ htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
 instance-identity:142.v04572ca_5b_265
 ionicons-api:45.vf54fca_5d2154
-jackson2-api:2.14.2-319.v37853346a_229
+jackson2-api:2.15.0-334.v317a_165f9b_7c
 jakarta-activation-api:2.0.1-3
 jakarta-mail-api:2.0.1-3
 javax-activation-api:1.2.0-6
@@ -83,7 +83,7 @@ jquery3-api:3.6.4-1
 jsch:0.1.55.61.va_e9ee26616e7
 junit:1198.ve38db_d1b_c975
 ldap:673.v034ec70ec2b_b_
-lockable-resources:1141.v7c5f8f31d2ee
+lockable-resources:1150.v59db_2b_994618
 mailer:448.v5b_97805e3767
 matrix-auth:3.1.7
 matrix-project:789.v57a_725b_63c79
