@@ -37,7 +37,7 @@ commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
 configuration-as-code:1625.v27444588cc3d
 credentials-binding:604.vb_64480b_c56ca_
-credentials:1224.vc23ca_a_9a_2cb_0
+credentials:1236.v31e44e6060c0
 data-tables-api:1.13.3-3
 declarative-pipeline-migration-assistant-api:1.5.6
 declarative-pipeline-migration-assistant:1.5.6
