@@ -51,8 +51,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
@@ -69,7 +69,12 @@ android {
             maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
-        pmd {}
+        pmd {
+            consoleOutput = true
+            toolVersion = "6.21.0"
+            rulesMinimumPriority = 5
+            //destination = "result.xml"
+        }
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')

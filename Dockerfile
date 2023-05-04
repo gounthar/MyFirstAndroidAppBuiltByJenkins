@@ -1,3 +1,4 @@
+
 FROM jenkins/ssh-agent:bullseye-jdk17 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
