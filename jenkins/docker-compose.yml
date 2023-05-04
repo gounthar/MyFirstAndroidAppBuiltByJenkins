@@ -56,8 +56,6 @@ services:
         container_name: adb
         image: devicefarmer/adb:latest
         restart: unless-stopped
-        volumes:
-            - "/dev/bus/usb:/dev/bus/usb"
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
         healthcheck:
