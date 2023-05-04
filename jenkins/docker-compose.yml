@@ -132,6 +132,7 @@ services:
     android-studio:
         container_name: android-studio
         build: ./android-studio-remote
+        command: $HOME/android-studio/bin/studio.sh
 volumes:
     qodana-data:
     jenkins-data:
