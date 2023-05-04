@@ -58,12 +58,6 @@ services:
         restart: unless-stopped
         privileged: true
         command: sh -c "adb -a -P 5037 server nodaemon"
-        healthcheck:
-            test: [ "CMD", "/opt/platform-tools/adb", "connect", "emulator:5555" ]
-            interval: 5s
-            timeout: 3s
-            retries: 10
-            start_period: 15s
     stf:
         container_name: stf
         image: devicefarmer/stf
