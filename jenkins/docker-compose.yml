@@ -129,6 +129,9 @@ services:
             - rethinkdb
             - adb
             - adb-connector
+    android-studio:
+        container_name: android-studio
+        build: ./android-studio
 volumes:
     qodana-data:
     jenkins-data:
