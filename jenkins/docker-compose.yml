@@ -79,6 +79,8 @@ services:
     android-studio:
         container_name: android-studio
         build: ./android-studio-remote
+        environment:
+            - DISPLAY=:0
         command: $HOME/android-studio/bin/studio.sh
 volumes:
     qodana-data:
