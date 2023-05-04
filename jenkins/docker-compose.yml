@@ -130,8 +130,8 @@ services:
             - adb
             - adb-connector
     android-studio:
-        container_name: android-studio-remote
-        build: ./android-studio
+        container_name: android-studio
+        build: ./android-studio-remote
 volumes:
     qodana-data:
     jenkins-data:
