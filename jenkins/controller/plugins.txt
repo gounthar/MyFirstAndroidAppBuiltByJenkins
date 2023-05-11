@@ -81,7 +81,7 @@ jnr-posix-api:3.1.16-2
 job-restrictions:0.8
 jquery3-api:3.6.4-1
 jsch:0.2.8-65.v052c39de79b_2
-junit:1198.ve38db_d1b_c975
+junit:1202.v79a_986785076
 ldap:673.v034ec70ec2b_b_
 lockable-resources:1156.v5e9f897ece02
 mailer:448.v5b_97805e3767
@@ -129,7 +129,7 @@ token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1208.v0cc7c6e0da_9e
+workflow-api:1213.v646def1087f9
 workflow-basic-steps:1017.vb_45b_302f0cea_
 workflow-cps:3659.v582dc37621d8
 workflow-durable-task-step:1246.v5524618ea_097
