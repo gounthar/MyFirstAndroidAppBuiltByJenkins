@@ -2,6 +2,7 @@
 ant:487.vd79d090d4ea_e
 antisamy-markup-formatter:159.v25b_c67cd35fb_
 apache-httpcomponents-client-4-api:4.5.14-150.v7a_b_9d17134a_5
+apache-httpcomponents-client-5-api:5.2.1-1.0
 authentication-tokens:1.53.v1c90fd9191a_b_
 blueocean-autofavorite:1.2.5
 blueocean-bitbucket-pipeline:1.27.4
@@ -44,8 +45,8 @@ declarative-pipeline-migration-assistant:1.5.6
 display-url-api:2.3.7
 distfork:1.8
 docker-commons:419.v8e3cd84ef49c
-docker-java-api:3.2.13-68.va_875df25a_b_45
-docker-plugin:1.3.0
+docker-java-api:3.3.0-77.vd409a_cdc37d5
+docker-plugin:1.3.1
 docker-workflow:563.vd5d2e5c4007f
 durable-task:507.v050055d0cb_dd
 echarts-api:5.4.0-4
@@ -67,7 +68,7 @@ handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
 instance-identity:142.v04572ca_5b_265
-ionicons-api:45.vf54fca_5d2154
+ionicons-api:55.vdc6562f64de3
 jackson2-api:2.15.1-344.v6eb_55303dc3e
 jakarta-activation-api:2.0.1-3
 jakarta-mail-api:2.0.1-3
