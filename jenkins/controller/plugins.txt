@@ -24,8 +24,6 @@ blueocean-rest-impl:1.27.4
 blueocean-rest:1.27.4
 blueocean-web:1.27.4
 blueocean:1.27.4
-bootstrap4-api:4.6.0-6
-bootstrap5-api:5.2.2-6
 bouncycastle-api:2.28
 branch-api:2.1105.v472604208c55
 build-timeout:1.31
