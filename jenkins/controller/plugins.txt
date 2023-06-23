@@ -30,7 +30,7 @@ branch-api:2.1109.vdf225489a_16d
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
 cloud-stats:267.v577e3742c282
-cloudbees-bitbucket-branch-source:805.v7f97d29dc0f5
+cloudbees-bitbucket-branch-source:809.vc1d904b_30426
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
 command-launcher:100.v2f6722292ee8
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
@@ -38,9 +38,9 @@ commons-text-api:1.10.0-36.vc008c8fcda_7b_
 configuration-as-code:1647.ve39ca_b_829b_42
 credentials-binding:604.vb_64480b_c56ca_
 credentials:1254.vb_96f366e7b_a_d
-data-tables-api:1.13.4-2
-declarative-pipeline-migration-assistant-api:1.5.6
-declarative-pipeline-migration-assistant:1.5.6
+data-tables-api:1.13.4-3
+declarative-pipeline-migration-assistant-api:1.6.0
+declarative-pipeline-migration-assistant:1.6.0
 display-url-api:2.3.7
 distfork:1.8
 docker-commons:419.v8e3cd84ef49c
@@ -49,7 +49,7 @@ docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
 durable-task:507.v050055d0cb_dd
 echarts-api:5.4.0-5
-email-ext:2.98
+email-ext:2.99
 envinject-api:1.199.v3ce31253ed13
 envinject:2.901.v0038b_6471582
 favorite:2.4.2
@@ -61,7 +61,7 @@ github-api:1.314-431.v78d72a_3fe4c3
 github-branch-source:1728.v859147241f49
 github-checks:545.v79a_a_68b_ca_682
 github:1.37.1
-google-oauth-plugin:1.0.8
+google-oauth-plugin:1.0.9
 gradle:2.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
@@ -81,9 +81,9 @@ jnr-posix-api:3.1.17-1
 job-restrictions:0.8
 jquery3-api:3.7.0-1
 jsch:0.2.8-65.v052c39de79b_2
-junit:1207.va_09d5100410f
+junit:1214.va_2f9db_3e6de0
 ldap:682.v7b_544c9d1512
-lockable-resources:1156.v5e9f897ece02
+lockable-resources:1167.v04861534072b_
 mailer:457.v3f72cb_e015e5
 matrix-auth:3.1.8
 matrix-project:789.v57a_725b_63c79
@@ -101,10 +101,10 @@ pipeline-milestone-step:111.v449306f708b_7
 pipeline-model-api:2.2141.v5402e818a_779
 pipeline-model-definition:2.2141.v5402e818a_779
 pipeline-model-extensions:2.2141.v5402e818a_779
-pipeline-rest-api:2.32
+pipeline-rest-api:2.33
 pipeline-stage-step:305.ve96d0205c1c6
 pipeline-stage-tags-metadata:2.2141.v5402e818a_779
-pipeline-stage-view:2.32
+pipeline-stage-view:2.33
 plain-credentials:143.v1b_df8b_d3b_e48
 platformlabeler:2095.ve47c8663f6a_b_
 plugin-util-api:3.3.0
@@ -112,7 +112,7 @@ pubsub-light:1.17
 resource-disposer:0.22
 saferestart:0.7
 schedule-build:467.vf48c1532e9eb_
-scm-api:672.v64378a_b_20c60
+scm-api:676.v886669a_199a_a_
 script-security:1251.vfe552ed55f8d
 slack:664.vc9a_90f8b_c24a_
 snakeyaml-api:1.33-95.va_b_a_e3e47b_fa_4
@@ -127,7 +127,7 @@ token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1213.v646def1087f9
+workflow-api:1215.v2b_ee3e1b_dd39
 workflow-basic-steps:1017.vb_45b_302f0cea_
 workflow-cps:3691.v28b_14c465a_b_b_
 workflow-durable-task-step:1247.v7f9dfea_b_4fd0
