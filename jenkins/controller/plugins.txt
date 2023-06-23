@@ -38,7 +38,7 @@ commons-text-api:1.10.0-36.vc008c8fcda_7b_
 configuration-as-code:1647.ve39ca_b_829b_42
 credentials-binding:604.vb_64480b_c56ca_
 credentials:1254.vb_96f366e7b_a_d
-data-tables-api:1.13.4-2
+data-tables-api:1.13.4-3
 declarative-pipeline-migration-assistant-api:1.6.0
 declarative-pipeline-migration-assistant:1.6.0
 display-url-api:2.3.7
@@ -61,7 +61,7 @@ github-api:1.314-431.v78d72a_3fe4c3
 github-branch-source:1728.v859147241f49
 github-checks:545.v79a_a_68b_ca_682
 github:1.37.1
-google-oauth-plugin:1.0.8
+google-oauth-plugin:1.0.9
 gradle:2.8
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
@@ -81,7 +81,7 @@ jnr-posix-api:3.1.17-1
 job-restrictions:0.8
 jquery3-api:3.7.0-1
 jsch:0.2.8-65.v052c39de79b_2
-junit:1207.va_09d5100410f
+junit:1214.va_2f9db_3e6de0
 ldap:682.v7b_544c9d1512
 lockable-resources:1167.v04861534072b_
 mailer:457.v3f72cb_e015e5
