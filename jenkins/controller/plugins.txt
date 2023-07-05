@@ -1,5 +1,5 @@
 # See https://github.com/jenkinsci/docker#usage-1
-ant:487.vd79d090d4ea_e
+ant:497.v94e7d9fffa_b_9
 antisamy-markup-formatter:159.v25b_c67cd35fb_
 apache-httpcomponents-client-4-api:4.5.14-150.v7a_b_9d17134a_5
 apache-httpcomponents-client-5-api:5.2.1-1.0
@@ -26,10 +26,10 @@ blueocean-web:1.27.4
 blueocean:1.27.4
 bootstrap5-api:5.3.0-1
 bouncycastle-api:2.28
-branch-api:2.1109.vdf225489a_16d
+branch-api:2.1122.v09cb_8ea_8a_724
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
-cloud-stats:267.v577e3742c282
+cloud-stats:302.v45b_647b_90608
 cloudbees-bitbucket-branch-source:809.vc1d904b_30426
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
 command-launcher:100.v2f6722292ee8
@@ -43,7 +43,7 @@ declarative-pipeline-migration-assistant-api:1.6.0
 declarative-pipeline-migration-assistant:1.6.0
 display-url-api:2.3.7
 distfork:1.8
-docker-commons:419.v8e3cd84ef49c
+docker-commons:422.v9d1a_89cede51
 docker-java-api:3.3.1-79.v20b_53427e041
 docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
@@ -62,7 +62,7 @@ github-branch-source:1728.v859147241f49
 github-checks:545.v79a_a_68b_ca_682
 github:1.37.1
 google-oauth-plugin:1.0.9
-gradle:2.8
+gradle:2.8.1
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
@@ -83,9 +83,9 @@ jquery3-api:3.7.0-1
 jsch:0.2.8-65.v052c39de79b_2
 junit:1214.va_2f9db_3e6de0
 ldap:682.v7b_544c9d1512
-lockable-resources:1167.v04861534072b_
+lockable-resources:1172.v4b_8fc8eed570
 mailer:457.v3f72cb_e015e5
-matrix-auth:3.1.8
+matrix-auth:3.1.9
 matrix-project:789.v57a_725b_63c79
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
 mina-sshd-api-core:2.10.0-69.v28e3e36d18eb_
@@ -121,17 +121,17 @@ ssh-credentials:305.v8f4381501156
 ssh-slaves:2.877.v365f5eb_a_b_eec
 sshd:3.303.vefc7119b_ec23
 structs:324.va_f5d6774f3a_d
-test-results-aggregator:1.2.12
+test-results-aggregator:1.2.13
 timestamper:1.25
 token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1215.v2b_ee3e1b_dd39
+workflow-api:1219.v05cd837ea_249
 workflow-basic-steps:1017.vb_45b_302f0cea_
-workflow-cps:3691.v28b_14c465a_b_b_
+workflow-cps:3697.vb_470e454c232
 workflow-durable-task-step:1247.v7f9dfea_b_4fd0
-workflow-job:1308.v58d48a_763b_31
+workflow-job:1316.vd2290d3341a_f
 workflow-multibranch:756.v891d88f2cd46
 workflow-scm-step:415.v434365564324
 workflow-step-api:639.v6eca_cd8c04a_a_
