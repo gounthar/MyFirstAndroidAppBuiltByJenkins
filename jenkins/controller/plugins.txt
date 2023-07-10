@@ -25,7 +25,7 @@ blueocean-rest:1.27.4
 blueocean-web:1.27.4
 blueocean:1.27.4
 bootstrap5-api:5.3.0-1
-bouncycastle-api:2.28
+bouncycastle-api:2.29
 branch-api:2.1122.v09cb_8ea_8a_724
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
@@ -81,7 +81,7 @@ jnr-posix-api:3.1.17-1
 job-restrictions:0.8
 jquery3-api:3.7.0-1
 jsch:0.2.8-65.v052c39de79b_2
-junit:1214.va_2f9db_3e6de0
+junit:1217.v4297208a_a_b_ce
 ldap:682.v7b_544c9d1512
 lockable-resources:1172.v4b_8fc8eed570
 mailer:457.v3f72cb_e015e5
@@ -127,7 +127,7 @@ token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1219.v05cd837ea_249
+workflow-api:1223.v41b_0279c361a
 workflow-basic-steps:1017.vb_45b_302f0cea_
 workflow-cps:3697.vb_470e454c232
 workflow-durable-task-step:1247.v7f9dfea_b_4fd0
