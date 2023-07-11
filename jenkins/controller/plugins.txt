@@ -43,7 +43,7 @@ declarative-pipeline-migration-assistant-api:1.6.0
 declarative-pipeline-migration-assistant:1.6.0
 display-url-api:2.3.7
 distfork:1.8
-docker-commons:422.v9d1a_89cede51
+docker-commons:434.v3dc53576ec32
 docker-java-api:3.3.1-79.v20b_53427e041
 docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
