@@ -30,7 +30,7 @@ branch-api:2.1122.v09cb_8ea_8a_724
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
 cloud-stats:302.v45b_647b_90608
-cloudbees-bitbucket-branch-source:809.vc1d904b_30426
+cloudbees-bitbucket-branch-source:820.v30b_e8c1e36f3
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
 command-launcher:100.v2f6722292ee8
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
@@ -43,11 +43,11 @@ declarative-pipeline-migration-assistant-api:1.6.0
 declarative-pipeline-migration-assistant:1.6.0
 display-url-api:2.3.7
 distfork:1.8
-docker-commons:434.v3dc53576ec32
+docker-commons:439.va_3cb_0a_6a_fb_29
 docker-java-api:3.3.1-79.v20b_53427e041
 docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
-durable-task:507.v050055d0cb_dd
+durable-task:510.v324450f8dca_4
 echarts-api:5.4.0-5
 email-ext:2.99
 envinject-api:1.199.v3ce31253ed13
