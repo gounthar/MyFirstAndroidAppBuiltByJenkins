@@ -85,7 +85,7 @@ junit:1217.v4297208a_a_b_ce
 ldap:682.v7b_544c9d1512
 lockable-resources:1172.v4b_8fc8eed570
 mailer:457.v3f72cb_e015e5
-matrix-auth:3.1.9
+matrix-auth:3.1.10
 matrix-project:789.v57a_725b_63c79
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
 mina-sshd-api-core:2.10.0-69.v28e3e36d18eb_
