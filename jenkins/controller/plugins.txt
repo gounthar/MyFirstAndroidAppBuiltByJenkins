@@ -30,7 +30,7 @@ branch-api:2.1122.v09cb_8ea_8a_724
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
 cloud-stats:302.v45b_647b_90608
-cloudbees-bitbucket-branch-source:820.v30b_e8c1e36f3
+cloudbees-bitbucket-branch-source:825.va_6a_dc46a_f97d
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
 command-launcher:100.v2f6722292ee8
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
@@ -98,12 +98,12 @@ pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-groovy-lib:656.va_a_ceeb_6ffb_f7
 pipeline-input-step:468.va_5db_051498a_4
 pipeline-milestone-step:111.v449306f708b_7
-pipeline-model-api:2.2141.v5402e818a_779
-pipeline-model-definition:2.2141.v5402e818a_779
-pipeline-model-extensions:2.2141.v5402e818a_779
+pipeline-model-api:2.2144.v077a_d1928a_40
+pipeline-model-definition:2.2144.v077a_d1928a_40
+pipeline-model-extensions:2.2144.v077a_d1928a_40
 pipeline-rest-api:2.33
 pipeline-stage-step:305.ve96d0205c1c6
-pipeline-stage-tags-metadata:2.2141.v5402e818a_779
+pipeline-stage-tags-metadata:2.2144.v077a_d1928a_40
 pipeline-stage-view:2.33
 plain-credentials:143.v1b_df8b_d3b_e48
 platformlabeler:2095.ve47c8663f6a_b_
@@ -128,7 +128,7 @@ variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
 workflow-api:1232.v1679fa_2f0f76
 workflow-basic-steps:1017.vb_45b_302f0cea_
-workflow-cps:3705.va_6a_c2775a_c17
+workflow-cps:3717.va_180a_fe9d3cd
 workflow-durable-task-step:1247.v7f9dfea_b_4fd0
 workflow-job:1316.vd2290d3341a_f
 workflow-multibranch:756.v891d88f2cd46
