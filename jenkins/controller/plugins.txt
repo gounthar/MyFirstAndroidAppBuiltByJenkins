@@ -37,7 +37,7 @@ commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
 configuration-as-code:1647.ve39ca_b_829b_42
 credentials-binding:604.vb_64480b_c56ca_
-credentials:1254.vb_96f366e7b_a_d
+credentials:1268.v3f0d043d60e9
 data-tables-api:1.13.5-1
 declarative-pipeline-migration-assistant-api:1.6.0
 declarative-pipeline-migration-assistant:1.6.0
@@ -126,7 +126,7 @@ token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1232.v1679fa_2f0f76
+workflow-api:1239.vd7c497375cb_f
 workflow-basic-steps:1017.vb_45b_302f0cea_
 workflow-cps:3717.va_180a_fe9d3cd
 workflow-durable-task-step:1247.v7f9dfea_b_4fd0
