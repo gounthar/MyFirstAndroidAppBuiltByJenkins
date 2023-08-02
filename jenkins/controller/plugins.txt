@@ -37,7 +37,7 @@ command-launcher:100.v2f6722292ee8
 commons-lang3-api:3.12.0-36.vd97de6465d5b_
 commons-text-api:1.10.0-36.vc008c8fcda_7b_
 configuration-as-code:1670.v564dc8b_982d0
-credentials-binding:626.v8d9034b_8ea_cc
+credentials-binding:631.v861c06d062b_4
 credentials:1271.v54b_1c2c6388a_
 data-tables-api:1.13.5-1
 declarative-pipeline-migration-assistant-api:1.6.0
@@ -48,7 +48,7 @@ docker-commons:439.va_3cb_0a_6a_fb_29
 docker-java-api:3.3.1-79.v20b_53427e041
 docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
-durable-task:510.v324450f8dca_4
+durable-task:513.vc48a_a_075a_d93
 echarts-api:5.4.0-5
 email-ext:2.100
 envinject-api:1.199.v3ce31253ed13
@@ -63,7 +63,7 @@ github-branch-source:1728.v859147241f49
 github-checks:545.v79a_a_68b_ca_682
 github:1.37.1
 google-oauth-plugin:1.0.9
-gradle:2.8.1
+gradle:2.8.2
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.31
 hudson-wsclean-plugin:1.0.8
@@ -84,7 +84,7 @@ jquery3-api:3.7.0-1
 jsch:0.2.8-65.v052c39de79b_2
 junit:1217.v4297208a_a_b_ce
 ldap:682.v7b_544c9d1512
-lockable-resources:1172.v4b_8fc8eed570
+lockable-resources:1184.va_6f2fc274b_e4
 mailer:457.v3f72cb_e015e5
 matrix-auth:3.1.10
 matrix-project:789.v57a_725b_63c79
@@ -94,7 +94,7 @@ mina-sshd-api-core:2.10.0-69.v28e3e36d18eb_
 oauth-credentials:0.645.ve666a_c332668
 okhttp-api:4.11.0-145.vcb_8de402ef81
 pam-auth:1.10
-pipeline-build-step:496.v2449a_9a_221f2
+pipeline-build-step:505.v5f0844d8d126
 pipeline-github-lib:42.v0739460cda_c4
 pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-graph-view:191.vc6da_9d3eb_70a
@@ -112,6 +112,7 @@ plain-credentials:143.v1b_df8b_d3b_e48
 platformlabeler:2095.ve47c8663f6a_b_
 plugin-util-api:3.3.0
 pubsub-light:1.17
+rebuild:320.v5a_0933a_e7d61
 resource-disposer:0.22
 saferestart:0.7
 schedule-build:467.vf48c1532e9eb_
@@ -129,10 +130,10 @@ token-macro:359.vb_cde11682e0c
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1241.v4edc8b_44933b_
+workflow-api:1251.vd4889a_b_0a_065
 workflow-basic-steps:1017.vb_45b_302f0cea_
-workflow-cps:3722.v85ce2a_c6240b_
-workflow-durable-task-step:1247.v7f9dfea_b_4fd0
+workflow-cps:3726.v83f8cff396c9
+workflow-durable-task-step:1278.v94b_dc2b_50c6f
 workflow-job:1316.vd2290d3341a_f
 workflow-multibranch:756.v891d88f2cd46
 workflow-scm-step:415.v434365564324
