@@ -8,20 +8,23 @@ plugins {
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "5.0.13"
     id("io.gitlab.arturbosch.detekt")
-    id("com.dicedmelon.gradle.jacoco-android")
+    id("com.mxalbert.gradle.jacoco-android") version "0.2.0"
+    // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.10"
 }
 
 tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
+    jacoco {
+        includeNoLocationClasses = true
+        excludes = ['jdk.internal.*']
+    }
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication"
@@ -50,8 +53,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
