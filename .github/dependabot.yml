@@ -29,7 +29,7 @@ updates:
     ignore:
       - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
-    directory: "./adb-connector"
+    directory: "./jenkins/adb-connector"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
