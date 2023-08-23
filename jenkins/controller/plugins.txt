@@ -86,7 +86,7 @@ junit:1217.v4297208a_a_b_ce
 ldap:694.vc02a_69c9787f
 lockable-resources:1185.v0c528656ce04
 mailer:463.vedf8358e006b_
-matrix-auth:3.1.10
+matrix-auth:3.2
 matrix-project:808.v5a_b_5f56d6966
 metrics:4.2.18-442.v02e107157925
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
@@ -133,7 +133,7 @@ workflow-api:1259.vb_47f14fffc8a_
 workflow-basic-steps:1042.ve7b_140c4a_e0c
 workflow-cps:3769.v8b_e595e4d40d
 workflow-durable-task-step:1284.v4fcd365b_75b_e
-workflow-job:1339.v7ede8a_29ed06
+workflow-job:1341.vd9fa_65f771dd
 workflow-multibranch:756.v891d88f2cd46
 workflow-scm-step:415.v434365564324
 workflow-step-api:639.v6eca_cd8c04a_a_
