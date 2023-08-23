@@ -21,4 +21,31 @@ updates:
       - "vector-im/element-android-reviewers"
     ignore:
       - dependency-name: com.google.zxing:core
-runs-on: self-hosted
+  - package-ecosystem: docker
+    directory: "./jenkins"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./jenkins/agent"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./jenkins/conbtroller"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./jenkins/qodana"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
