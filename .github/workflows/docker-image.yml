@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64
+          platforms: linux/amd64, linux/aarch64
           push: true
           tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
       -
