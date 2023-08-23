@@ -60,7 +60,7 @@ git-server:99.va_0826a_b_cdfa_d
 git:5.2.0
 github-api:1.314-431.v78d72a_3fe4c3
 github-branch-source:1732.v3f1889a_c475b_
-github-checks:545.v79a_a_68b_ca_682
+github-checks:554.vb_ee03a_000f65
 github:1.37.3
 google-oauth-plugin:1.0.9
 gradle:2.8.2
