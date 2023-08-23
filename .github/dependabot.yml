@@ -22,7 +22,7 @@ updates:
     ignore:
       - dependency-name: com.google.zxing:core
   - package-ecosystem: docker
-    directory: "./jenkins"
+    directory: "./"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
@@ -36,7 +36,7 @@ updates:
     ignore:
       - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
-    directory: "./jenkins/conbtroller"
+    directory: "./jenkins/controller"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
