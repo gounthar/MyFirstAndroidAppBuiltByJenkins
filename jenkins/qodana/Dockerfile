@@ -6,4 +6,3 @@ RUN qodana --save-report
 
 FROM scratch AS export-stage
 COPY --from=qodana /data/results /
-
