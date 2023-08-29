@@ -1,4 +1,4 @@
-FROM jenkins/ssh-agent:5.10.0-jdk17 as ssh-agent
+FROM jenkins/ssh-agent:5.11.0-jdk17 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
 RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git python3 python3-pip unzip
@@ -71,8 +71,8 @@ RUN mkdir -p "${DEVICEFARMER_STF_HOME}" && chown -R jenkins:jenkins /home/jenkin
     chmod 644 /home/jenkins/.android/adbkey* && chmod -R 777 /home/jenkins/.android
 COPY android-stf-api.py "${DEVICEFARMER_STF_HOME}"
 RUN chmod 755 "${DEVICEFARMER_STF_HOME}"/android-stf-api.py && chown -R jenkins:jenkins /home/jenkins/.android && \
-# Install Python dependencies for the script \
-    pip3 install --upgrade pip && pip3 install requests
+    # Install Python dependencies for the script
+    apt install -y python3-requests
 
 ENV PATH $PATH:$DEVICEFARMER_STF_HOME
 
