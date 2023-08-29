@@ -71,8 +71,8 @@ RUN mkdir -p "${DEVICEFARMER_STF_HOME}" && chown -R jenkins:jenkins /home/jenkin
     chmod 644 /home/jenkins/.android/adbkey* && chmod -R 777 /home/jenkins/.android
 COPY android-stf-api.py "${DEVICEFARMER_STF_HOME}"
 RUN chmod 755 "${DEVICEFARMER_STF_HOME}"/android-stf-api.py && chown -R jenkins:jenkins /home/jenkins/.android && \
-# Install Python dependencies for the script \
-    pip3 install --upgrade pip && pip3 install requests
+    # Install Python dependencies for the script
+    apt install -y python3-requests
 
 ENV PATH $PATH:$DEVICEFARMER_STF_HOME
 
