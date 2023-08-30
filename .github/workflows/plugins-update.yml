@@ -47,7 +47,7 @@ jobs:
           echo "BASE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
           # Start the docker containers
-          cd jenkins && docker compose up -d -f docker-compose-plugins.yml
+          cd jenkins && docker compose -f docker-compose-plugins.yml up -d
 
       - name: print GITHUB_ENV file
         run: cat $GITHUB_ENV
