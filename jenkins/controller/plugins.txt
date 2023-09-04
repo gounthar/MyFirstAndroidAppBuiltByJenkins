@@ -30,7 +30,7 @@ branch-api:2.1122.v09cb_8ea_8a_724
 build-timestamp:1.0.3
 caffeine-api:3.1.8-133.v17b_1ff2e0599
 checks-api:2.0.0
-cloud-stats:316.vd6d6b_292238d
+cloud-stats:320.v96b_65297a_4b_b_
 cloudbees-bitbucket-branch-source:832.v43175a_425ea_6
 cloudbees-folder:6.848.ve3b_fd7839a_81
 command-launcher:107.v773860566e2e
