@@ -16,7 +16,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 200
+    open-pull-requests-limit: 10
     reviewers:
       - "vector-im/element-android-reviewers"
     ignore:
