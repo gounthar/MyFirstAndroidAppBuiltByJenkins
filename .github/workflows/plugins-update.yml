@@ -22,6 +22,22 @@ jobs:
           git config --global user.email "gounthar@gmail.com"
           git config --global user.name "gounthar"
 
+      - name: Install yq
+        run: |
+          sudo add-apt-repository ppa:rmescandon/yq
+          sudo apt update
+          sudo apt install yq -y
+
+      - name: Modify Docker Compose file
+        run: |
+          cd jenkins && cp docker-compose.yml docker-compose-plugins.yml
+          yq e 'del(.services.emulator)' docker-compose-plugins.yml -i
+          yq e 'del(.services.stf)' docker-compose-plugins.yml -i
+          yq e 'del(.services.adb-connector)' docker-compose-plugins.yml -i
+          yq e 'del(.services.adb)' docker-compose-plugins.yml -i
+          yq e 'del(.services.rethinkdb)' docker-compose-plugins.yml -i
+          cd ..
+
       - name: Set branch Names and start the containers
         run: |
           #  Set the name of the branch to create the pull request from
@@ -31,7 +47,7 @@ jobs:
           echo "BASE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
           # Start the docker containers
-          cd jenkins && docker compose up -d
+          cd jenkins && docker compose -f docker-compose-plugins.yml up -d
 
       - name: print GITHUB_ENV file
         run: cat $GITHUB_ENV

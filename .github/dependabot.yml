@@ -26,33 +26,23 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
     directory: "./jenkins/adb-connector"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"      
   - package-ecosystem: docker
     directory: "./jenkins/agent"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
     directory: "./jenkins/controller"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
     directory: "./jenkins/qodana"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"
