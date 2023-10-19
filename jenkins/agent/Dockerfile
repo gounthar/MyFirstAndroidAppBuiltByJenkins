@@ -1,4 +1,4 @@
-FROM jenkins/ssh-agent:5.16.0 as ssh-agent
+FROM jenkins/ssh-agent:5.17.0 as ssh-agent
 
 
 # ca-certificates because curl will need it later on for the Maven installation
