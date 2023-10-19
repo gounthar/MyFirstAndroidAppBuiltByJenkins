@@ -1,4 +1,5 @@
 # See https://github.com/jenkinsci/docker#usage-1
+# See https://github.com/jenkinsci/docker#usage-1
 ant:497.v94e7d9fffa_b_9
 antisamy-markup-formatter:162.v0e6ec0fcfcf6
 apache-httpcomponents-client-4-api:4.5.14-208.v438351942757
@@ -32,14 +33,14 @@ caffeine-api:3.1.8-133.v17b_1ff2e0599
 checks-api:2.0.2
 cloud-stats:320.v96b_65297a_4b_b_
 cloudbees-bitbucket-branch-source:848.v42c6a_317eda_e
-cloudbees-folder:6.848.ve3b_fd7839a_81
+cloudbees-folder:6.858.v898218f3609d
 command-launcher:107.v773860566e2e
 commons-lang3-api:3.13.0-62.v7d18e55f51e2
 commons-text-api:1.10.0-78.v3e7b_ea_d5a_fe1
 configuration-as-code:1714.v09593e830cfa
 credentials-binding:636.v55f1275c7b_27
 credentials:1293.vff276f713473
-data-tables-api:1.13.6-4
+data-tables-api:1.13.6-5
 declarative-pipeline-migration-assistant-api:1.6.1
 declarative-pipeline-migration-assistant:1.6.1
 display-url-api:2.200.vb_9327d658781
@@ -62,14 +63,15 @@ github-api:1.316-451.v15738eef3414
 github-branch-source:1741.va_3028eb_9fd21
 github-checks:554.vb_ee03a_000f65
 github:1.37.3
-google-oauth-plugin:1.1.1
+google-oauth-plugin:1.318.vb_39c5db_e3041
 gradle:2.8.2
+groovy:457.v99900cb_85593
 handy-uri-templates-2-api:2.1.8-22.v77d5b_75e6953
 htmlpublisher:1.32
 hudson-wsclean-plugin:1.0.8
 instance-identity:173.va_37c494ec4e5
 ionicons-api:56.v1b_1c8c49374e
-jackson2-api:2.15.2-350.v0c2f3f8fc595
+jackson2-api:2.15.3-366.vfe8d1fa_f8c87
 jakarta-activation-api:2.0.1-3
 jakarta-mail-api:2.0.1-3
 javax-activation-api:1.2.0-6
@@ -87,7 +89,7 @@ ldap:701.vf8619de9160a_
 lockable-resources:1185.v0c528656ce04
 mailer:463.vedf8358e006b_
 matrix-auth:3.2.1
-matrix-project:808.v5a_b_5f56d6966
+matrix-project:818.v7eb_e657db_924
 metrics:4.2.18-442.v02e107157925
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
 mina-sshd-api-core:2.10.0-69.v28e3e36d18eb_
@@ -97,7 +99,7 @@ pam-auth:1.10
 pipeline-build-step:505.v5f0844d8d126
 pipeline-github-lib:42.v0739460cda_c4
 pipeline-graph-analysis:202.va_d268e64deb_3
-pipeline-graph-view:201.vf8943f17f402
+pipeline-graph-view:202.v6da_a_9e590325
 pipeline-groovy-lib:689.veec561a_dee13
 pipeline-input-step:477.v339683a_8d55e
 pipeline-milestone-step:111.v449306f708b_7
@@ -110,7 +112,7 @@ pipeline-stage-tags-metadata:2.2144.v077a_d1928a_40
 pipeline-stage-view:2.33
 plain-credentials:143.v1b_df8b_d3b_e48
 platformlabeler:2095.ve47c8663f6a_b_
-plugin-util-api:3.4.0
+plugin-util-api:3.6.0
 prism-api:1.29.0-8
 pubsub-light:1.17
 resource-disposer:0.23
