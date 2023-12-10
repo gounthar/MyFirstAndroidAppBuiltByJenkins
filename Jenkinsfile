@@ -25,9 +25,7 @@ pipeline {
         stage('Static Analysis') {
             parallel {
                 stage('Static Analysis with gradlew check') {
-                    agent {
-                        label 'android'
-                    }
+                    agent any
                     steps {
                         echo 'Run the static analysis to the code'
                         sh 'chmod +x ./gradlew'
