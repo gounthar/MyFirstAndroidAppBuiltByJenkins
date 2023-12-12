@@ -1,21 +1,27 @@
 # Add 'repo' label to any root file changes
 repo:
-- '*'
+  - changed-files:
+      - any-glob-to-any-file: '*'
 
 # Add '@domain/core' label to any change within the 'core' package
 '@domain/core':
-- package/core/*
-- package/core/**/*
+  - changed-files:
+      - any-glob-to-any-file: 'package/core/*'
+      - any-glob-to-any-file: 'package/core/**/*'
 
 # Add 'test' label to any change to *.spec.js files within the source dir
 test:
-- src/**/*.spec.js
+  - changed-files:
+      - any-glob-to-any-file: 'src/**/*.spec.js'
 
 # Add 'source' label to any change to src files within the source dir EXCEPT for the docs sub-folder
 source:
-- any: ['src/**/*', '!src/docs/*']
+  - changed-files:
+      - any-glob-to-any-file: 'src/**/*'
+      - any-glob-to-any-file: '!src/docs/*'
 
 # Add 'frontend` label to any change to *.js files as long as the `main.js` hasn't changed
 frontend:
-- any: ['src/**/*.js']
-  all: ['!src/main.js']
+  - changed-files:
+      - any-glob-to-any-file: 'src/**/*.js'
+      - all: ['!src/main.js']
