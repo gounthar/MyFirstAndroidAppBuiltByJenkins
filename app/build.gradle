@@ -3,7 +3,7 @@ import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id("com.github.triplet.play") version "3.9.0"
+    id("com.github.triplet.play") version "3.9.1"
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "6.0.8"
     id("io.gitlab.arturbosch.detekt")
