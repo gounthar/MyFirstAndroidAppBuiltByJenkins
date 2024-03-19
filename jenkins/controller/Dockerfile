@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.448
+FROM jenkins/jenkins:2.449
 
 ## Disables the startup wizard
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
