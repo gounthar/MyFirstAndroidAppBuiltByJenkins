@@ -30,8 +30,8 @@ ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin:$ANDROID_HOME/:$ANDROID_HO
 ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
 
 RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/android-sdk-linux && \
-  curl -L -O  https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip && \
-  unzip -qq commandlinetools-linux-8512546_latest.zip -d tmp && mv tmp/cmdline-tools/* cmdline-tools/latest && \
+  curl -L -O  https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
+  unzip -qq commandlinetools-linux-11076708_latest.zip -d tmp && mv tmp/cmdline-tools/* cmdline-tools/latest && \
   rm -rf /usr/local/android-sdk-linux/commandlinetools-linux-8512546_latest.zip && \
   yes|/usr/local/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --licenses && \
   /usr/local/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --update && \
