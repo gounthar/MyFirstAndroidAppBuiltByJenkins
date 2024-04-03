@@ -29,6 +29,7 @@ ENV CMDLINE_TOOLS_HOME $ANDROID_HOME/cmdline-tools/latest
 ENV PATH /usr/local/bin:$PATH:$CMDLINE_TOOLS_HOME/bin:$ANDROID_HOME/:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
 
+# To get a newer version, please have a look at https://developer.android.com/studio/ and adjust the version number accordingly
 RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/android-sdk-linux && \
   curl -L -O  https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
   unzip -qq commandlinetools-linux-11076708_latest.zip -d tmp && mv tmp/cmdline-tools/* cmdline-tools/latest && \
