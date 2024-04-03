@@ -8,6 +8,7 @@ plugins {
     id("com.github.spotbugs") version "6.0.9"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
+    id('pmd')
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
 }
 
