@@ -8,7 +8,6 @@ plugins {
     id("com.github.spotbugs") version "6.0.9"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
-    id('pmd')
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
 }
 
@@ -73,7 +72,7 @@ android {
             maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
-        pmd {}
+        // pmd {}
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
