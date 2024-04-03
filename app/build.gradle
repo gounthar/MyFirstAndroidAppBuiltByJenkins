@@ -82,13 +82,18 @@ android {
         }
 
         //detekt {
-            /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
-            input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
-            // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
-            //baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
+        /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
+        input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
+        // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
+        //baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
         //}
     }
     namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
+    }
 }
 
 dependencies {
@@ -103,6 +108,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 
 repositories {
