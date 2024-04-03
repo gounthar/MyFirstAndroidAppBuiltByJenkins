@@ -1,10 +1,10 @@
-FROM jenkins/ssh-agent:latest-jdk17 as ssh-agent
+FROM jenkins/ssh-agent:5.31.0-jdk17 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
 RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git python3 python3-pip unzip
 
 # Now time to install Maven
-ARG MAVEN_VERSION=3.9.5
+ARG MAVEN_VERSION=3.9.6
 # Add a checksum for the maven binary
 RUN curl -sS -L -O --output-dir /tmp/ --create-dirs  https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
     && echo "$(sha512sum /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz)" | sha512sum -c - \
@@ -40,7 +40,7 @@ RUN mkdir -p /usr/local/android-sdk-linux/cmdline-tools/latest && cd /usr/local/
                                                       "ndk;25.0.8775105" \
                                                       "extras;google;m2repository" \
                                                       "extras;android;m2repository" \
-                                                      "platforms;android-33" \
+                                                      "platforms;android-34" \
                                                       "emulator" \
                                                       "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
                                                       "add-ons;addon-google_apis-google-24" \
