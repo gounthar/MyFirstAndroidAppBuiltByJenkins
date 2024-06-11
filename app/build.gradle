@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-android'
     id("com.github.triplet.play") version "3.9.1"
     id("com.gradleup.static-analysis") version "1.4"
-    id("com.github.spotbugs") version "6.0.15"
+    id("com.github.spotbugs") version "6.0.16"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
