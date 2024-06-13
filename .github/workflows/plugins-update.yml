@@ -29,6 +29,12 @@ jobs:
           sudo apt update
           sudo apt install yq -y
 
+      - name: Print working directory
+        run: pwd
+
+      - name: Run script
+        run: ./scripts/modify_docker_compose.sh
+
       - name: Modify Docker Compose file
         run: ./scripts/modify_docker_compose.sh
 
