@@ -24,19 +24,13 @@ jobs:
 
       - name: Install yq
         run: |
+          sudo apt-get update 
           sudo add-apt-repository ppa:rmescandon/yq
           sudo apt update
           sudo apt install yq -y
 
       - name: Modify Docker Compose file
-        run: |
-          cd jenkins && cp docker-compose.yml docker-compose-plugins.yml
-          yq e 'del(.services.emulator)' docker-compose-plugins.yml -i
-          yq e 'del(.services.stf)' docker-compose-plugins.yml -i
-          yq e 'del(.services.adb-connector)' docker-compose-plugins.yml -i
-          yq e 'del(.services.adb)' docker-compose-plugins.yml -i
-          yq e 'del(.services.rethinkdb)' docker-compose-plugins.yml -i
-          cd ..
+        run: ./scripts/modify_docker_compose.sh
 
       - name: Set branch Names and start the containers
         run: |
@@ -53,36 +47,7 @@ jobs:
         run: cat $GITHUB_ENV
         
       - name: Waiting for service to be ready
-        run: |
-          # Check If Jenkins is running or not
-          # If the message is found, awk exits with a non-zero status (1), and the loop continues.
-          # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
-          timeout 60 bash -c 'until curl -s -f http://127.0.0.1:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running" 
-          echo "Jenkins is ready"
-          JENKINS_VERSION=$(curl -s -I -k http://admin:butler@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
-          echo "Jenkins version is: $JENKINS_VERSION"
+        run: ./scripts/wait_for_service.sh
 
-
-          # Uses jenkins-plugin-cli to update the plugin.txt and update it 
-          cd jenkins && docker ps | grep controller | awk '{print $1}' | xargs -I {} docker exec {} jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt --no-download --available-updates --output txt > controller/plugins.txt
-          # Check if the plugins.txt file has been modified
-          if git diff --quiet -- controller/plugins.txt; then
-              # No changes
-              echo "No plugins need to be updated"
-          else
-              # Changes detected
-              echo "Plugins have been updated, creating a pull request"
-
-              # Create and checkout new branch
-              git checkout -b "$BRANCH_NAME" 
-
-              # Add and commit changes
-              git add controller/plugins.txt
-              git commit -m "chore(jenkins): Update Jenkins plugins"
-
-              # Push changes to GitHub
-              git push -u origin "$BRANCH_NAME"
-
-              # Create pull request using gh command
-              gh pr create --title "chore(jenkins): Updates Jenkins plugins" --body "This pull request updates the Jenkins plugins listed in \`plugins.txt\`." --base "$BASE_BRANCH" --head "$BRANCH_NAME"
-          fi
+      - name: Update plugins
+        run: ./scripts/update_plugins.sh ${{ env.BRANCH_NAME }} ${{ env.BASE_BRANCH }}
