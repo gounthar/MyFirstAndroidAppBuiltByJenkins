@@ -1,10 +1,10 @@
 #!/bin/bash
-
+set -eux
 # Navigate to the jenkins directory
 cd jenkins
 
 # Use jenkins-plugin-cli to update the plugin.txt and update it
-docker ps | grep controller | awk '{print $1}' | xargs -I {} docker exec {} jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt --no-download --available-updates --output txt > controller/plugins.txt
+docker ps | grep jenkins | grep -v agent | awk '{print $1}' | xargs -I {} docker exec {} jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt --no-download --available-updates --output txt > controller/plugins.txt
 
 # Check if the plugins.txt file has been modified
 if git diff --quiet -- controller/plugins.txt; then
