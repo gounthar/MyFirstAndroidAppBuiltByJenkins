@@ -30,7 +30,7 @@ jobs:
           sudo apt install yq -y
 
       - name: Print working directory
-        run: pwd
+        run: pwd  && find . -name modify_docker_compose.sh
 
       - name: Run script
         run: ./scripts/modify_docker_compose.sh
