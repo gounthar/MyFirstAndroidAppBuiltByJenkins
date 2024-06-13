@@ -29,14 +29,8 @@ jobs:
           sudo apt update
           sudo apt install yq -y
 
-      - name: Print working directory
-        run: pwd  && find . -name modify_docker_compose.sh
-
-      - name: Run script
-        run: ./scripts/modify_docker_compose.sh
-
       - name: Modify Docker Compose file
-        run: ./scripts/modify_docker_compose.sh
+        run: ./.github/workflows/scripts/modify_docker_compose.sh
 
       - name: Set branch Names and start the containers
         run: |
@@ -53,7 +47,7 @@ jobs:
         run: cat $GITHUB_ENV
         
       - name: Waiting for service to be ready
-        run: ./scripts/wait_for_service.sh
+        run: ./.github/workflows/scripts/wait_for_service.sh
 
       - name: Update plugins
-        run: ./scripts/update_plugins.sh ${{ env.BRANCH_NAME }} ${{ env.BASE_BRANCH }}
+        run: ./.github/workflows/scripts/update_plugins.sh ${{ env.BRANCH_NAME }} ${{ env.BASE_BRANCH }}
