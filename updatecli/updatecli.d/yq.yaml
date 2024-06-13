@@ -26,14 +26,34 @@ sources:
     transformers:
       - trimprefix: "v"
 targets:
-  updateYQVersion:
-    name: "Update the YQ version in the script"
+  updateYQRequiredVersion:
+    name: "Update the YQ required version in the script"
     kind: file
     sourceID: latestYQVersion
     spec:
-      file: ./.github/workflows/scripts/modify_docker_compose.sh
+      file: .github/workflows/scripts/modify_docker_compose.sh
       matchpattern: >-
         (.*REQUIRED_VERSION=")(.*)(".*)
       replacepattern: >-
         ${1}{{ source "latestYQVersion" }}${3}
     scmid: default
+  updateYQVersion:
+    name: "Update the YQ version in the script"
+    kind: file
+    sourceID: latestYQVersion
+    spec:
+      file: .github/workflows/scripts/modify_docker_compose.sh
+      matchpattern: >-
+        (.*VERSION=v)(.*)$
+      replacepattern: >-
+        ${1}{{ source "latestYQVersion" }}
+    scmid: default
+
+actions:
+  default:
+    kind: github/pullrequest
+    scmid: default
+    title: '[GitHub Actions] Bump yq version to {{ source "latestYQVersion" }}'
+    spec:
+      labels:
+        - dependencies
