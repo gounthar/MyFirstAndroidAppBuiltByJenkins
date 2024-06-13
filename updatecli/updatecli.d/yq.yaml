@@ -44,7 +44,7 @@ targets:
     spec:
       file: .github/workflows/scripts/modify_docker_compose.sh
       matchpattern: >-
-        (.*VERSION=v)(.*)$
+        (.*VERSION=v).*
       replacepattern: >-
         ${1}{{ source "latestYQVersion" }}
     scmid: default

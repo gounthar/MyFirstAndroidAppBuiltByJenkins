@@ -4,9 +4,9 @@
 
 # The script first tries to access the Jenkins login page. If the page is accessible,
 # it means that Jenkins is running. The script will keep trying to access the page for
-# up to 60 seconds. If the page is not accessible after 60 seconds, the script will
+# up to 120 seconds. If the page is not accessible after 120 seconds, the script will
 # print "Jenkins is not running" and exit.
-timeout 60 bash -c 'until curl -s -f http://127.0.0.1:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running"
+timeout 120 bash -c 'until curl -s -f http://127.0.0.1:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running"
 
 # If Jenkins is running, the script will print "Jenkins is ready".
 echo "Jenkins is ready"
