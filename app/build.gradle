@@ -30,7 +30,7 @@ android {
     defaultConfig {
         applicationId 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
         minSdk 21
-        targetSdk 33
+        targetSdkVersion 34
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
@@ -90,6 +90,10 @@ android {
         //}
     }
     namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 }
 
 dependencies {
@@ -104,6 +108,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     // JUnit Jupiter API for writing tests
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     // JUnit Jupiter Engine for running tests
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
