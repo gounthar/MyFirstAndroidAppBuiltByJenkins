@@ -72,20 +72,27 @@ android {
             maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
-        pmd {}
+        pmd {
+            toolVersion = '6.34.0'
+            sourceSets = [android.sourceSets.main.java, android.sourceSets.main.kotlin]
+            ruleSetFiles = files("config/pmd/ruleset.xml")
+            ignoreFailures = false
+
+        }
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
-            htmlReportEnabled true // Control whether html report generation should be enabled. `true` by default.
+            htmlReportEnabled true
+            // Control whether html report generation should be enabled. `true` by default.
             includeVariants { variant -> release }
             // A closure to determine which variants (only for Android) to include
         }
 
         //detekt {
-            /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
-            input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
-            // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
-            //baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
+        /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
+        input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
+        // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
+        //baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
         //}
     }
     namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
