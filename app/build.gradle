@@ -3,9 +3,9 @@ import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id("com.github.triplet.play") version "3.9.1"
+    id("com.github.triplet.play") version "3.10.1"
     id("com.gradleup.static-analysis") version "1.4"
-    id("com.github.spotbugs") version "6.0.16"
+    id("com.github.spotbugs") version "6.0.18"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
@@ -54,12 +54,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '11'
     }
 
     buildFeatures {
@@ -89,7 +89,6 @@ android {
         //}
     }
     namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
-    buildToolsVersion '34.0.0'
 }
 
 dependencies {
@@ -97,15 +96,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.3'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
 
 repositories {
