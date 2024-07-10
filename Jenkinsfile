@@ -80,7 +80,6 @@ pipeline {
                             sh 'echo "Ensure that the code coverage is not just wishful thinking"'
                             sh 'chmod +x ./gradlew'
                             sh 'chmod +x ./gradlew && ./gradlew jacocoTestReport'
-                            sh 'find build -name "*eports*"'
                         }
                     }
                 }
