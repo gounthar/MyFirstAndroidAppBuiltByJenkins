@@ -63,7 +63,6 @@ pipeline {
                             sh 'chmod +x ./gradlew'
                             sh './gradlew build'
                             sh 'ls -artl /home/jenkins/.gradle/wrapper/dists'
-                            sh 'find /home/jenkins/ -name "gradle-7.3.3-bin.zip" -exec ls {} \\;'
                             sh './gradlew :app:bundleDebug :app:bundleRelease'
                         }
                     }
