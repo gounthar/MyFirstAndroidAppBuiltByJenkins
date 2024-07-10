@@ -10,6 +10,7 @@ buildscript {
         classpath "com.dipien:semantic-version-android-gradle-plugin:2.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0"
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.5'
+        // classpath 'junit:5.8.1'
         // spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
 
         // NOTE: Do not place your application dependencies here; they belong
