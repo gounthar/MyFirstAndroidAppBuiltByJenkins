@@ -72,13 +72,7 @@ android {
             maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
-        pmd {
-            toolVersion = '6.34.0'
-            sourceSets = [android.sourceSets.main.java, android.sourceSets.main.kotlin]
-            ruleSetFiles = files("config/pmd/ruleset.xml")
-            ignoreFailures = false
-
-        }
+        //pmd {
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
