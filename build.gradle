@@ -6,7 +6,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.5.2'
+        classpath 'com.android.tools.build:gradle:8.6.0'
         classpath "com.dipien:semantic-version-android-gradle-plugin:2.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20"
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.5'
