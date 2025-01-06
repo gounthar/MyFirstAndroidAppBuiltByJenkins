@@ -1,4 +1,4 @@
-FROM jenkins/ssh-agent:6.5.0 as ssh-agent
+FROM jenkins/ssh-agent:6.6.0 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
 RUN apt-get update && apt-get install -y --no-install-recommends adb build-essential ca-certificates curl file git unzip
