@@ -19,7 +19,7 @@ jobs:
       docker-ignore: ${{ steps.filter.outputs.docker-ignore }}
       gradle-wrapper: ${{ steps.filter.outputs.gradle-wrapper }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -40,7 +40,7 @@ jobs:
     steps:  
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
