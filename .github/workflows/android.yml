@@ -23,4 +23,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build :app:bundleDebug :app:bundleRelease && find . -name "*apk"
+      run: ./gradlew build :app:bundleDebug :app:bundleRelease --no-daemon && find . -name "*apk"
