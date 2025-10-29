@@ -25,10 +25,9 @@ services:
             # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
     jenkins-agent:
         platform: linux/amd64
-        # Use quickstart-tutorials DinD agent image directly (no customization needed)
-        # This image is maintained at https://github.com/jenkins-docs/quickstart-tutorials
-        # and published to GHCR automatically (twice daily)
-        image: ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:simple_agent_
+        # Use official Jenkins DinD (Docker-in-Docker) agent
+        # Provides SSH connectivity and Docker socket access for CI/CD
+        image: jenkins/ssh-agent:latest-jdk21
         restart: unless-stopped
         privileged: true
         volumes:
