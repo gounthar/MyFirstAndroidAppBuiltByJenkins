@@ -72,7 +72,8 @@ android {
             maxWarnings = 15
         }
         // Kotlin project, so no checkstyle { }
-        pmd {}
+        // PMD disabled due to incompatibility with Gradle 8.13
+        // pmd {}
         spotbugs {
             // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
             // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
