@@ -1,0 +1,138 @@
+#  docker compose up -d --build --force-recreate
+services:
+    jenkins:
+        build: ./controller
+        restart: always
+        ports:
+            - "8080:8080"
+            - "50000:50000"
+        volumes:
+            - jenkins-data:/var/jenkins_home:rw
+            - ./casc.d:/var/jenkins_home/casc.d/:ro
+            # Mounting the ssh private key as "container secret" makes it available in JCasc as the variable ${SSH_AGENT_KEY}
+            - ./secrets/id_jenkins.pem:/run/secrets/SSH_AGENT_KEY:ro
+            #- ./secrets/converted-github-app.pem:GITHUB_APP_KEY:ro
+        environment:
+            - JENKINS_EXT_URL=http://localhost:8080
+            - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
+            - GITHUB_APP_ID
+            - GITHUB_APP_KEY
+            - ANDROID_PUBLISHER_CREDENTIALS
+            - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
+            - PUBLIC_IP
+            - STF_API_TOKEN
+            - STF_HOST_NAME
+            # - JENKINS_OPTS=-Djenkins.install.runSetupWizard=false
+    jenkins-agent:
+        platform: linux/amd64
+        build: ./agent
+        restart: unless-stopped
+        privileged: true
+        volumes:
+            - jenkins-agent-data:/home/jenkins:rw
+            - qodana-data:/home/jenkins/qodana:rw
+            - /var/run/docker.sock:/var/run/docker.sock:rw
+        environment:
+            - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD noone@localhost.local
+    android-agent:
+        platform: linux/amd64
+        build: ../
+        restart: unless-stopped
+        volumes:
+            - android-agent-data:/home/jenkins:rw
+            - ../adbkey.pub:/home/jenkins/.android/adbkey.pub:rw
+            - ../adbkey.txt:/home/jenkins/.android/adbkey:rw
+        environment:
+            - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBpNqXQ4x7fPPUBbYPxKF77Zqq6d35iPCD2chg644OUD
+            - STF_HOST_NAME
+    emulator:
+        # NOTE: The images should not run in docker on mac or windows
+        # https://github.com/google/android-emulator-container-scripts
+        # In fact, the one we chose is working...
+        platform: linux/amd64
+        image: us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2
+        restart: unless-stopped
+        ports:
+            - 8554:8554
+            - 5555:5555
+        environment:
+            - ADBKEY
+        devices:
+            - /dev/kvm
+        healthcheck:
+            # test: [ "CMD", "/android/sdk/platform-tools/adb", "connect", "localhost:5555" ]
+            # interval: 5s
+            # timeout: 3s
+            # retries: 10
+            # start_period: 15s"
+            test: [
+                    "CMD-SHELL",
+                    "/android/sdk/platform-tools/adb shell getprop dev.bootcomplete | grep \"1\""
+                ]
+            interval: 5s
+            timeout: 3s
+            start_period: 15s
+            retries: 10
+    rethinkdb:
+        container_name: rethinkdb
+        image: rethinkdb:2.3
+        restart: unless-stopped
+        volumes:
+            - "rethinkdb-data:/data"
+        command: "rethinkdb --bind all --cache-size 2048"
+    adb:
+        container_name: adb
+        image: devicefarmer/adb:latest
+        restart: unless-stopped
+        volumes:
+            - "/dev/bus/usb:/dev/bus/usb"
+        privileged: true
+        command: sh -c "adb -a -P 5037 server nodaemon"
+        healthcheck:
+            test: [ "CMD", "/opt/platform-tools/adb", "connect", "emulator:5555" ]
+            interval: 5s
+            timeout: 3s
+            retries: 10
+            start_period: 15s
+        depends_on:
+            - emulator
+    adb-connector:
+        container_name: adb-connector
+        build: ./adb-connector
+        privileged: true
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:rw
+        command:
+            - docker exec adb adb connect emulator:5555 && docker exec adb adb connect ${ANDROID_PHONE_IP}
+        depends_on:
+            # please see the documentation at https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on
+            adb:
+                condition: service_healthy
+            emulator:
+                condition: service_healthy
+    stf:
+        container_name: stf
+        image: devicefarmer/stf
+        ports:
+            - "7100:7100"
+            - "7110:7110"
+            - "7400-7500:7400-7500"
+        environment:
+            - TZ='America/Los_Angeles'
+            - RETHINKDB_PORT_28015_TCP=tcp://rethinkdb:28015
+            - STF_ADMIN_EMAIL=${YOUR_EMAIL}
+            - STF_ADMIN_NAME=${YOUR_NAME}
+            - STF_HOST_NAME=${STF_HOST_NAME}
+        restart: unless-stopped
+        command: stf local --adb-host adb --public-ip ${STF_HOST_NAME} --provider-min-port 7400 --provider-max-port 7500 --allow-remote
+        depends_on:
+            - rethinkdb
+            - adb
+            - adb-connector
+volumes:
+    qodana-data:
+    jenkins-data:
+    jenkins-agent-data:
+    android-agent-data:
+    rethinkdb-data:
+

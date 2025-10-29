@@ -64,3 +64,15 @@ Screenshot_20220715_104832.png
 /jenkins/secrets/converted-github-app.pem
 /jenkins/backup/
 /jenkins/.env
+
+# Environment files with secrets
+.env
+/.env
+
+# JWT tokens and GitHub App keys
+/jenkins/secrets/jwt.token
+/jenkins/secrets/github_app.key
+
+# Local context files
+CLAUDE.md
+CONTEXT.md
