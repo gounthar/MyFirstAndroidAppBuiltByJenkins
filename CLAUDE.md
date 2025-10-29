@@ -1,6 +1,6 @@
-# CLAUDE.md
+# Mobile Development Documentation
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance when working with code in this repository.
 
 ## Project Overview
 
@@ -72,9 +72,13 @@ Create a `.env` file in the project root with:
 ```bash
 GITHUB_APP_ID=<your_github_app_id>
 ANDROID_PUBLISHER_CREDENTIALS='<your_android_publisher_credentials>'
-GITHUB_APP_KEY='<github_app_key>'
+GITHUB_APP_KEY='<github_app_rsa_key>'  # Must be RSA format, not Ed25519
 ADB_KEY='<your_adb_key>'
+STF_API_TOKEN=<your_stf_api_token>
+GITHUB_APP_CLIENT_SECRET=<your_github_app_client_secret>
 ```
+
+**IMPORTANT**: Use `.env.example` as a template. Never commit the `.env` file to version control.
 
 ## Architecture
 
@@ -83,8 +87,8 @@ ADB_KEY='<your_adb_key>'
 - **Package**: `io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication`
 - **Language**: Kotlin
 - **Min SDK**: 21
-- **Target SDK**: 33
-- **Compile SDK**: 35
+- **Target SDK**: 36
+- **Compile SDK**: 36
 - **Architecture**: MVVM with Navigation Component
 - **UI Fragments**:
   - `HomeFragment` / `HomeViewModel`
@@ -93,12 +97,24 @@ ADB_KEY='<your_adb_key>'
 
 ### Build Configuration
 
-- **Android Gradle Plugin**: 8.8.0
-- **Kotlin**: 2.1.0
-- **Java Version**: 11
+- **Android Gradle Plugin**: 8.13.0
+- **Gradle**: 8.13
+- **Kotlin**: 2.2.21
+- **Java Version**: 11 (sourceCompatibility/targetCompatibility)
+- **JDK**: 21 (build toolchain - compatible with AGP 8.13.0)
 - **Versioning**: Semantic versioning using `com.dipien:semantic-version-android-gradle-plugin`
   - Version defined in root `build.gradle` (currently `1.1.11`)
   - Plugin auto-generates `versionCode` and `versionName` from semantic version
+
+### JDK Compatibility Notes
+
+The project uses JDK 21 in Docker images while targeting Java 11 bytecode:
+- **Build JDK**: JDK 21 (Jenkins agents and CI/CD)
+- **Target JVM**: Java 11 (app runtime compatibility)
+- **AGP 8.13.0 Support**: Compatible with JDK 17-21
+- **Backward Compatibility**: Apps run on Android devices with Java 11+ runtime
+
+This configuration maximizes modern tooling benefits while ensuring broad device compatibility.
 
 ### Jenkins Pipeline Stages
 
@@ -129,8 +145,15 @@ The `Jenkinsfile` defines a complete CI/CD pipeline:
 ### Jenkins Agents
 
 The pipeline uses two agent labels:
-- `android`: For building and testing Android apps (uses custom Docker image `gounthar/jenkinsci-docker-android-base`)
+- `android`: For building and testing Android apps (uses Docker image `ghcr.io/jenkins-docs/jenkinsci-tutorials:android_` with JDK 21)
 - `docker`: For Docker-based tasks like Qodana
+
+**Android Agent Base Image**: The `android_` image from quickstart-tutorials includes:
+- JDK 21
+- Maven 3.9.5+
+- Android SDK 33
+- Build Tools 30.0.3
+- GitHub CLI
 
 ### Static Analysis Tools
 
@@ -184,3 +207,11 @@ Located in `jenkins/docker-compose.yml`:
 - Test framework: JUnit 4 for unit tests, Espresso for UI tests
 - Navigation uses AndroidX Navigation Component
 - The project follows conventional commits as per contributing guidelines
+
+## Security Best Practices
+
+- Never commit `.env` files - use `.env.example` as template
+- GitHub App keys must be RSA format for RS256 JWT signing
+- ADB private keys should have 600 permissions
+- JWT tokens should never be committed to version control
+- All secrets should be managed via environment variables or secure vaults

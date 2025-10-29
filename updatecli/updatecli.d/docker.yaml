@@ -47,8 +47,8 @@ targets:
         (.*Docker Compose version `)(.*?)(`.*)
       replacepattern: >-
         ${1}{{ source "DockerComposeTestedVersion" }}${3}
-    name: "[README.md] Bump docker tested version"
-    sourceid: DockerTestedVersion
+    name: "[README.md] Bump docker compose tested version"
+    sourceid: DockerComposeTestedVersion
     scmid: default
 
 actions:

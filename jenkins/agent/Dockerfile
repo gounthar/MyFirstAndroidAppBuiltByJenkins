@@ -24,8 +24,8 @@ RUN mkdir -p "${DEVICEFARMER_STF_HOME}" && \
 COPY android-stf-api.py "${DEVICEFARMER_STF_HOME}"/
 RUN chmod 755 "${DEVICEFARMER_STF_HOME}"/android-stf-api.py && \
     chown -R jenkins:jenkins /home/jenkins/.android && \
-    chmod 644 /home/jenkins/.android/adbkey* && \
-    chmod -R 777 /home/jenkins/.android
+    chmod 644 /home/jenkins/.android/adbkey.pub && \
+    chmod 600 /home/jenkins/.android/adbkey
 
 ENV PATH=$PATH:$DEVICEFARMER_STF_HOME
 
