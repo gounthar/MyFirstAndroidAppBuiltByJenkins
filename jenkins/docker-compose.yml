@@ -41,7 +41,7 @@ services:
         platform: linux/amd64
         build:
             context: ../
-            dockerfile: ./jenkins/agent/Dockerfile
+            dockerfile: jenkins/agent/Dockerfile
         restart: unless-stopped
         volumes:
             - android-agent-data:/home/jenkins:rw
