@@ -62,7 +62,8 @@ jobs:
         name: Build and push android ssh agent
         uses: docker/build-push-action@v6
         with:
-          context: ./jenkins/agent
+          context: .
+          file: ./jenkins/agent/Dockerfile
           platforms: linux/amd64
           push: true
           tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
