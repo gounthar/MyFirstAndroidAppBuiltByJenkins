@@ -25,7 +25,7 @@ tasks.withType(Test) {
 */
 
 android {
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
