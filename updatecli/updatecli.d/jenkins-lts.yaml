@@ -18,7 +18,7 @@ sources:
     name: Get the latest Jenkins LTS version
     kind: jenkins
     spec:
-      release: lts
+      release: stable
 
 targets:
   setJenkinsLatestLTS:
