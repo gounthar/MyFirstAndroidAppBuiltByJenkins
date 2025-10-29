@@ -1,19 +1,22 @@
-ARG JENKINS_VERSION=2.528.1
-FROM jenkins/jenkins:${JENKINS_VERSION}-lts-jdk17
+# Use quickstart-tutorials Jenkins controller image as base
+# This image is maintained at https://github.com/jenkins-docs/quickstart-tutorials
+# and published to GHCR automatically (twice daily)
+FROM ghcr.io/jenkins-docs/jenkinsci-tutorials:simple_controller_
 
-## Disables the startup wizard
-RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+# Switch to root for customizations
+USER root
 
-## Install custom plugins
-# To update plugins: docker run --rm -v "$(pwd):$(pwd):ro" --entrypoint=jenkins-plugin-cli jenkins/jenkins:${JENKINS_VERSION}-lts-jdk17 --available-updates --war /usr/share/jenkins/jenkins.war --output txt --plugin-file "$(pwd)"/plugins.txt
-COPY --chown=jenkins:jenkins ./plugins.txt /usr/share/jenkins/plugins.txt
-RUN jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt
-
-# Poor man's Jcasc
+# Project-specific jobs (Poor man's JCasC)
 COPY --chown=jenkins:jenkins ./FirstJob /usr/share/jenkins/ref/jobs/FirstJob
 COPY --chown=jenkins:jenkins ./MultiBranchAndroidPipeline /usr/share/jenkins/ref/jobs/MultiBranchAndroidPipeline
 COPY --chown=jenkins:jenkins ./AutoUpdaterMultiBranches /usr/share/jenkins/ref/jobs/AutoUpdaterMultiBranches
 COPY --chown=jenkins:jenkins ./PublishAppToGitHubAndGoogle /usr/share/jenkins/ref/jobs/PublishAppToGitHubAndGoogle
 
-# because of /var/jenkins_home/.ssh/known_hosts [SSH] No Known Hosts file was found at /var/jenkins_home/.ssh/known_hosts. Please ensure one is created at this path and that Jenkins can read it.
-RUN mkdir -p /var/jenkins_home/.ssh/ && touch /var/jenkins_home/.ssh/known_hosts && chown -R jenkins:jenkins /var/jenkins_home/.ssh/
+# SSH known_hosts setup for SSH agent connections
+# Required to avoid: [SSH] No Known Hosts file was found at /var/jenkins_home/.ssh/known_hosts
+RUN mkdir -p /var/jenkins_home/.ssh/ && \
+    touch /var/jenkins_home/.ssh/known_hosts && \
+    chown -R jenkins:jenkins /var/jenkins_home/.ssh/
+
+# Switch back to jenkins user
+USER jenkins
