@@ -8,14 +8,18 @@ Let's try an empty Android App just to see how to build it with Jenkins.
 
 ### A self contained Jenkins server
 
-This repo contains the source code for the Android application, but also the configuration files to get an up and 
+This repo contains the source code for the Android application, but also the configuration files to get an up and
 running Jenkins controller and agents able to build this app.
 It's not mandatory to use my Jenkins configuration, you can use any other configuration, but I thought it would be a
 good idea to have a specific Jenkins instance for this project. This way, you won't have to change the configuration of
 your instance, to create new agents, new jobs, and so on.
 
+This setup uses **Jenkins LTS (Long-Term Support)** for stability, with automated version updates managed by UpdateCLI.
+The Jenkins controller runs in Docker using the configuration in [`jenkins/controller/Dockerfile`](/jenkins/controller/Dockerfile)
+and is currently on version 2.528.1 (automatically updated weekly via pull requests).
+
 If you have a look at the [`Jenkinsfile`](/Jenkinsfile) file, you will see that it uses `docker` agents, and agents
-labelled `android`. These `android` agents use the docker image built for this project thanks to the 
+labelled `android`. These `android` agents use the docker image built for this project thanks to the
 [`Dockerfile`](/Dockerfile) file. If you don't want to build it by yourself, you can also use the
  [image](https://hub.docker.com/repository/docker/gounthar/jenkinsci-docker-android-base) that I provide.
 
@@ -72,8 +76,18 @@ to the Gitpod button if you have installed the extension, or via this link:
 [try this repo with gitpod](https://gitpod.io/#https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins).
 One part of the pipeline won't work though, because it's using DonD, and I haven't found a way to use it with Gitpod.
 
-## How to build the app 
+## How to build the app
 
 Once logged in (`admin`/`butler`) go into _Dashboard_ `>` _MultiBranchAndroidPipeline_ `>` _branches_ `>` _main_ and
 click on Build now.
 If you got your credentials right, you should see the build started.
+
+## Automated Maintenance
+
+This project uses UpdateCLI to automatically keep dependencies up to date:
+- **Jenkins LTS**: Automatically checked weekly (every Monday at 8am UTC) for new stable releases
+- **Updates via PR**: When new versions are available, UpdateCLI creates pull requests automatically with:
+  - Version changes in the Jenkins controller Dockerfile
+  - Links to Jenkins changelog
+  - Appropriate labels (`dependencies`, `chore`)
+- **Workflow**: See [`.github/workflows/updatecli.yaml`](.github/workflows/updatecli.yaml) for configuration
