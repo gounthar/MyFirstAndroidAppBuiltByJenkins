@@ -1,7 +1,7 @@
 # Use quickstart-tutorials Jenkins controller image as base
 # This image is maintained at https://github.com/jenkins-docs/quickstart-tutorials
 # and published to GHCR automatically (twice daily)
-FROM ghcr.io/jenkins-docs/jenkinsci-tutorials:simple_controller_
+FROM ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:simple_controller_
 
 # Switch to root for customizations
 USER root

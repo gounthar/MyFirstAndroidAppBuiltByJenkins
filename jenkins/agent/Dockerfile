@@ -2,7 +2,7 @@
 # This image is maintained at https://github.com/jenkins-docs/quickstart-tutorials
 # and published to GHCR automatically (twice daily)
 # Base image includes: Maven, Android SDK 33, Build Tools 30.0.3, GitHub CLI
-FROM ghcr.io/jenkins-docs/jenkinsci-tutorials:android_
+FROM ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:android_
 
 # Switch to root for project-specific customizations
 USER root
