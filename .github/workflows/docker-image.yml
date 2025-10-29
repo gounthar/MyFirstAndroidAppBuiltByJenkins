@@ -75,12 +75,4 @@ jobs:
           platforms: linux/amd64, linux/aarch64
           push: true
           tags: gounthar/jenkinsci-docker-controller:${{ steps.extract_branch.outputs.branch }}
-      -
-        name: Build and push jenkins DinD agent
-        uses: docker/build-push-action@v6
-        with:
-          context: ./jenkins/agent
-          platforms: linux/amd64, linux/aarch64
-          push: true
-          tags: gounthar/jenkinsci-docker-dind-agent:${{ steps.extract_branch.outputs.branch }}
 
