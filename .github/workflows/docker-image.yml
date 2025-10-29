@@ -25,7 +25,8 @@ jobs:
         with:
           filters: |
             docker:
-              - 'Dockerfile'
+              - 'jenkins/agent/Dockerfile'
+              - 'jenkins/controller/Dockerfile'
             docker-ignore:
               - '.dockerignore'
             gradle-wrapper:
@@ -61,7 +62,7 @@ jobs:
         name: Build and push android ssh agent
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./jenkins/agent
           platforms: linux/amd64
           push: true
           tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
