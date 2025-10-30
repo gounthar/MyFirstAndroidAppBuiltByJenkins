@@ -1,5 +1,14 @@
 name: docker image building and pushing
 
+# This workflow builds and publishes project-specific Docker images to Docker Hub.
+# These images extend the quickstart-tutorials GHCR base images with customizations:
+# - Controller: Adds project-specific Jenkins jobs
+# - Android Agent: Adds ADB keys, DeviceFarmer STF, and gradle wrapper
+#
+# Base images (auto-updated twice daily by quickstart-tutorials):
+# - ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:simple_controller_
+# - ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:android_
+
 on:
   push:
     branches:
@@ -56,23 +65,52 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Extract branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed -e 's#/#-#g')"
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/} | sed -e 's#/#-#g')" >> $GITHUB_OUTPUT
         id: extract_branch
-      -
-        name: Build and push android ssh agent
+
+      - name: Prepare Docker tags
+        id: docker_tags
+        run: |
+          BRANCH="${{ steps.extract_branch.outputs.branch }}"
+
+          # Android agent tags
+          ANDROID_TAGS="gounthar/jenkinsci-docker-android-base:${BRANCH}"
+          if [ "$BRANCH" = "main" ]; then
+            ANDROID_TAGS="${ANDROID_TAGS},gounthar/jenkinsci-docker-android-base:latest"
+          fi
+          echo "android_tags=${ANDROID_TAGS}" >> $GITHUB_OUTPUT
+
+          # Controller tags
+          CONTROLLER_TAGS="gounthar/jenkinsci-docker-controller:${BRANCH}"
+          if [ "$BRANCH" = "main" ]; then
+            CONTROLLER_TAGS="${CONTROLLER_TAGS},gounthar/jenkinsci-docker-controller:latest"
+          fi
+          echo "controller_tags=${CONTROLLER_TAGS}" >> $GITHUB_OUTPUT
+
+      - name: Build and push android ssh agent
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./jenkins/agent/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: gounthar/jenkinsci-docker-android-base:${{ steps.extract_branch.outputs.branch }}
-      -
-        name: Build and push jenkins controller
+          tags: ${{ steps.docker_tags.outputs.android_tags }}
+          labels: |
+            org.opencontainers.image.title=Jenkins Android Agent
+            org.opencontainers.image.description=Custom Jenkins Android agent with ADB keys and DeviceFarmer STF
+            org.opencontainers.image.base.name=ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:android_
+            org.opencontainers.image.source=https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins
+
+      - name: Build and push jenkins controller
         uses: docker/build-push-action@v6
         with:
           context: ./jenkins/controller
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: gounthar/jenkinsci-docker-controller:${{ steps.extract_branch.outputs.branch }}
+          tags: ${{ steps.docker_tags.outputs.controller_tags }}
+          labels: |
+            org.opencontainers.image.title=Jenkins Controller
+            org.opencontainers.image.description=Custom Jenkins controller with project-specific jobs
+            org.opencontainers.image.base.name=ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:simple_controller_
+            org.opencontainers.image.source=https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins
 
