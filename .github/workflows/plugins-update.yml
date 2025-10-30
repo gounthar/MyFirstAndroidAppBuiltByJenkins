@@ -2,11 +2,14 @@ name: Plugins Update file test
 
 on:
   workflow_dispatch:
-    
+
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
 
-    
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   check-plugins:
     runs-on: ubuntu-latest
@@ -16,8 +19,7 @@ jobs:
       
       - name: Configure git & gh
         run: |
-          
-          echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh auth status
           git config --global user.email "gounthar@gmail.com"
           git config --global user.name "gounthar"
