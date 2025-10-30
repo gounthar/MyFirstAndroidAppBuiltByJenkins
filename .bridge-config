@@ -1,0 +1,8 @@
+# Telegram Bridge Session Configuration
+# Auto-generated for project: MyFirstAndroidAppBuiltByJenkins
+
+SESSION_NAME="MyFirstAndroidAppBuiltByJenkins"
+SESSION_EMOJI=""
+SHOW_WORKING_DIR="no"
+AUTH_REQUESTS_ENABLED="yes"
+AUTH_TIMEOUT="300"

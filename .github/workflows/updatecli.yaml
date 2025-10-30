@@ -25,10 +25,22 @@ jobs:
       - name: Install Updatecli in the runner
         uses: updatecli/updatecli-action@v2.93.0
 
+      # Check if there are any manifests to process
+      - name: Check for updatecli manifests
+        id: check_manifests
+        run: |
+          if ls updatecli/updatecli.d/*.yaml >/dev/null 2>&1 || ls updatecli/updatecli.d/*.yml >/dev/null 2>&1; then
+            echo "manifests_exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "manifests_exist=false" >> $GITHUB_OUTPUT
+            echo "No UpdateCLI manifests found. Skipping..."
+          fi
+
       # This step runs Updatecli in Dry Run mode
       # It uses the "diff" command of updatecli with the specified config and values files
       # The GitHub token is passed as an environment variable
       - name: Run Updatecli in Dry Run mode
+        if: steps.check_manifests.outputs.manifests_exist == 'true'
         run: updatecli diff --config ./updatecli/updatecli.d --values ./updatecli/values.github-action.yaml
         env:
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +49,7 @@ jobs:
       # It uses the "apply" command of updatecli with the specified config and values files
       # The GitHub token is passed as an environment variable
       - name: Run Updatecli in Apply mode
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && steps.check_manifests.outputs.manifests_exist == 'true'
         run: updatecli apply --config ./updatecli/updatecli.d --values ./updatecli/values.github-action.yaml
         env:
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
