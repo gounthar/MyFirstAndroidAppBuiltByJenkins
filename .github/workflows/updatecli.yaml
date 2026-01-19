@@ -23,7 +23,7 @@ jobs:
 
       # This step installs Updatecli in the runner using the updatecli-action
       - name: Install Updatecli in the runner
-        uses: updatecli/updatecli-action@v2.98.0
+        uses: updatecli/updatecli-action@v2.99.0
 
       # Check if there are any manifests to process
       - name: Check for updatecli manifests
