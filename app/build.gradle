@@ -4,8 +4,6 @@ plugins {
     id 'com.android.application'
     // id 'kotlin-android'  // REMOVED as per AGP 9.0 update instructions
     id("com.github.triplet.play") version "4.0.0"
-    id("com.gradleup.static-analysis") version "1.4"
-    id("com.github.spotbugs") version "6.4.8"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
@@ -66,28 +64,13 @@ android {
         viewBinding true
     }
 
-    staticAnalysis {
-        penalty {
-            maxErrors = 0
-            maxWarnings = 30
-        }
-        // Kotlin project, so no checkstyle { }
-        // PMD disabled due to incompatibility with Gradle 8.13
-        // pmd {}
-        spotbugs {
-            // toolVersion "4.7.1" // Optional string, the latest SpotBugs release (currently 4.0.0-beta4)
-            // excludeFilter file('static-analysis/spotbugs-excludes.xml') // A file containing the SpotBugs exclusions, e.g., teamPropsFile('static-analysis/spotbugs-excludes.xml')
-            htmlReportEnabled true // Control whether html report generation should be enabled. `true` by default.
-            includeVariants { variant -> release }
-            // A closure to determine which variants (only for Android) to include
-        }
-
-        //detekt {
-            /*toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
-            input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources*/
-            // filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
-            //baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.*/
-        //}
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+        htmlReport true
+        htmlOutput file("build/reports/lint/lint-results.html")
+        xmlReport true
+        xmlOutput file("build/reports/lint/lint-results.xml")
     }
     namespace 'io.jenkins.mobile.example.myfirstbuiltbyjenkinsapplication'
 }
