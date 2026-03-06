@@ -2,7 +2,7 @@ import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
+    // id 'kotlin-android'  // REMOVED as per AGP 9.0 update instructions
     id("com.github.triplet.play") version "4.0.0"
     id("com.gradleup.static-analysis") version "1.4"
     id("com.github.spotbugs") version "6.4.8"
@@ -117,4 +117,3 @@ play {
     releaseStatus.set(ReleaseStatus.DRAFT)
     // ...
 }
-
