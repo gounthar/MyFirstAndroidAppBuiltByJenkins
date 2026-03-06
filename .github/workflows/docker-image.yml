@@ -14,15 +14,15 @@ on:
     branches:
       - '*'
   pull_request:
-    branches: [ '*' ]
+    branches: ['*']
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Will build everyday at 4:30 and 16:30
-    - cron:  '30 4,16 * * *'
+    - cron: '30 4,16 * * *'
 
 jobs:
   paths-filter:
-    runs-on: ubuntu-latest
+    runs-on: tenki-standard-medium-4c-8g
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
       docker-ignore: ${{ steps.filter.outputs.docker-ignore }}
@@ -46,19 +46,15 @@ jobs:
     needs: paths-filter
     if: "!contains(needs.paths-filter.changes.outputs, '[]')"
     # “!contains(toJson(github.event.pull_request.labels), ‘[]’)”
-    runs-on: ubuntu-latest
-    steps:  
-      -
-        name: Checkout
+    runs-on: tenki-standard-medium-4c-8g
+    steps:
+      - name: Checkout
         uses: actions/checkout@v6
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Login to DockerHub
+      - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -113,4 +109,3 @@ jobs:
             org.opencontainers.image.description=Custom Jenkins controller with project-specific jobs
             org.opencontainers.image.base.name=ghcr.io/jenkins-docs/quickstart-tutorials/jenkinsci-tutorials:simple_controller_
             org.opencontainers.image.source=https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins
-
