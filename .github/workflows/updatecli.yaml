@@ -15,7 +15,7 @@ jobs:
   # This job is named "updatecli"
   updatecli:
     # This job runs on the latest version of Ubuntu
-    runs-on: ubuntu-latest
+    runs-on: tenki-standard-medium-4c-8g
     steps:
       # This step checks out the repository using the checkout action
       - name: Checkout
