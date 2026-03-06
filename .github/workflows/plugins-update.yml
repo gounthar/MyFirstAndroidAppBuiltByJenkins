@@ -2,7 +2,6 @@ name: Plugins Update file test
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
 
@@ -12,11 +11,11 @@ permissions:
 
 jobs:
   check-plugins:
-    runs-on: ubuntu-latest
+    runs-on: tenki-standard-medium-4c-8g
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-      
+
       - name: Configure git & gh
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
@@ -53,7 +52,7 @@ jobs:
 
       - name: print GITHUB_ENV file
         run: cat $GITHUB_ENV
-        
+
       - name: Waiting for service to be ready
         run: |
           # Check If Jenkins is running or not
