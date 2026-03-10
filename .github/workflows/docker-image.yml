@@ -84,7 +84,7 @@ jobs:
           echo "controller_tags=${CONTROLLER_TAGS}" >> $GITHUB_OUTPUT
 
       - name: Build and push android ssh agent
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ./jenkins/agent/Dockerfile
@@ -98,7 +98,7 @@ jobs:
             org.opencontainers.image.source=https://github.com/gounthar/MyFirstAndroidAppBuiltByJenkins
 
       - name: Build and push jenkins controller
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./jenkins/controller
           platforms: linux/amd64, linux/aarch64
