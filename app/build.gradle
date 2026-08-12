@@ -89,10 +89,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 }
 
-repositories {
-//    mavenCentral()
-}
-
 play {
     // Overrides defaults
     track.set("internal")
