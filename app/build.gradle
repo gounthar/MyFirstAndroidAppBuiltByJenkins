@@ -3,7 +3,7 @@ import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 plugins {
     id 'com.android.application'
     // id 'kotlin-android'  // REMOVED as per AGP 9.0 update instructions
-    id("com.github.triplet.play") version "4.0.0"
+    id("com.github.triplet.play") version "4.1.1"
     id("io.gitlab.arturbosch.detekt")
     id("com.mxalbert.gradle.jacoco-android") version "0.2.1"
     // id("com.dicedmelon.gradle.jacoco-android") not compatible with Gradle 8.x
